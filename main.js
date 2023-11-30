@@ -1,1 +1,4 @@
-console.log('hhhhhhhhhhhhhhhhhhhhh');
+function d(){
+    console.log('asdasd');
+}
+d();
