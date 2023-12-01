@@ -1,126 +1,65 @@
 grammar React;
 
-program: statements* EOF
-;
+program: statement+;
 
-statements: (declaration ';'? | expression ';'? | calls ';'?)+;
+statement: variableDeclaration
+         | functionDeclaration
+         | expressionStatement
+         | consoleLogStatement
+         | assignment
+         ;
 
-expression    : expression '*' expression                             # Multiplication
-              | expression '+' expression                             # Addition
-              | ID                                                    # Identifier
-              | evaluation                                            # Value
-              ;
+variableDeclaration: variableType Identifier '=' expression ';'?;
 
-declaration : variableDeclaration
-            | functionDeclaration
-            ;
+variableType: 'let' | 'var' | 'const';
 
-// variables
-variableDeclaration:VARTYPE ID ('=' evaluation)?;
+functionDeclaration: 'function' Identifier '(' parameters? ')' block;
 
-// functions
-functionDeclaration: anonymousFunction | regularFunction;
+assignment: Identifier '=' expression ';'?;
 
-regularFunction: 'function' ID '(' parameters? ')' block;
+functionExpression: 'function' '(' parameters? ')' block;
 
-anonymousFunction : VARTYPE ID '=' '(' parameters? ')' block;
+parameters: Identifier (',' Identifier)*;
 
-parameters: ID (',' ID)*;
+block: '{' statement* '}';
 
-block: '{' statements* return? '}';
+expressionStatement: expression ';'?;
 
-return: 'return' expression?;
+expression: expression '*' expression                           #Multiplication
+          | expression '/' expression                           #Division
+          | expression '+' expression                           #Addition
+          | expression '-' expression                           #Subtraction
+          | expression '>' expression                           #MoreThan
+          | expression '>=' expression                          #MoreThanOrEqual
+          | expression '<=' expression                          #LessThanOrEqual
+          | expression '<' expression                           #LessThan
+          | expression '==' expression                          #Equal
+          | expression '!=' expression                          #NotEqual
+          | '(' expression ')'                                  #Expr
+          | functionCall                                        #FuncCall
+          | arrowFunction                                       #ArrowFunc
+          | functionExpression                                  #FuncExpr
+          | Identifier                                          #ID
+          | Literal                                             #Litteral
+          ;
 
-console:'console.log(' expression ')';
+functionCall: Identifier '(' arguments? ')';
 
-calls
-    : console
-    | ID ('(' parameters? ')')?
-    ;
+arrowFunction: '(' parameters? ')' '=>' block;
 
-evaluation : (DIGIT* |string);
+arguments: expression (',' expression)*;
 
-string: StringLiteral                                      #DoubleQuoteString
-      | SingleQuoteStringLiteral                           #SingleQuoteString
-      | string '+' string                                  #Concatenation
-      ;
+consoleLogExpression: 'console.log' '(' arguments? ')' ';'?;
 
-VARTYPE : 'let' | 'const' | 'var';
-LETTER: [a-zA-Z];
-DIGIT: [0-9];
-UNDERSCORE: '_';
-ID: LETTER (LETTER | DIGIT | UNDERSCORE)*;
-WS: [ \t\r\n]+ -> skip;
+consoleLogStatement: consoleLogExpression;
 
-// strings
+Literal: IntegerLiteral | StringLiteral;
+
+IntegerLiteral: [0-9]+;
+
 StringLiteral: '"' (EscapeSequence | ~["\\])* '"';
-SingleQuoteStringLiteral: '\'' (EscapeSequence | ~['\\])* '\'';
-EscapeSequence: '\\' (["\\/bfnrt] | UnicodeEscape | LineContinuation);
-UnicodeEscape: 'u' HexDigit HexDigit HexDigit HexDigit;
-LineContinuation: '\\' [\r\n\u2028\u2029];
-HexDigit: [0-9a-fA-F];
+fragment EscapeSequence: '\\' [nrt"'\\];
 
-//TODO::for GPT
-/*
-grammar React;
+Identifier: [a-zA-Z_] [a-zA-Z_0-9]*;
 
-program: statements* EOF
-;
-
-statements: (declaration ';'? | expression ';'? | calls ';'?)+;
-
-expression    : expression '*' expression                                                    # Multiplication
-              | expression '+' expression                                                    # Addition
-              | ID                                                                           # Identifier
-              | evaluation                                                                   # Value
-              ;
-
-declaration : variableDeclaration
-            | functionDeclaration
-            ;
-
-// variables
-variableDeclaration:VARTYPE ID ('=' evaluation)?;
-
-// functions
-functionDeclaration: anonymousFunction | regularFunction;
-
-regularFunction: 'function' ID '(' parameters? ')' block;
-
-anonymousFunction : VARTYPE ID '=' '(' parameters? ')' block;
-
-parameters: ID (',' ID)*;
-
-block: '{' statements* return? '}';
-
-return: 'return' expression?;
-
-console:'console.log(' expression ')';
-
-calls
-    : console
-    | ID ('(' parameters? ')')?
-    ;
-
-evaluation : (DIGIT* |string);
-
-string: StringLiteral                                      #DoubleQuoteString
-      | SingleQuoteStringLiteral                            #SingleQuoteString
-      | string '+' string                                    #Concatenation
-      ;
-
-VARTYPE : 'let' | 'const' | 'var';
-LETTER: [a-zA-Z];
-DIGIT: [0-9];
-UNDERSCORE: '_';
-ID: LETTER (LETTER | DIGIT | UNDERSCORE)*;
 WS: [ \t\r\n]+ -> skip;
-
-// strings
-StringLiteral: '"' (EscapeSequence | ~["\\])* '"';
-SingleQuoteStringLiteral: '\'' (EscapeSequence | ~['\\])* '\'';
-EscapeSequence: '\\' (["\\/bfnrt] | UnicodeEscape | LineContinuation);
-UnicodeEscape: 'u' HexDigit HexDigit HexDigit HexDigit;
-LineContinuation: '\\' [\r\n\u2028\u2029];
-HexDigit: [0-9a-fA-F]; error(153): React.g4:6:0: rule statements contains a closure with at least one alternative that can match an empty string
-*/
