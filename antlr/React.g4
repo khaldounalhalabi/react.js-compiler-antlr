@@ -3,29 +3,42 @@ grammar React;
 program: statement+;
 
 statement: variableDeclaration
-         | functionDeclaration
-         | expressionStatement
-         | consoleLogStatement
+         | functionsDeclarations
+         | expression (';')?
+         | consoleLogExpression
          | assignment
          ;
 
-variableDeclaration: variableType Identifier '=' expression ';'?;
+functionsDeclarations : regularFunctionDeclaration
+                      | arrowFunction
+                      | anonymousFunction
+                      ;
 
-variableType: 'let' | 'var' | 'const';
-
-functionDeclaration: 'function' Identifier '(' parameters? ')' block;
-
-assignment: Identifier '=' expression ';'?;
-
-functionExpression: 'function' '(' parameters? ')' block;
+valuable : expression
+         | arrowFunction
+         | anonymousFunction
+         ;
 
 parameters: Identifier (',' Identifier)*;
 
 block: '{' statement* '}';
 
-expressionStatement: expression ';'?;
+regularFunctionDeclaration: 'function' Identifier '(' parameters? ')' block;
 
-expression: expression '*' expression                           #Multiplication
+anonymousFunction: 'function' '(' parameters? ')' block;
+
+arrowFunction: '(' parameters? ')' '=>' block;
+
+functionCall: Identifier '(' arguments? ')';
+
+arguments: expression (',' expression)*;
+
+variableDeclaration: variableType Identifier '=' valuable ';'?;
+
+variableType: 'let' | 'var' | 'const';
+
+expression: '(' expression ')'                                  #ExpressionInBrackets
+          | expression '*' expression                           #Multiplication
           | expression '/' expression                           #Division
           | expression '+' expression                           #Addition
           | expression '-' expression                           #Subtraction
@@ -35,23 +48,15 @@ expression: expression '*' expression                           #Multiplication
           | expression '<' expression                           #LessThan
           | expression '==' expression                          #Equal
           | expression '!=' expression                          #NotEqual
-          | '(' expression ')'                                  #Expr
           | functionCall                                        #FuncCall
-          | arrowFunction                                       #ArrowFunc
-          | functionExpression                                  #FuncExpr
           | Identifier                                          #ID
           | Literal                                             #Litteral
           ;
 
-functionCall: Identifier '(' arguments? ')';
+assignment: Identifier '=' valuable ';'?;
 
-arrowFunction: '(' parameters? ')' '=>' block;
-
-arguments: expression (',' expression)*;
 
 consoleLogExpression: 'console.log' '(' arguments? ')' ';'?;
-
-consoleLogStatement: consoleLogExpression;
 
 Literal: IntegerLiteral | StringLiteral;
 

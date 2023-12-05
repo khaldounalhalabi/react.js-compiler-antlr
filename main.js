@@ -1,4 +1,3 @@
-function d(){
-    console.log('asdasd');
+let v = function (){
+    
 }
-d();
