@@ -13,10 +13,8 @@ import { LessThanOrEqualContext } from "./ReactParser";
 import { LessThanContext } from "./ReactParser";
 import { EqualContext } from "./ReactParser";
 import { NotEqualContext } from "./ReactParser";
-import { ExprContext } from "./ReactParser";
-import { FuncCallContext } from "./ReactParser";
-import { ArrowFuncContext } from "./ReactParser";
-import { FuncExprContext } from "./ReactParser";
+import { BracedExpressionContext } from "./ReactParser";
+import { FunctionalExpressionContext } from "./ReactParser";
 import { IDContext } from "./ReactParser";
 import { LitteralContext } from "./ReactParser";
 import { ProgramContext } from "./ReactParser";
@@ -30,6 +28,7 @@ import { ParametersContext } from "./ReactParser";
 import { BlockContext } from "./ReactParser";
 import { ExpressionStatementContext } from "./ReactParser";
 import { ExpressionContext } from "./ReactParser";
+import { FuncExprContext } from "./ReactParser";
 import { FunctionCallContext } from "./ReactParser";
 import { ArrowFunctionContext } from "./ReactParser";
 import { ArgumentsContext } from "./ReactParser";
@@ -126,36 +125,20 @@ export interface ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	visitNotEqual?: (ctx: NotEqualContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by the `Expr`
+	 * Visit a parse tree produced by the `BracedExpression`
 	 * labeled alternative in `ReactParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitExpr?: (ctx: ExprContext) => Result;
+	visitBracedExpression?: (ctx: BracedExpressionContext) => Result;
 
 	/**
-	 * Visit a parse tree produced by the `FuncCall`
+	 * Visit a parse tree produced by the `FunctionalExpression`
 	 * labeled alternative in `ReactParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitFuncCall?: (ctx: FuncCallContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by the `ArrowFunc`
-	 * labeled alternative in `ReactParser.expression`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitArrowFunc?: (ctx: ArrowFuncContext) => Result;
-
-	/**
-	 * Visit a parse tree produced by the `FuncExpr`
-	 * labeled alternative in `ReactParser.expression`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitFuncExpr?: (ctx: FuncExprContext) => Result;
+	visitFunctionalExpression?: (ctx: FunctionalExpressionContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by the `ID`
@@ -249,6 +232,13 @@ export interface ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitExpression?: (ctx: ExpressionContext) => Result;
+
+	/**
+	 * Visit a parse tree produced by `ReactParser.funcExpr`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitFuncExpr?: (ctx: FuncExprContext) => Result;
 
 	/**
 	 * Visit a parse tree produced by `ReactParser.functionCall`.

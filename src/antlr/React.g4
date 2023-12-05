@@ -35,13 +35,16 @@ expression: expression '*' expression                           #Multiplication
           | expression '<' expression                           #LessThan
           | expression '==' expression                          #Equal
           | expression '!=' expression                          #NotEqual
-          | '(' expression ')'                                  #Expr
-          | functionCall                                        #FuncCall
-          | arrowFunction                                       #ArrowFunc
-          | functionExpression                                  #FuncExpr
+          | '(' expression ')'                                  #BracedExpression
+          | funcExpr                                            #FunctionalExpression
           | Identifier                                          #ID
           | Literal                                             #Litteral
           ;
+
+funcExpr: functionCall
+        | arrowFunction
+        | functionExpression
+        ;
 
 functionCall: Identifier '(' arguments? ')';
 

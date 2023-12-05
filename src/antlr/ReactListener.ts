@@ -13,10 +13,8 @@ import { LessThanOrEqualContext } from "./ReactParser";
 import { LessThanContext } from "./ReactParser";
 import { EqualContext } from "./ReactParser";
 import { NotEqualContext } from "./ReactParser";
-import { ExprContext } from "./ReactParser";
-import { FuncCallContext } from "./ReactParser";
-import { ArrowFuncContext } from "./ReactParser";
-import { FuncExprContext } from "./ReactParser";
+import { BracedExpressionContext } from "./ReactParser";
+import { FunctionalExpressionContext } from "./ReactParser";
 import { IDContext } from "./ReactParser";
 import { LitteralContext } from "./ReactParser";
 import { ProgramContext } from "./ReactParser";
@@ -30,6 +28,7 @@ import { ParametersContext } from "./ReactParser";
 import { BlockContext } from "./ReactParser";
 import { ExpressionStatementContext } from "./ReactParser";
 import { ExpressionContext } from "./ReactParser";
+import { FuncExprContext } from "./ReactParser";
 import { FunctionCallContext } from "./ReactParser";
 import { ArrowFunctionContext } from "./ReactParser";
 import { ArgumentsContext } from "./ReactParser";
@@ -173,56 +172,30 @@ export interface ReactListener extends ParseTreeListener {
 	exitNotEqual?: (ctx: NotEqualContext) => void;
 
 	/**
-	 * Enter a parse tree produced by the `Expr`
+	 * Enter a parse tree produced by the `BracedExpression`
 	 * labeled alternative in `ReactParser.expression`.
 	 * @param ctx the parse tree
 	 */
-	enterExpr?: (ctx: ExprContext) => void;
+	enterBracedExpression?: (ctx: BracedExpressionContext) => void;
 	/**
-	 * Exit a parse tree produced by the `Expr`
+	 * Exit a parse tree produced by the `BracedExpression`
 	 * labeled alternative in `ReactParser.expression`.
 	 * @param ctx the parse tree
 	 */
-	exitExpr?: (ctx: ExprContext) => void;
+	exitBracedExpression?: (ctx: BracedExpressionContext) => void;
 
 	/**
-	 * Enter a parse tree produced by the `FuncCall`
+	 * Enter a parse tree produced by the `FunctionalExpression`
 	 * labeled alternative in `ReactParser.expression`.
 	 * @param ctx the parse tree
 	 */
-	enterFuncCall?: (ctx: FuncCallContext) => void;
+	enterFunctionalExpression?: (ctx: FunctionalExpressionContext) => void;
 	/**
-	 * Exit a parse tree produced by the `FuncCall`
+	 * Exit a parse tree produced by the `FunctionalExpression`
 	 * labeled alternative in `ReactParser.expression`.
 	 * @param ctx the parse tree
 	 */
-	exitFuncCall?: (ctx: FuncCallContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `ArrowFunc`
-	 * labeled alternative in `ReactParser.expression`.
-	 * @param ctx the parse tree
-	 */
-	enterArrowFunc?: (ctx: ArrowFuncContext) => void;
-	/**
-	 * Exit a parse tree produced by the `ArrowFunc`
-	 * labeled alternative in `ReactParser.expression`.
-	 * @param ctx the parse tree
-	 */
-	exitArrowFunc?: (ctx: ArrowFuncContext) => void;
-
-	/**
-	 * Enter a parse tree produced by the `FuncExpr`
-	 * labeled alternative in `ReactParser.expression`.
-	 * @param ctx the parse tree
-	 */
-	enterFuncExpr?: (ctx: FuncExprContext) => void;
-	/**
-	 * Exit a parse tree produced by the `FuncExpr`
-	 * labeled alternative in `ReactParser.expression`.
-	 * @param ctx the parse tree
-	 */
-	exitFuncExpr?: (ctx: FuncExprContext) => void;
+	exitFunctionalExpression?: (ctx: FunctionalExpressionContext) => void;
 
 	/**
 	 * Enter a parse tree produced by the `ID`
@@ -370,6 +343,17 @@ export interface ReactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitExpression?: (ctx: ExpressionContext) => void;
+
+	/**
+	 * Enter a parse tree produced by `ReactParser.funcExpr`.
+	 * @param ctx the parse tree
+	 */
+	enterFuncExpr?: (ctx: FuncExprContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.funcExpr`.
+	 * @param ctx the parse tree
+	 */
+	exitFuncExpr?: (ctx: FuncExprContext) => void;
 
 	/**
 	 * Enter a parse tree produced by `ReactParser.functionCall`.
