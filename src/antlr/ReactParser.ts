@@ -4,18 +4,13 @@
 import { ATN } from "antlr4ts/atn/ATN";
 import { ATNDeserializer } from "antlr4ts/atn/ATNDeserializer";
 import { FailedPredicateException } from "antlr4ts/FailedPredicateException";
-// @ts-ignore
 import { NotNull } from "antlr4ts/Decorators";
-// @ts-ignore
 import { NoViableAltException } from "antlr4ts/NoViableAltException";
-// @ts-ignore
 import { Override } from "antlr4ts/Decorators";
 import { Parser } from "antlr4ts/Parser";
 import { ParserRuleContext } from "antlr4ts/ParserRuleContext";
 import { ParserATNSimulator } from "antlr4ts/atn/ParserATNSimulator";
-// @ts-ignore
 import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
-// @ts-ignore
 import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
 import { RecognitionException } from "antlr4ts/RecognitionException";
 import { RuleContext } from "antlr4ts/RuleContext";
@@ -560,7 +555,6 @@ export class ReactParser extends Parser {
 		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
 		let _localctx: ExpressionContext = new ExpressionContext(this._ctx, _parentState);
-		// @ts-ignore
 		let _prevctx: ExpressionContext = _localctx;
 		let _startState: number = 20;
 		this.enterRecursionRule(_localctx, 20, ReactParser.RULE_expression, _p);
