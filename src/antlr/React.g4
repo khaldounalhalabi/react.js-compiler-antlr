@@ -2,11 +2,11 @@ grammar React;
 
 program: statement+;
 
-statement: variableDeclaration
-         | functionDeclaration
-         | expression ';'?
-         | consoleLogExpression
-         | assignment
+statement: variableDeclaration #variabledeclaration
+         | functionDeclaration #functiondecleration
+         | expression ';'? #expressionLable
+         | consoleLogExpression #consoleLogexpressionLabel
+         | assignment #assignmentLabel
          ;
 
 variableDeclaration: variableType Identifier '=' expression ';'?;
