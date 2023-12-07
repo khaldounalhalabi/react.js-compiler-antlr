@@ -2,6 +2,7 @@ import {VariableDeclaration} from "../../ast/statements/VariableDeclaration.ts";
 import ReactVisitor from "../../antlr/ReactVisitor.ts";
 import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor'
 import {Variable} from '../../ast/Variable.ts';
+import {VariabledeclarationContext} from "../../antlr/ReactParser.ts";
 
 export class VariableDeclarationVisitor extends AbstractParseTreeVisitor<number> implements ReactVisitor<number> {
 
@@ -41,13 +42,16 @@ export class VariableDeclarationVisitor extends AbstractParseTreeVisitor<number>
     visit = (ctx: any): any => {
         console.log('tree', ctx)
         for(let i = 0 ; i < ctx.children.length ; i++){
+            if(ctx.children[i] instanceof
+            VariabledeclarationContext){
+                let type = ctx.children[i].ruleContext.children[0].children[0].text;
+                let name = ctx.children[i].ruleContext.children[0].children[1].text;
+                let value = ctx.children[i].ruleContext.children[0].children[3].text;
 
-            let type = ctx.children[i].ruleContext.children[0].children[0].text;
-            let name = ctx.children[i].ruleContext.children[0].children[1].text;
-            let value = ctx.children[i].ruleContext.children[0].children[3].text;
+                let tempVariable = new Variable(name , value , type);
+                this.addVariable(tempVariable)
+            }
 
-            let tempVariable = new Variable(name , value , type);
-            this.addVariable(tempVariable)
 
         }
         return ctx.accept(this);

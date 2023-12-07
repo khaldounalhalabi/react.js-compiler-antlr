@@ -9,8 +9,8 @@ export class ConsoleLogExpression extends Statement {
         this.args = args;
     }
 
-    toString(): string {
-        const argsStr = this.args ? this.args.toString() : '';
-        return `console.log(${argsStr})`;
-    }
+    // toString(): string {
+    //     const argsStr = this.args ? this.args.toString() : '';
+    //     return `console.log(${argsStr})`;
+    // }
 }
