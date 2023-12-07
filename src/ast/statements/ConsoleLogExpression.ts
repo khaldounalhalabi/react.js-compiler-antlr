@@ -1,9 +1,11 @@
-import {Arguments} from "./Arguments.ts";
+import {Statement} from "../Statement.ts";
+import {Arguments} from "../Expressions/Arguments.ts";
 
-export class ConsoleLogExpression {
+export class ConsoleLogExpression extends Statement {
     args: Arguments | null;
 
     constructor(args: Arguments | null) {
+        super();
         this.args = args;
     }
 

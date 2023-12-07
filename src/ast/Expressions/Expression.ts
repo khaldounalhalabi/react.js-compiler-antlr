@@ -1,8 +1,8 @@
 import {Statement} from "../Statement.ts";
 
-export class Expression extends Statement {
+export abstract class Expression extends Statement {
 
-    constructor() {
+    protected constructor() {
         super();
     }
 

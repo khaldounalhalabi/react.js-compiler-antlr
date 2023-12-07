@@ -4,8 +4,8 @@ program: statement+;
 
 statement: variableDeclaration
          | functionDeclaration
-         | expressionStatement
-         | consoleLogStatement
+         | expression ';'?
+         | consoleLogExpression
          | assignment
          ;
 
@@ -23,8 +23,6 @@ parameters: Identifier (',' Identifier)*;
 
 block: '{' statement* '}';
 
-expressionStatement: expression ';'?;
-
 expression: expression '*' expression                           #Multiplication
           | expression '/' expression                           #Division
           | expression '+' expression                           #Addition
@@ -37,8 +35,9 @@ expression: expression '*' expression                           #Multiplication
           | expression '!=' expression                          #NotEqual
           | '(' expression ')'                                  #BracedExpression
           | funcExpr                                            #FunctionalExpression
-          | Identifier                                          #ID
-          | Literal                                             #Litteral
+          | Identifier                                          #Identifier
+          | IntegerLiteral                                      #Number
+          | StringLiteral                                       #String
           ;
 
 funcExpr: functionCall
@@ -53,10 +52,6 @@ arrowFunction: '(' parameters? ')' '=>' block;
 arguments: expression (',' expression)*;
 
 consoleLogExpression: 'console.log' '(' arguments? ')' ';'?;
-
-consoleLogStatement: consoleLogExpression;
-
-Literal: IntegerLiteral | StringLiteral;
 
 IntegerLiteral: [0-9]+;
 

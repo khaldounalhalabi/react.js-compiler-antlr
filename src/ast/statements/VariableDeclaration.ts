@@ -1,12 +1,14 @@
 import {Expression} from "../Expressions/Expression.ts";
-import {Id} from "../Expressions/Id.ts";
+import {Identifier} from "../Expressions/Identifier.ts";
+import {Statement} from "../Statement.ts";
 
-export class VariableDeclaration {
+export class VariableDeclaration extends Statement {
     variableType: string;
-    identifier: Id;
+    identifier: Identifier;
     expression: Expression | null;
 
-    constructor(variableType: string, identifier: Id, expression: Expression | null) {
+    constructor(variableType: string, identifier: Identifier, expression: Expression | null) {
+        super();
         this.variableType = variableType;
         this.identifier = identifier;
         this.expression = expression;

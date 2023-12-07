@@ -1,6 +1,6 @@
 import {Expression} from "./Expression.ts";
 
-export class Id extends Expression {
+export class Identifier extends Expression {
     name: string;
 
     constructor(name: string) {

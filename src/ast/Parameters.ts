@@ -1,9 +1,9 @@
-import {Id} from "./Expressions/Id.ts";
+import {Identifier} from "./Expressions/Identifier.ts";
 
 export class Parameter {
-    identifier: Id;
+    identifier: Identifier;
 
-    constructor(identifier: Id) {
+    constructor(identifier: Identifier) {
         this.identifier = identifier;
     }
 

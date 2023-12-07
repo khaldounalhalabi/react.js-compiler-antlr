@@ -1,10 +1,9 @@
 import {Statement} from "./Statement.ts";
 
-export class BlockNode extends Statement{
+export class Block{
     statements: Statement[];
 
     constructor(statements: Statement[]) {
-        super();
         this.statements = statements;
     }
 
@@ -13,5 +12,3 @@ export class BlockNode extends Statement{
         return `{\n${statementStrings}\n}`;
     }
 }
-
-export default BlockNode;

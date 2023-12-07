@@ -1,33 +1,24 @@
-// Generated from React.g4 by ANTLR 4.9.0-SNAPSHOT
+// Generated from React.g4 by ANTLR 4.13.1
+// noinspection ES6UnusedImports,JSUnusedGlobalSymbols,JSUnusedLocalSymbols
 
+import {
+	ATN,
+	ATNDeserializer, DecisionState, DFA, FailedPredicateException,
+	RecognitionException, NoViableAltException, BailErrorStrategy,
+	Parser, ParserATNSimulator,
+	RuleContext, ParserRuleContext, PredictionMode, PredictionContextCache,
+	TerminalNode, RuleNode,
+	Token, TokenStream,
+	Interval, IntervalSet
+} from 'antlr4';
+import ReactListener from "./ReactListener.js";
+import ReactVisitor from "./ReactVisitor.js";
 
-import { ATN } from "antlr4ts/atn/ATN";
-import { ATNDeserializer } from "antlr4ts/atn/ATNDeserializer";
-import { FailedPredicateException } from "antlr4ts/FailedPredicateException";
-import { NotNull } from "antlr4ts/Decorators";
-import { NoViableAltException } from "antlr4ts/NoViableAltException";
-import { Override } from "antlr4ts/Decorators";
-import { Parser } from "antlr4ts/Parser";
-import { ParserRuleContext } from "antlr4ts/ParserRuleContext";
-import { ParserATNSimulator } from "antlr4ts/atn/ParserATNSimulator";
-import { ParseTreeListener } from "antlr4ts/tree/ParseTreeListener";
-import { ParseTreeVisitor } from "antlr4ts/tree/ParseTreeVisitor";
-import { RecognitionException } from "antlr4ts/RecognitionException";
-import { RuleContext } from "antlr4ts/RuleContext";
-//import { RuleVersion } from "antlr4ts/RuleVersion";
-import { TerminalNode } from "antlr4ts/tree/TerminalNode";
-import { Token } from "antlr4ts/Token";
-import { TokenStream } from "antlr4ts/TokenStream";
-import { Vocabulary } from "antlr4ts/Vocabulary";
-import { VocabularyImpl } from "antlr4ts/VocabularyImpl";
+// for running tests with parameters, TODO: discuss strategy for typed parameters in CI
+// eslint-disable-next-line no-unused-vars
+type int = number;
 
-import * as Utils from "antlr4ts/misc/Utils";
-
-import { ReactListener } from "./ReactListener";
-import { ReactVisitor } from "./ReactVisitor";
-
-
-export class ReactParser extends Parser {
+export default class ReactParser extends Parser {
 	public static readonly T__0 = 1;
 	public static readonly T__1 = 2;
 	public static readonly T__2 = 3;
@@ -51,11 +42,11 @@ export class ReactParser extends Parser {
 	public static readonly T__20 = 21;
 	public static readonly T__21 = 22;
 	public static readonly T__22 = 23;
-	public static readonly Literal = 24;
-	public static readonly IntegerLiteral = 25;
-	public static readonly StringLiteral = 26;
-	public static readonly Identifier = 27;
-	public static readonly WS = 28;
+	public static readonly IntegerLiteral = 24;
+	public static readonly StringLiteral = 25;
+	public static readonly Identifier = 26;
+	public static readonly WS = 27;
+	public static readonly EOF = Token.EOF;
 	public static readonly RULE_program = 0;
 	public static readonly RULE_statement = 1;
 	public static readonly RULE_variableDeclaration = 2;
@@ -65,51 +56,52 @@ export class ReactParser extends Parser {
 	public static readonly RULE_functionExpression = 6;
 	public static readonly RULE_parameters = 7;
 	public static readonly RULE_block = 8;
-	public static readonly RULE_expressionStatement = 9;
-	public static readonly RULE_expression = 10;
-	public static readonly RULE_funcExpr = 11;
-	public static readonly RULE_functionCall = 12;
-	public static readonly RULE_arrowFunction = 13;
-	public static readonly RULE_arguments = 14;
-	public static readonly RULE_consoleLogExpression = 15;
-	public static readonly RULE_consoleLogStatement = 16;
+	public static readonly RULE_expression = 9;
+	public static readonly RULE_funcExpr = 10;
+	public static readonly RULE_functionCall = 11;
+	public static readonly RULE_arrowFunction = 12;
+	public static readonly RULE_arguments = 13;
+	public static readonly RULE_consoleLogExpression = 14;
+	public static readonly literalNames: (string | null)[] = [ null, "';'", 
+                                                            "'='", "'let'", 
+                                                            "'var'", "'const'", 
+                                                            "'function'", 
+                                                            "'('", "')'", 
+                                                            "','", "'{'", 
+                                                            "'}'", "'*'", 
+                                                            "'/'", "'+'", 
+                                                            "'-'", "'>'", 
+                                                            "'>='", "'<='", 
+                                                            "'<'", "'=='", 
+                                                            "'!='", "'=>'", 
+                                                            "'console.log'" ];
+	public static readonly symbolicNames: (string | null)[] = [ null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             null, null, 
+                                                             "IntegerLiteral", 
+                                                             "StringLiteral", 
+                                                             "Identifier", 
+                                                             "WS" ];
 	// tslint:disable:no-trailing-whitespace
 	public static readonly ruleNames: string[] = [
 		"program", "statement", "variableDeclaration", "variableType", "functionDeclaration", 
-		"assignment", "functionExpression", "parameters", "block", "expressionStatement", 
-		"expression", "funcExpr", "functionCall", "arrowFunction", "arguments", 
-		"consoleLogExpression", "consoleLogStatement",
+		"assignment", "functionExpression", "parameters", "block", "expression", 
+		"funcExpr", "functionCall", "arrowFunction", "arguments", "consoleLogExpression",
 	];
-
-	private static readonly _LITERAL_NAMES: Array<string | undefined> = [
-		undefined, "'='", "';'", "'let'", "'var'", "'const'", "'function'", "'('", 
-		"')'", "','", "'{'", "'}'", "'*'", "'/'", "'+'", "'-'", "'>'", "'>='", 
-		"'<='", "'<'", "'=='", "'!='", "'=>'", "'console.log'",
-	];
-	private static readonly _SYMBOLIC_NAMES: Array<string | undefined> = [
-		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
-		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
-		undefined, undefined, undefined, undefined, undefined, undefined, undefined, 
-		undefined, undefined, undefined, "Literal", "IntegerLiteral", "StringLiteral", 
-		"Identifier", "WS",
-	];
-	public static readonly VOCABULARY: Vocabulary = new VocabularyImpl(ReactParser._LITERAL_NAMES, ReactParser._SYMBOLIC_NAMES, []);
-
-	// @Override
-	// @NotNull
-	public get vocabulary(): Vocabulary {
-		return ReactParser.VOCABULARY;
-	}
-	// tslint:enable:no-trailing-whitespace
-
-	// @Override
 	public get grammarFileName(): string { return "React.g4"; }
-
-	// @Override
+	public get literalNames(): (string | null)[] { return ReactParser.literalNames; }
+	public get symbolicNames(): (string | null)[] { return ReactParser.symbolicNames; }
 	public get ruleNames(): string[] { return ReactParser.ruleNames; }
-
-	// @Override
-	public get serializedATN(): string { return ReactParser._serializedATN; }
+	public get serializedATN(): number[] { return ReactParser._serializedATN; }
 
 	protected createFailedPredicateException(predicate?: string, message?: string): FailedPredicateException {
 		return new FailedPredicateException(this, predicate, message);
@@ -117,35 +109,35 @@ export class ReactParser extends Parser {
 
 	constructor(input: TokenStream) {
 		super(input);
-		this._interp = new ParserATNSimulator(ReactParser._ATN, this);
+		this._interp = new ParserATNSimulator(this, ReactParser._ATN, ReactParser.DecisionsToDFA, new PredictionContextCache());
 	}
 	// @RuleVersion(0)
 	public program(): ProgramContext {
-		let _localctx: ProgramContext = new ProgramContext(this._ctx, this.state);
-		this.enterRule(_localctx, 0, ReactParser.RULE_program);
+		let localctx: ProgramContext = new ProgramContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 0, ReactParser.RULE_program);
 		let _la: number;
 		try {
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 35;
+			this.state = 31;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 34;
+				this.state = 30;
 				this.statement();
 				}
 				}
-				this.state = 37;
+				this.state = 33;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << ReactParser.T__2) | (1 << ReactParser.T__3) | (1 << ReactParser.T__4) | (1 << ReactParser.T__5) | (1 << ReactParser.T__6) | (1 << ReactParser.T__22) | (1 << ReactParser.Literal) | (1 << ReactParser.Identifier))) !== 0));
+			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 125829368) !== 0));
 			}
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -155,52 +147,59 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public statement(): StatementContext {
-		let _localctx: StatementContext = new StatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 2, ReactParser.RULE_statement);
+		let localctx: StatementContext = new StatementContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 2, ReactParser.RULE_statement);
+		let _la: number;
 		try {
-			this.state = 44;
+			this.state = 43;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 1, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 2, this._ctx) ) {
 			case 1:
-				this.enterOuterAlt(_localctx, 1);
+				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 39;
+				this.state = 35;
 				this.variableDeclaration();
 				}
 				break;
-
 			case 2:
-				this.enterOuterAlt(_localctx, 2);
+				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 40;
+				this.state = 36;
 				this.functionDeclaration();
 				}
 				break;
-
 			case 3:
-				this.enterOuterAlt(_localctx, 3);
+				this.enterOuterAlt(localctx, 3);
+				{
+				this.state = 37;
+				this.expression(0);
+				this.state = 39;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+				if (_la===1) {
+					{
+					this.state = 38;
+					this.match(ReactParser.T__0);
+					}
+				}
+
+				}
+				break;
+			case 4:
+				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 41;
-				this.expressionStatement();
+				this.consoleLogExpression();
 				}
 				break;
-
-			case 4:
-				this.enterOuterAlt(_localctx, 4);
+			case 5:
+				this.enterOuterAlt(localctx, 5);
 				{
 				this.state = 42;
-				this.consoleLogStatement();
-				}
-				break;
-
-			case 5:
-				this.enterOuterAlt(_localctx, 5);
-				{
-				this.state = 43;
 				this.assignment();
 				}
 				break;
@@ -208,7 +207,7 @@ export class ReactParser extends Parser {
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -218,31 +217,31 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public variableDeclaration(): VariableDeclarationContext {
-		let _localctx: VariableDeclarationContext = new VariableDeclarationContext(this._ctx, this.state);
-		this.enterRule(_localctx, 4, ReactParser.RULE_variableDeclaration);
+		let localctx: VariableDeclarationContext = new VariableDeclarationContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 4, ReactParser.RULE_variableDeclaration);
 		let _la: number;
 		try {
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 46;
+			this.state = 45;
 			this.variableType();
-			this.state = 47;
+			this.state = 46;
 			this.match(ReactParser.Identifier);
+			this.state = 47;
+			this.match(ReactParser.T__1);
 			this.state = 48;
-			this.match(ReactParser.T__0);
-			this.state = 49;
 			this.expression(0);
-			this.state = 51;
+			this.state = 50;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === ReactParser.T__1) {
+			if (_la===1) {
 				{
-				this.state = 50;
-				this.match(ReactParser.T__1);
+				this.state = 49;
+				this.match(ReactParser.T__0);
 				}
 			}
 
@@ -250,7 +249,7 @@ export class ReactParser extends Parser {
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -260,33 +259,30 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public variableType(): VariableTypeContext {
-		let _localctx: VariableTypeContext = new VariableTypeContext(this._ctx, this.state);
-		this.enterRule(_localctx, 6, ReactParser.RULE_variableType);
+		let localctx: VariableTypeContext = new VariableTypeContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 6, ReactParser.RULE_variableType);
 		let _la: number;
 		try {
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 53;
+			this.state = 52;
 			_la = this._input.LA(1);
-			if (!((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << ReactParser.T__2) | (1 << ReactParser.T__3) | (1 << ReactParser.T__4))) !== 0))) {
+			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 56) !== 0))) {
 			this._errHandler.recoverInline(this);
-			} else {
-				if (this._input.LA(1) === Token.EOF) {
-					this.matchedEOF = true;
-				}
-
+			}
+			else {
 				this._errHandler.reportMatch(this);
-				this.consume();
+			    this.consume();
 			}
 			}
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -296,41 +292,41 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public functionDeclaration(): FunctionDeclarationContext {
-		let _localctx: FunctionDeclarationContext = new FunctionDeclarationContext(this._ctx, this.state);
-		this.enterRule(_localctx, 8, ReactParser.RULE_functionDeclaration);
+		let localctx: FunctionDeclarationContext = new FunctionDeclarationContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 8, ReactParser.RULE_functionDeclaration);
 		let _la: number;
 		try {
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 55;
+			this.state = 54;
 			this.match(ReactParser.T__5);
-			this.state = 56;
+			this.state = 55;
 			this.match(ReactParser.Identifier);
-			this.state = 57;
+			this.state = 56;
 			this.match(ReactParser.T__6);
-			this.state = 59;
+			this.state = 58;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === ReactParser.Identifier) {
+			if (_la===26) {
 				{
-				this.state = 58;
+				this.state = 57;
 				this.parameters();
 				}
 			}
 
-			this.state = 61;
+			this.state = 60;
 			this.match(ReactParser.T__7);
-			this.state = 62;
+			this.state = 61;
 			this.block();
 			}
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -340,29 +336,29 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public assignment(): AssignmentContext {
-		let _localctx: AssignmentContext = new AssignmentContext(this._ctx, this.state);
-		this.enterRule(_localctx, 10, ReactParser.RULE_assignment);
+		let localctx: AssignmentContext = new AssignmentContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 10, ReactParser.RULE_assignment);
 		let _la: number;
 		try {
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 64;
+			this.state = 63;
 			this.match(ReactParser.Identifier);
+			this.state = 64;
+			this.match(ReactParser.T__1);
 			this.state = 65;
-			this.match(ReactParser.T__0);
-			this.state = 66;
 			this.expression(0);
-			this.state = 68;
+			this.state = 67;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === ReactParser.T__1) {
+			if (_la===1) {
 				{
-				this.state = 67;
-				this.match(ReactParser.T__1);
+				this.state = 66;
+				this.match(ReactParser.T__0);
 				}
 			}
 
@@ -370,7 +366,7 @@ export class ReactParser extends Parser {
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -380,39 +376,39 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public functionExpression(): FunctionExpressionContext {
-		let _localctx: FunctionExpressionContext = new FunctionExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 12, ReactParser.RULE_functionExpression);
+		let localctx: FunctionExpressionContext = new FunctionExpressionContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 12, ReactParser.RULE_functionExpression);
 		let _la: number;
 		try {
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 70;
+			this.state = 69;
 			this.match(ReactParser.T__5);
-			this.state = 71;
+			this.state = 70;
 			this.match(ReactParser.T__6);
-			this.state = 73;
+			this.state = 72;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === ReactParser.Identifier) {
+			if (_la===26) {
 				{
-				this.state = 72;
+				this.state = 71;
 				this.parameters();
 				}
 			}
 
-			this.state = 75;
+			this.state = 74;
 			this.match(ReactParser.T__7);
-			this.state = 76;
+			this.state = 75;
 			this.block();
 			}
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -422,31 +418,31 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public parameters(): ParametersContext {
-		let _localctx: ParametersContext = new ParametersContext(this._ctx, this.state);
-		this.enterRule(_localctx, 14, ReactParser.RULE_parameters);
+		let localctx: ParametersContext = new ParametersContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 14, ReactParser.RULE_parameters);
 		let _la: number;
 		try {
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 78;
+			this.state = 77;
 			this.match(ReactParser.Identifier);
-			this.state = 83;
+			this.state = 82;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la === ReactParser.T__8) {
+			while (_la===9) {
 				{
 				{
-				this.state = 79;
+				this.state = 78;
 				this.match(ReactParser.T__8);
-				this.state = 80;
+				this.state = 79;
 				this.match(ReactParser.Identifier);
 				}
 				}
-				this.state = 85;
+				this.state = 84;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -454,7 +450,7 @@ export class ReactParser extends Parser {
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -464,39 +460,39 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public block(): BlockContext {
-		let _localctx: BlockContext = new BlockContext(this._ctx, this.state);
-		this.enterRule(_localctx, 16, ReactParser.RULE_block);
+		let localctx: BlockContext = new BlockContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 16, ReactParser.RULE_block);
 		let _la: number;
 		try {
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 86;
+			this.state = 85;
 			this.match(ReactParser.T__9);
-			this.state = 90;
+			this.state = 89;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << ReactParser.T__2) | (1 << ReactParser.T__3) | (1 << ReactParser.T__4) | (1 << ReactParser.T__5) | (1 << ReactParser.T__6) | (1 << ReactParser.T__22) | (1 << ReactParser.Literal) | (1 << ReactParser.Identifier))) !== 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 125829368) !== 0)) {
 				{
 				{
-				this.state = 87;
+				this.state = 86;
 				this.statement();
 				}
 				}
-				this.state = 92;
+				this.state = 91;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 93;
+			this.state = 92;
 			this.match(ReactParser.T__10);
 			}
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -506,43 +502,7 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public expressionStatement(): ExpressionStatementContext {
-		let _localctx: ExpressionStatementContext = new ExpressionStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 18, ReactParser.RULE_expressionStatement);
-		let _la: number;
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 95;
-			this.expression(0);
-			this.state = 97;
-			this._errHandler.sync(this);
-			_la = this._input.LA(1);
-			if (_la === ReactParser.T__1) {
-				{
-				this.state = 96;
-				this.match(ReactParser.T__1);
-				}
-			}
-
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
+		return localctx;
 	}
 
 	public expression(): ExpressionContext;
@@ -555,237 +515,234 @@ export class ReactParser extends Parser {
 
 		let _parentctx: ParserRuleContext = this._ctx;
 		let _parentState: number = this.state;
-		let _localctx: ExpressionContext = new ExpressionContext(this._ctx, _parentState);
-		let _prevctx: ExpressionContext = _localctx;
-		let _startState: number = 20;
-		this.enterRecursionRule(_localctx, 20, ReactParser.RULE_expression, _p);
+		let localctx: ExpressionContext = new ExpressionContext(this, this._ctx, _parentState);
+		let _prevctx: ExpressionContext = localctx;
+		let _startState: number = 18;
+		this.enterRecursionRule(localctx, 18, ReactParser.RULE_expression, _p);
 		try {
 			let _alt: number;
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 107;
+			this.state = 103;
 			this._errHandler.sync(this);
-			switch ( this.interpreter.adaptivePredict(this._input, 9, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 9, this._ctx) ) {
 			case 1:
 				{
-				_localctx = new BracedExpressionContext(_localctx);
-				this._ctx = _localctx;
-				_prevctx = _localctx;
+				localctx = new BracedExpressionContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 
-				this.state = 100;
+				this.state = 95;
 				this.match(ReactParser.T__6);
-				this.state = 101;
+				this.state = 96;
 				this.expression(0);
-				this.state = 102;
+				this.state = 97;
 				this.match(ReactParser.T__7);
 				}
 				break;
-
 			case 2:
 				{
-				_localctx = new FunctionalExpressionContext(_localctx);
-				this._ctx = _localctx;
-				_prevctx = _localctx;
-				this.state = 104;
+				localctx = new FunctionalExpressionContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
+				this.state = 99;
 				this.funcExpr();
 				}
 				break;
-
 			case 3:
 				{
-				_localctx = new IDContext(_localctx);
-				this._ctx = _localctx;
-				_prevctx = _localctx;
-				this.state = 105;
+				localctx = new IdentifierContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
+				this.state = 100;
 				this.match(ReactParser.Identifier);
 				}
 				break;
-
 			case 4:
 				{
-				_localctx = new LitteralContext(_localctx);
-				this._ctx = _localctx;
-				_prevctx = _localctx;
-				this.state = 106;
-				this.match(ReactParser.Literal);
+				localctx = new NumberContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
+				this.state = 101;
+				this.match(ReactParser.IntegerLiteral);
+				}
+				break;
+			case 5:
+				{
+				localctx = new StringContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
+				this.state = 102;
+				this.match(ReactParser.StringLiteral);
 				}
 				break;
 			}
-			this._ctx._stop = this._input.tryLT(-1);
-			this.state = 141;
+			this._ctx.stop = this._input.LT(-1);
+			this.state = 137;
 			this._errHandler.sync(this);
-			_alt = this.interpreter.adaptivePredict(this._input, 11, this._ctx);
+			_alt = this._interp.adaptivePredict(this._input, 11, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
 				if (_alt === 1) {
 					if (this._parseListeners != null) {
 						this.triggerExitRuleEvent();
 					}
-					_prevctx = _localctx;
+					_prevctx = localctx;
 					{
-					this.state = 139;
+					this.state = 135;
 					this._errHandler.sync(this);
-					switch ( this.interpreter.adaptivePredict(this._input, 10, this._ctx) ) {
+					switch ( this._interp.adaptivePredict(this._input, 10, this._ctx) ) {
 					case 1:
 						{
-						_localctx = new MultiplicationContext(new ExpressionContext(_parentctx, _parentState));
-						this.pushNewRecursionContext(_localctx, _startState, ReactParser.RULE_expression);
-						this.state = 109;
+						localctx = new MultiplicationContext(this, new ExpressionContext(this, _parentctx, _parentState));
+						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
+						this.state = 105;
+						if (!(this.precpred(this._ctx, 15))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 15)");
+						}
+						this.state = 106;
+						this.match(ReactParser.T__11);
+						this.state = 107;
+						this.expression(16);
+						}
+						break;
+					case 2:
+						{
+						localctx = new DivisionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
+						this.state = 108;
 						if (!(this.precpred(this._ctx, 14))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 14)");
 						}
+						this.state = 109;
+						this.match(ReactParser.T__12);
 						this.state = 110;
-						this.match(ReactParser.T__11);
-						this.state = 111;
 						this.expression(15);
 						}
 						break;
-
-					case 2:
+					case 3:
 						{
-						_localctx = new DivisionContext(new ExpressionContext(_parentctx, _parentState));
-						this.pushNewRecursionContext(_localctx, _startState, ReactParser.RULE_expression);
-						this.state = 112;
+						localctx = new AdditionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
+						this.state = 111;
 						if (!(this.precpred(this._ctx, 13))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 13)");
 						}
+						this.state = 112;
+						this.match(ReactParser.T__13);
 						this.state = 113;
-						this.match(ReactParser.T__12);
-						this.state = 114;
 						this.expression(14);
 						}
 						break;
-
-					case 3:
+					case 4:
 						{
-						_localctx = new AdditionContext(new ExpressionContext(_parentctx, _parentState));
-						this.pushNewRecursionContext(_localctx, _startState, ReactParser.RULE_expression);
-						this.state = 115;
+						localctx = new SubtractionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
+						this.state = 114;
 						if (!(this.precpred(this._ctx, 12))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 12)");
 						}
+						this.state = 115;
+						this.match(ReactParser.T__14);
 						this.state = 116;
-						this.match(ReactParser.T__13);
-						this.state = 117;
 						this.expression(13);
 						}
 						break;
-
-					case 4:
+					case 5:
 						{
-						_localctx = new SubtractionContext(new ExpressionContext(_parentctx, _parentState));
-						this.pushNewRecursionContext(_localctx, _startState, ReactParser.RULE_expression);
-						this.state = 118;
+						localctx = new MoreThanContext(this, new ExpressionContext(this, _parentctx, _parentState));
+						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
+						this.state = 117;
 						if (!(this.precpred(this._ctx, 11))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 11)");
 						}
+						this.state = 118;
+						this.match(ReactParser.T__15);
 						this.state = 119;
-						this.match(ReactParser.T__14);
-						this.state = 120;
 						this.expression(12);
 						}
 						break;
-
-					case 5:
+					case 6:
 						{
-						_localctx = new MoreThanContext(new ExpressionContext(_parentctx, _parentState));
-						this.pushNewRecursionContext(_localctx, _startState, ReactParser.RULE_expression);
-						this.state = 121;
+						localctx = new MoreThanOrEqualContext(this, new ExpressionContext(this, _parentctx, _parentState));
+						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
+						this.state = 120;
 						if (!(this.precpred(this._ctx, 10))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 10)");
 						}
+						this.state = 121;
+						this.match(ReactParser.T__16);
 						this.state = 122;
-						this.match(ReactParser.T__15);
-						this.state = 123;
 						this.expression(11);
 						}
 						break;
-
-					case 6:
+					case 7:
 						{
-						_localctx = new MoreThanOrEqualContext(new ExpressionContext(_parentctx, _parentState));
-						this.pushNewRecursionContext(_localctx, _startState, ReactParser.RULE_expression);
-						this.state = 124;
+						localctx = new LessThanOrEqualContext(this, new ExpressionContext(this, _parentctx, _parentState));
+						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
+						this.state = 123;
 						if (!(this.precpred(this._ctx, 9))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 9)");
 						}
+						this.state = 124;
+						this.match(ReactParser.T__17);
 						this.state = 125;
-						this.match(ReactParser.T__16);
-						this.state = 126;
 						this.expression(10);
 						}
 						break;
-
-					case 7:
+					case 8:
 						{
-						_localctx = new LessThanOrEqualContext(new ExpressionContext(_parentctx, _parentState));
-						this.pushNewRecursionContext(_localctx, _startState, ReactParser.RULE_expression);
-						this.state = 127;
+						localctx = new LessThanContext(this, new ExpressionContext(this, _parentctx, _parentState));
+						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
+						this.state = 126;
 						if (!(this.precpred(this._ctx, 8))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 8)");
 						}
+						this.state = 127;
+						this.match(ReactParser.T__18);
 						this.state = 128;
-						this.match(ReactParser.T__17);
-						this.state = 129;
 						this.expression(9);
 						}
 						break;
-
-					case 8:
+					case 9:
 						{
-						_localctx = new LessThanContext(new ExpressionContext(_parentctx, _parentState));
-						this.pushNewRecursionContext(_localctx, _startState, ReactParser.RULE_expression);
-						this.state = 130;
+						localctx = new EqualContext(this, new ExpressionContext(this, _parentctx, _parentState));
+						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
+						this.state = 129;
 						if (!(this.precpred(this._ctx, 7))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 7)");
 						}
+						this.state = 130;
+						this.match(ReactParser.T__19);
 						this.state = 131;
-						this.match(ReactParser.T__18);
-						this.state = 132;
 						this.expression(8);
 						}
 						break;
-
-					case 9:
+					case 10:
 						{
-						_localctx = new EqualContext(new ExpressionContext(_parentctx, _parentState));
-						this.pushNewRecursionContext(_localctx, _startState, ReactParser.RULE_expression);
-						this.state = 133;
+						localctx = new NotEqualContext(this, new ExpressionContext(this, _parentctx, _parentState));
+						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
+						this.state = 132;
 						if (!(this.precpred(this._ctx, 6))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 6)");
 						}
-						this.state = 134;
-						this.match(ReactParser.T__19);
-						this.state = 135;
-						this.expression(7);
-						}
-						break;
-
-					case 10:
-						{
-						_localctx = new NotEqualContext(new ExpressionContext(_parentctx, _parentState));
-						this.pushNewRecursionContext(_localctx, _startState, ReactParser.RULE_expression);
-						this.state = 136;
-						if (!(this.precpred(this._ctx, 5))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 5)");
-						}
-						this.state = 137;
+						this.state = 133;
 						this.match(ReactParser.T__20);
-						this.state = 138;
-						this.expression(6);
+						this.state = 134;
+						this.expression(7);
 						}
 						break;
 					}
 					}
 				}
-				this.state = 143;
+				this.state = 139;
 				this._errHandler.sync(this);
-				_alt = this.interpreter.adaptivePredict(this._input, 11, this._ctx);
+				_alt = this._interp.adaptivePredict(this._input, 11, this._ctx);
 			}
 			}
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -795,34 +752,34 @@ export class ReactParser extends Parser {
 		finally {
 			this.unrollRecursionContexts(_parentctx);
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public funcExpr(): FuncExprContext {
-		let _localctx: FuncExprContext = new FuncExprContext(this._ctx, this.state);
-		this.enterRule(_localctx, 22, ReactParser.RULE_funcExpr);
+		let localctx: FuncExprContext = new FuncExprContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 20, ReactParser.RULE_funcExpr);
 		try {
-			this.state = 147;
+			this.state = 143;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case ReactParser.Identifier:
-				this.enterOuterAlt(_localctx, 1);
+			case 26:
+				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 144;
+				this.state = 140;
 				this.functionCall();
 				}
 				break;
-			case ReactParser.T__6:
-				this.enterOuterAlt(_localctx, 2);
+			case 7:
+				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 145;
+				this.state = 141;
 				this.arrowFunction();
 				}
 				break;
-			case ReactParser.T__5:
-				this.enterOuterAlt(_localctx, 3);
+			case 6:
+				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 146;
+				this.state = 142;
 				this.functionExpression();
 				}
 				break;
@@ -832,7 +789,7 @@ export class ReactParser extends Parser {
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -842,37 +799,37 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public functionCall(): FunctionCallContext {
-		let _localctx: FunctionCallContext = new FunctionCallContext(this._ctx, this.state);
-		this.enterRule(_localctx, 24, ReactParser.RULE_functionCall);
+		let localctx: FunctionCallContext = new FunctionCallContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 22, ReactParser.RULE_functionCall);
 		let _la: number;
 		try {
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 149;
+			this.state = 145;
 			this.match(ReactParser.Identifier);
-			this.state = 150;
+			this.state = 146;
 			this.match(ReactParser.T__6);
-			this.state = 152;
+			this.state = 148;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << ReactParser.T__5) | (1 << ReactParser.T__6) | (1 << ReactParser.Literal) | (1 << ReactParser.Identifier))) !== 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 117440704) !== 0)) {
 				{
-				this.state = 151;
+				this.state = 147;
 				this.arguments();
 				}
 			}
 
-			this.state = 154;
+			this.state = 150;
 			this.match(ReactParser.T__7);
 			}
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -882,39 +839,39 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public arrowFunction(): ArrowFunctionContext {
-		let _localctx: ArrowFunctionContext = new ArrowFunctionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 26, ReactParser.RULE_arrowFunction);
+		let localctx: ArrowFunctionContext = new ArrowFunctionContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 24, ReactParser.RULE_arrowFunction);
 		let _la: number;
 		try {
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 156;
+			this.state = 152;
 			this.match(ReactParser.T__6);
-			this.state = 158;
+			this.state = 154;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === ReactParser.Identifier) {
+			if (_la===26) {
 				{
-				this.state = 157;
+				this.state = 153;
 				this.parameters();
 				}
 			}
 
-			this.state = 160;
+			this.state = 156;
 			this.match(ReactParser.T__7);
-			this.state = 161;
+			this.state = 157;
 			this.match(ReactParser.T__21);
-			this.state = 162;
+			this.state = 158;
 			this.block();
 			}
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -924,31 +881,31 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public arguments(): ArgumentsContext {
-		let _localctx: ArgumentsContext = new ArgumentsContext(this._ctx, this.state);
-		this.enterRule(_localctx, 28, ReactParser.RULE_arguments);
+		let localctx: ArgumentsContext = new ArgumentsContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 26, ReactParser.RULE_arguments);
 		let _la: number;
 		try {
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 164;
+			this.state = 160;
 			this.expression(0);
-			this.state = 169;
+			this.state = 165;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while (_la === ReactParser.T__8) {
+			while (_la===9) {
 				{
 				{
-				this.state = 165;
+				this.state = 161;
 				this.match(ReactParser.T__8);
-				this.state = 166;
+				this.state = 162;
 				this.expression(0);
 				}
 				}
-				this.state = 171;
+				this.state = 167;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -956,7 +913,7 @@ export class ReactParser extends Parser {
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -966,39 +923,39 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
+		return localctx;
 	}
 	// @RuleVersion(0)
 	public consoleLogExpression(): ConsoleLogExpressionContext {
-		let _localctx: ConsoleLogExpressionContext = new ConsoleLogExpressionContext(this._ctx, this.state);
-		this.enterRule(_localctx, 30, ReactParser.RULE_consoleLogExpression);
+		let localctx: ConsoleLogExpressionContext = new ConsoleLogExpressionContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 28, ReactParser.RULE_consoleLogExpression);
 		let _la: number;
 		try {
-			this.enterOuterAlt(_localctx, 1);
+			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 172;
+			this.state = 168;
 			this.match(ReactParser.T__22);
-			this.state = 173;
+			this.state = 169;
 			this.match(ReactParser.T__6);
-			this.state = 175;
+			this.state = 171;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & ((1 << ReactParser.T__5) | (1 << ReactParser.T__6) | (1 << ReactParser.Literal) | (1 << ReactParser.Identifier))) !== 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 117440704) !== 0)) {
 				{
-				this.state = 174;
+				this.state = 170;
 				this.arguments();
 				}
 			}
 
-			this.state = 177;
+			this.state = 173;
 			this.match(ReactParser.T__7);
-			this.state = 179;
+			this.state = 175;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la === ReactParser.T__1) {
+			if (_la===1) {
 				{
-				this.state = 178;
-				this.match(ReactParser.T__1);
+				this.state = 174;
+				this.match(ReactParser.T__0);
 				}
 			}
 
@@ -1006,7 +963,7 @@ export class ReactParser extends Parser {
 		}
 		catch (re) {
 			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
+				localctx.exception = re;
 				this._errHandler.reportError(this, re);
 				this._errHandler.recover(this, re);
 			} else {
@@ -1016,191 +973,136 @@ export class ReactParser extends Parser {
 		finally {
 			this.exitRule();
 		}
-		return _localctx;
-	}
-	// @RuleVersion(0)
-	public consoleLogStatement(): ConsoleLogStatementContext {
-		let _localctx: ConsoleLogStatementContext = new ConsoleLogStatementContext(this._ctx, this.state);
-		this.enterRule(_localctx, 32, ReactParser.RULE_consoleLogStatement);
-		try {
-			this.enterOuterAlt(_localctx, 1);
-			{
-			this.state = 181;
-			this.consoleLogExpression();
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				_localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return _localctx;
+		return localctx;
 	}
 
-	public sempred(_localctx: RuleContext, ruleIndex: number, predIndex: number): boolean {
+	public sempred(localctx: RuleContext, ruleIndex: number, predIndex: number): boolean {
 		switch (ruleIndex) {
-		case 10:
-			return this.expression_sempred(_localctx as ExpressionContext, predIndex);
+		case 9:
+			return this.expression_sempred(localctx as ExpressionContext, predIndex);
 		}
 		return true;
 	}
-	private expression_sempred(_localctx: ExpressionContext, predIndex: number): boolean {
+	private expression_sempred(localctx: ExpressionContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 0:
-			return this.precpred(this._ctx, 14);
-
+			return this.precpred(this._ctx, 15);
 		case 1:
-			return this.precpred(this._ctx, 13);
-
+			return this.precpred(this._ctx, 14);
 		case 2:
-			return this.precpred(this._ctx, 12);
-
+			return this.precpred(this._ctx, 13);
 		case 3:
-			return this.precpred(this._ctx, 11);
-
+			return this.precpred(this._ctx, 12);
 		case 4:
-			return this.precpred(this._ctx, 10);
-
+			return this.precpred(this._ctx, 11);
 		case 5:
-			return this.precpred(this._ctx, 9);
-
+			return this.precpred(this._ctx, 10);
 		case 6:
-			return this.precpred(this._ctx, 8);
-
+			return this.precpred(this._ctx, 9);
 		case 7:
-			return this.precpred(this._ctx, 7);
-
+			return this.precpred(this._ctx, 8);
 		case 8:
-			return this.precpred(this._ctx, 6);
-
+			return this.precpred(this._ctx, 7);
 		case 9:
-			return this.precpred(this._ctx, 5);
+			return this.precpred(this._ctx, 6);
 		}
 		return true;
 	}
 
-	public static readonly _serializedATN: string =
-		"\x03\uC91D\uCABA\u058D\uAFBA\u4F53\u0607\uEA8B\uC241\x03\x1E\xBA\x04\x02" +
-		"\t\x02\x04\x03\t\x03\x04\x04\t\x04\x04\x05\t\x05\x04\x06\t\x06\x04\x07" +
-		"\t\x07\x04\b\t\b\x04\t\t\t\x04\n\t\n\x04\v\t\v\x04\f\t\f\x04\r\t\r\x04" +
-		"\x0E\t\x0E\x04\x0F\t\x0F\x04\x10\t\x10\x04\x11\t\x11\x04\x12\t\x12\x03" +
-		"\x02\x06\x02&\n\x02\r\x02\x0E\x02\'\x03\x03\x03\x03\x03\x03\x03\x03\x03" +
-		"\x03\x05\x03/\n\x03\x03\x04\x03\x04\x03\x04\x03\x04\x03\x04\x05\x046\n" +
-		"\x04\x03\x05\x03\x05\x03\x06\x03\x06\x03\x06\x03\x06\x05\x06>\n\x06\x03" +
-		"\x06\x03\x06\x03\x06\x03\x07\x03\x07\x03\x07\x03\x07\x05\x07G\n\x07\x03" +
-		"\b\x03\b\x03\b\x05\bL\n\b\x03\b\x03\b\x03\b\x03\t\x03\t\x03\t\x07\tT\n" +
-		"\t\f\t\x0E\tW\v\t\x03\n\x03\n\x07\n[\n\n\f\n\x0E\n^\v\n\x03\n\x03\n\x03" +
-		"\v\x03\v\x05\vd\n\v\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x05" +
-		"\fn\n\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03" +
-		"\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03" +
-		"\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x03\f\x07\f\x8E\n\f\f\f\x0E\f\x91" +
-		"\v\f\x03\r\x03\r\x03\r\x05\r\x96\n\r\x03\x0E\x03\x0E\x03\x0E\x05\x0E\x9B" +
-		"\n\x0E\x03\x0E\x03\x0E\x03\x0F\x03\x0F\x05\x0F\xA1\n\x0F\x03\x0F\x03\x0F" +
-		"\x03\x0F\x03\x0F\x03\x10\x03\x10\x03\x10\x07\x10\xAA\n\x10\f\x10\x0E\x10" +
-		"\xAD\v\x10\x03\x11\x03\x11\x03\x11\x05\x11\xB2\n\x11\x03\x11\x03\x11\x05" +
-		"\x11\xB6\n\x11\x03\x12\x03\x12\x03\x12\x02\x02\x03\x16\x13\x02\x02\x04" +
-		"\x02\x06\x02\b\x02\n\x02\f\x02\x0E\x02\x10\x02\x12\x02\x14\x02\x16\x02" +
-		"\x18\x02\x1A\x02\x1C\x02\x1E\x02 \x02\"\x02\x02\x03\x03\x02\x05\x07\x02" +
-		"\xC8\x02%\x03\x02\x02\x02\x04.\x03\x02\x02\x02\x060\x03\x02\x02\x02\b" +
-		"7\x03\x02\x02\x02\n9\x03\x02\x02\x02\fB\x03\x02\x02\x02\x0EH\x03\x02\x02" +
-		"\x02\x10P\x03\x02\x02\x02\x12X\x03\x02\x02\x02\x14a\x03\x02\x02\x02\x16" +
-		"m\x03\x02\x02\x02\x18\x95\x03\x02\x02\x02\x1A\x97\x03\x02\x02\x02\x1C" +
-		"\x9E\x03\x02\x02\x02\x1E\xA6\x03\x02\x02\x02 \xAE\x03\x02\x02\x02\"\xB7" +
-		"\x03\x02\x02\x02$&\x05\x04\x03\x02%$\x03\x02\x02\x02&\'\x03\x02\x02\x02" +
-		"\'%\x03\x02\x02\x02\'(\x03\x02\x02\x02(\x03\x03\x02\x02\x02)/\x05\x06" +
-		"\x04\x02*/\x05\n\x06\x02+/\x05\x14\v\x02,/\x05\"\x12\x02-/\x05\f\x07\x02" +
-		".)\x03\x02\x02\x02.*\x03\x02\x02\x02.+\x03\x02\x02\x02.,\x03\x02\x02\x02" +
-		".-\x03\x02\x02\x02/\x05\x03\x02\x02\x0201\x05\b\x05\x0212\x07\x1D\x02" +
-		"\x0223\x07\x03\x02\x0235\x05\x16\f\x0246\x07\x04\x02\x0254\x03\x02\x02" +
-		"\x0256\x03\x02\x02\x026\x07\x03\x02\x02\x0278\t\x02\x02\x028\t\x03\x02" +
-		"\x02\x029:\x07\b\x02\x02:;\x07\x1D\x02\x02;=\x07\t\x02\x02<>\x05\x10\t" +
-		"\x02=<\x03\x02\x02\x02=>\x03\x02\x02\x02>?\x03\x02\x02\x02?@\x07\n\x02" +
-		"\x02@A\x05\x12\n\x02A\v\x03\x02\x02\x02BC\x07\x1D\x02\x02CD\x07\x03\x02" +
-		"\x02DF\x05\x16\f\x02EG\x07\x04\x02\x02FE\x03\x02\x02\x02FG\x03\x02\x02" +
-		"\x02G\r\x03\x02\x02\x02HI\x07\b\x02\x02IK\x07\t\x02\x02JL\x05\x10\t\x02" +
-		"KJ\x03\x02\x02\x02KL\x03\x02\x02\x02LM\x03\x02\x02\x02MN\x07\n\x02\x02" +
-		"NO\x05\x12\n\x02O\x0F\x03\x02\x02\x02PU\x07\x1D\x02\x02QR\x07\v\x02\x02" +
-		"RT\x07\x1D\x02\x02SQ\x03\x02\x02\x02TW\x03\x02\x02\x02US\x03\x02\x02\x02" +
-		"UV\x03\x02\x02\x02V\x11\x03\x02\x02\x02WU\x03\x02\x02\x02X\\\x07\f\x02" +
-		"\x02Y[\x05\x04\x03\x02ZY\x03\x02\x02\x02[^\x03\x02\x02\x02\\Z\x03\x02" +
-		"\x02\x02\\]\x03\x02\x02\x02]_\x03\x02\x02\x02^\\\x03\x02\x02\x02_`\x07" +
-		"\r\x02\x02`\x13\x03\x02\x02\x02ac\x05\x16\f\x02bd\x07\x04\x02\x02cb\x03" +
-		"\x02\x02\x02cd\x03\x02\x02\x02d\x15\x03\x02\x02\x02ef\b\f\x01\x02fg\x07" +
-		"\t\x02\x02gh\x05\x16\f\x02hi\x07\n\x02\x02in\x03\x02\x02\x02jn\x05\x18" +
-		"\r\x02kn\x07\x1D\x02\x02ln\x07\x1A\x02\x02me\x03\x02\x02\x02mj\x03\x02" +
-		"\x02\x02mk\x03\x02\x02\x02ml\x03\x02\x02\x02n\x8F\x03\x02\x02\x02op\f" +
-		"\x10\x02\x02pq\x07\x0E\x02\x02q\x8E\x05\x16\f\x11rs\f\x0F\x02\x02st\x07" +
-		"\x0F\x02\x02t\x8E\x05\x16\f\x10uv\f\x0E\x02\x02vw\x07\x10\x02\x02w\x8E" +
-		"\x05\x16\f\x0Fxy\f\r\x02\x02yz\x07\x11\x02\x02z\x8E\x05\x16\f\x0E{|\f" +
-		"\f\x02\x02|}\x07\x12\x02\x02}\x8E\x05\x16\f\r~\x7F\f\v\x02\x02\x7F\x80" +
-		"\x07\x13\x02\x02\x80\x8E\x05\x16\f\f\x81\x82\f\n\x02\x02\x82\x83\x07\x14" +
-		"\x02\x02\x83\x8E\x05\x16\f\v\x84\x85\f\t\x02\x02\x85\x86\x07\x15\x02\x02" +
-		"\x86\x8E\x05\x16\f\n\x87\x88\f\b\x02\x02\x88\x89\x07\x16\x02\x02\x89\x8E" +
-		"\x05\x16\f\t\x8A\x8B\f\x07\x02\x02\x8B\x8C\x07\x17\x02\x02\x8C\x8E\x05" +
-		"\x16\f\b\x8Do\x03\x02\x02\x02\x8Dr\x03\x02\x02\x02\x8Du\x03\x02\x02\x02" +
-		"\x8Dx\x03\x02\x02\x02\x8D{\x03\x02\x02\x02\x8D~\x03\x02\x02\x02\x8D\x81" +
-		"\x03\x02\x02\x02\x8D\x84\x03\x02\x02\x02\x8D\x87\x03\x02\x02\x02\x8D\x8A" +
-		"\x03\x02\x02\x02\x8E\x91\x03\x02\x02\x02\x8F\x8D\x03\x02\x02\x02\x8F\x90" +
-		"\x03\x02\x02\x02\x90\x17\x03\x02\x02\x02\x91\x8F\x03\x02\x02\x02\x92\x96" +
-		"\x05\x1A\x0E\x02\x93\x96\x05\x1C\x0F\x02\x94\x96\x05\x0E\b\x02\x95\x92" +
-		"\x03\x02\x02\x02\x95\x93\x03\x02\x02\x02\x95\x94\x03\x02\x02\x02\x96\x19" +
-		"\x03\x02\x02\x02\x97\x98\x07\x1D\x02\x02\x98\x9A\x07\t\x02\x02\x99\x9B" +
-		"\x05\x1E\x10\x02\x9A\x99\x03\x02\x02\x02\x9A\x9B\x03\x02\x02\x02\x9B\x9C" +
-		"\x03\x02\x02\x02\x9C\x9D\x07\n\x02\x02\x9D\x1B\x03\x02\x02\x02\x9E\xA0" +
-		"\x07\t\x02\x02\x9F\xA1\x05\x10\t\x02\xA0\x9F\x03\x02\x02\x02\xA0\xA1\x03" +
-		"\x02\x02\x02\xA1\xA2\x03\x02\x02\x02\xA2\xA3\x07\n\x02\x02\xA3\xA4\x07" +
-		"\x18\x02\x02\xA4\xA5\x05\x12\n\x02\xA5\x1D\x03\x02\x02\x02\xA6\xAB\x05" +
-		"\x16\f\x02\xA7\xA8\x07\v\x02\x02\xA8\xAA\x05\x16\f\x02\xA9\xA7\x03\x02" +
-		"\x02\x02\xAA\xAD\x03\x02\x02\x02\xAB\xA9\x03\x02\x02\x02\xAB\xAC\x03\x02" +
-		"\x02\x02\xAC\x1F\x03\x02\x02\x02\xAD\xAB\x03\x02\x02\x02\xAE\xAF\x07\x19" +
-		"\x02\x02\xAF\xB1\x07\t\x02\x02\xB0\xB2\x05\x1E\x10\x02\xB1\xB0\x03\x02" +
-		"\x02\x02\xB1\xB2\x03\x02\x02\x02\xB2\xB3\x03\x02\x02\x02\xB3\xB5\x07\n" +
-		"\x02\x02\xB4\xB6\x07\x04\x02\x02\xB5\xB4\x03\x02\x02\x02\xB5\xB6\x03\x02" +
-		"\x02\x02\xB6!\x03\x02\x02\x02\xB7\xB8\x05 \x11\x02\xB8#\x03\x02\x02\x02" +
-		"\x14\'.5=FKU\\cm\x8D\x8F\x95\x9A\xA0\xAB\xB1\xB5";
-	public static __ATN: ATN;
+	public static readonly _serializedATN: number[] = [4,1,27,178,2,0,7,0,2,
+	1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,
+	10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,14,1,0,4,0,32,8,0,11,0,12,
+	0,33,1,1,1,1,1,1,1,1,3,1,40,8,1,1,1,1,1,3,1,44,8,1,1,2,1,2,1,2,1,2,1,2,
+	3,2,51,8,2,1,3,1,3,1,4,1,4,1,4,1,4,3,4,59,8,4,1,4,1,4,1,4,1,5,1,5,1,5,1,
+	5,3,5,68,8,5,1,6,1,6,1,6,3,6,73,8,6,1,6,1,6,1,6,1,7,1,7,1,7,5,7,81,8,7,
+	10,7,12,7,84,9,7,1,8,1,8,5,8,88,8,8,10,8,12,8,91,9,8,1,8,1,8,1,9,1,9,1,
+	9,1,9,1,9,1,9,1,9,1,9,1,9,3,9,104,8,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,
+	9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,9,1,
+	9,1,9,1,9,1,9,5,9,136,8,9,10,9,12,9,139,9,9,1,10,1,10,1,10,3,10,144,8,10,
+	1,11,1,11,1,11,3,11,149,8,11,1,11,1,11,1,12,1,12,3,12,155,8,12,1,12,1,12,
+	1,12,1,12,1,13,1,13,1,13,5,13,164,8,13,10,13,12,13,167,9,13,1,14,1,14,1,
+	14,3,14,172,8,14,1,14,1,14,3,14,176,8,14,1,14,0,1,18,15,0,2,4,6,8,10,12,
+	14,16,18,20,22,24,26,28,0,1,1,0,3,5,195,0,31,1,0,0,0,2,43,1,0,0,0,4,45,
+	1,0,0,0,6,52,1,0,0,0,8,54,1,0,0,0,10,63,1,0,0,0,12,69,1,0,0,0,14,77,1,0,
+	0,0,16,85,1,0,0,0,18,103,1,0,0,0,20,143,1,0,0,0,22,145,1,0,0,0,24,152,1,
+	0,0,0,26,160,1,0,0,0,28,168,1,0,0,0,30,32,3,2,1,0,31,30,1,0,0,0,32,33,1,
+	0,0,0,33,31,1,0,0,0,33,34,1,0,0,0,34,1,1,0,0,0,35,44,3,4,2,0,36,44,3,8,
+	4,0,37,39,3,18,9,0,38,40,5,1,0,0,39,38,1,0,0,0,39,40,1,0,0,0,40,44,1,0,
+	0,0,41,44,3,28,14,0,42,44,3,10,5,0,43,35,1,0,0,0,43,36,1,0,0,0,43,37,1,
+	0,0,0,43,41,1,0,0,0,43,42,1,0,0,0,44,3,1,0,0,0,45,46,3,6,3,0,46,47,5,26,
+	0,0,47,48,5,2,0,0,48,50,3,18,9,0,49,51,5,1,0,0,50,49,1,0,0,0,50,51,1,0,
+	0,0,51,5,1,0,0,0,52,53,7,0,0,0,53,7,1,0,0,0,54,55,5,6,0,0,55,56,5,26,0,
+	0,56,58,5,7,0,0,57,59,3,14,7,0,58,57,1,0,0,0,58,59,1,0,0,0,59,60,1,0,0,
+	0,60,61,5,8,0,0,61,62,3,16,8,0,62,9,1,0,0,0,63,64,5,26,0,0,64,65,5,2,0,
+	0,65,67,3,18,9,0,66,68,5,1,0,0,67,66,1,0,0,0,67,68,1,0,0,0,68,11,1,0,0,
+	0,69,70,5,6,0,0,70,72,5,7,0,0,71,73,3,14,7,0,72,71,1,0,0,0,72,73,1,0,0,
+	0,73,74,1,0,0,0,74,75,5,8,0,0,75,76,3,16,8,0,76,13,1,0,0,0,77,82,5,26,0,
+	0,78,79,5,9,0,0,79,81,5,26,0,0,80,78,1,0,0,0,81,84,1,0,0,0,82,80,1,0,0,
+	0,82,83,1,0,0,0,83,15,1,0,0,0,84,82,1,0,0,0,85,89,5,10,0,0,86,88,3,2,1,
+	0,87,86,1,0,0,0,88,91,1,0,0,0,89,87,1,0,0,0,89,90,1,0,0,0,90,92,1,0,0,0,
+	91,89,1,0,0,0,92,93,5,11,0,0,93,17,1,0,0,0,94,95,6,9,-1,0,95,96,5,7,0,0,
+	96,97,3,18,9,0,97,98,5,8,0,0,98,104,1,0,0,0,99,104,3,20,10,0,100,104,5,
+	26,0,0,101,104,5,24,0,0,102,104,5,25,0,0,103,94,1,0,0,0,103,99,1,0,0,0,
+	103,100,1,0,0,0,103,101,1,0,0,0,103,102,1,0,0,0,104,137,1,0,0,0,105,106,
+	10,15,0,0,106,107,5,12,0,0,107,136,3,18,9,16,108,109,10,14,0,0,109,110,
+	5,13,0,0,110,136,3,18,9,15,111,112,10,13,0,0,112,113,5,14,0,0,113,136,3,
+	18,9,14,114,115,10,12,0,0,115,116,5,15,0,0,116,136,3,18,9,13,117,118,10,
+	11,0,0,118,119,5,16,0,0,119,136,3,18,9,12,120,121,10,10,0,0,121,122,5,17,
+	0,0,122,136,3,18,9,11,123,124,10,9,0,0,124,125,5,18,0,0,125,136,3,18,9,
+	10,126,127,10,8,0,0,127,128,5,19,0,0,128,136,3,18,9,9,129,130,10,7,0,0,
+	130,131,5,20,0,0,131,136,3,18,9,8,132,133,10,6,0,0,133,134,5,21,0,0,134,
+	136,3,18,9,7,135,105,1,0,0,0,135,108,1,0,0,0,135,111,1,0,0,0,135,114,1,
+	0,0,0,135,117,1,0,0,0,135,120,1,0,0,0,135,123,1,0,0,0,135,126,1,0,0,0,135,
+	129,1,0,0,0,135,132,1,0,0,0,136,139,1,0,0,0,137,135,1,0,0,0,137,138,1,0,
+	0,0,138,19,1,0,0,0,139,137,1,0,0,0,140,144,3,22,11,0,141,144,3,24,12,0,
+	142,144,3,12,6,0,143,140,1,0,0,0,143,141,1,0,0,0,143,142,1,0,0,0,144,21,
+	1,0,0,0,145,146,5,26,0,0,146,148,5,7,0,0,147,149,3,26,13,0,148,147,1,0,
+	0,0,148,149,1,0,0,0,149,150,1,0,0,0,150,151,5,8,0,0,151,23,1,0,0,0,152,
+	154,5,7,0,0,153,155,3,14,7,0,154,153,1,0,0,0,154,155,1,0,0,0,155,156,1,
+	0,0,0,156,157,5,8,0,0,157,158,5,22,0,0,158,159,3,16,8,0,159,25,1,0,0,0,
+	160,165,3,18,9,0,161,162,5,9,0,0,162,164,3,18,9,0,163,161,1,0,0,0,164,167,
+	1,0,0,0,165,163,1,0,0,0,165,166,1,0,0,0,166,27,1,0,0,0,167,165,1,0,0,0,
+	168,169,5,23,0,0,169,171,5,7,0,0,170,172,3,26,13,0,171,170,1,0,0,0,171,
+	172,1,0,0,0,172,173,1,0,0,0,173,175,5,8,0,0,174,176,5,1,0,0,175,174,1,0,
+	0,0,175,176,1,0,0,0,176,29,1,0,0,0,18,33,39,43,50,58,67,72,82,89,103,135,
+	137,143,148,154,165,171,175];
+
+	private static __ATN: ATN;
 	public static get _ATN(): ATN {
 		if (!ReactParser.__ATN) {
-			ReactParser.__ATN = new ATNDeserializer().deserialize(Utils.toCharArray(ReactParser._serializedATN));
+			ReactParser.__ATN = new ATNDeserializer().deserialize(ReactParser._serializedATN);
 		}
 
 		return ReactParser.__ATN;
 	}
 
+
+	static DecisionsToDFA = ReactParser._ATN.decisionToState.map( (ds: DecisionState, index: number) => new DFA(ds, index) );
+
 }
 
 export class ProgramContext extends ParserRuleContext {
-	public statement(): StatementContext[];
-	public statement(i: number): StatementContext;
-	public statement(i?: number): StatementContext | StatementContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(StatementContext);
-		} else {
-			return this.getRuleContext(i, StatementContext);
-		}
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_program; }
-	// @Override
+	public statement_list(): StatementContext[] {
+		return this.getTypedRuleContexts(StatementContext) as StatementContext[];
+	}
+	public statement(i: number): StatementContext {
+		return this.getTypedRuleContext(StatementContext, i) as StatementContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_program;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterProgram) {
-			listener.enterProgram(this);
+	    if(listener.enterProgram) {
+	 		listener.enterProgram(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitProgram) {
-			listener.exitProgram(this);
+	    if(listener.exitProgram) {
+	 		listener.exitProgram(this);
 		}
 	}
 	// @Override
@@ -1215,36 +1117,36 @@ export class ProgramContext extends ParserRuleContext {
 
 
 export class StatementContext extends ParserRuleContext {
-	public variableDeclaration(): VariableDeclarationContext | undefined {
-		return this.tryGetRuleContext(0, VariableDeclarationContext);
-	}
-	public functionDeclaration(): FunctionDeclarationContext | undefined {
-		return this.tryGetRuleContext(0, FunctionDeclarationContext);
-	}
-	public expressionStatement(): ExpressionStatementContext | undefined {
-		return this.tryGetRuleContext(0, ExpressionStatementContext);
-	}
-	public consoleLogStatement(): ConsoleLogStatementContext | undefined {
-		return this.tryGetRuleContext(0, ConsoleLogStatementContext);
-	}
-	public assignment(): AssignmentContext | undefined {
-		return this.tryGetRuleContext(0, AssignmentContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_statement; }
-	// @Override
+	public variableDeclaration(): VariableDeclarationContext {
+		return this.getTypedRuleContext(VariableDeclarationContext, 0) as VariableDeclarationContext;
+	}
+	public functionDeclaration(): FunctionDeclarationContext {
+		return this.getTypedRuleContext(FunctionDeclarationContext, 0) as FunctionDeclarationContext;
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public consoleLogExpression(): ConsoleLogExpressionContext {
+		return this.getTypedRuleContext(ConsoleLogExpressionContext, 0) as ConsoleLogExpressionContext;
+	}
+	public assignment(): AssignmentContext {
+		return this.getTypedRuleContext(AssignmentContext, 0) as AssignmentContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_statement;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterStatement) {
-			listener.enterStatement(this);
+	    if(listener.enterStatement) {
+	 		listener.enterStatement(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitStatement) {
-			listener.exitStatement(this);
+	    if(listener.exitStatement) {
+	 		listener.exitStatement(this);
 		}
 	}
 	// @Override
@@ -1259,28 +1161,30 @@ export class StatementContext extends ParserRuleContext {
 
 
 export class VariableDeclarationContext extends ParserRuleContext {
-	public variableType(): VariableTypeContext {
-		return this.getRuleContext(0, VariableTypeContext);
-	}
-	public Identifier(): TerminalNode { return this.getToken(ReactParser.Identifier, 0); }
-	public expression(): ExpressionContext {
-		return this.getRuleContext(0, ExpressionContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_variableDeclaration; }
-	// @Override
+	public variableType(): VariableTypeContext {
+		return this.getTypedRuleContext(VariableTypeContext, 0) as VariableTypeContext;
+	}
+	public Identifier(): TerminalNode {
+		return this.getToken(ReactParser.Identifier, 0);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_variableDeclaration;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterVariableDeclaration) {
-			listener.enterVariableDeclaration(this);
+	    if(listener.enterVariableDeclaration) {
+	 		listener.enterVariableDeclaration(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitVariableDeclaration) {
-			listener.exitVariableDeclaration(this);
+	    if(listener.exitVariableDeclaration) {
+	 		listener.exitVariableDeclaration(this);
 		}
 	}
 	// @Override
@@ -1295,21 +1199,21 @@ export class VariableDeclarationContext extends ParserRuleContext {
 
 
 export class VariableTypeContext extends ParserRuleContext {
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_variableType; }
-	// @Override
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_variableType;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterVariableType) {
-			listener.enterVariableType(this);
+	    if(listener.enterVariableType) {
+	 		listener.enterVariableType(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitVariableType) {
-			listener.exitVariableType(this);
+	    if(listener.exitVariableType) {
+	 		listener.exitVariableType(this);
 		}
 	}
 	// @Override
@@ -1324,28 +1228,30 @@ export class VariableTypeContext extends ParserRuleContext {
 
 
 export class FunctionDeclarationContext extends ParserRuleContext {
-	public Identifier(): TerminalNode { return this.getToken(ReactParser.Identifier, 0); }
-	public block(): BlockContext {
-		return this.getRuleContext(0, BlockContext);
-	}
-	public parameters(): ParametersContext | undefined {
-		return this.tryGetRuleContext(0, ParametersContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_functionDeclaration; }
-	// @Override
+	public Identifier(): TerminalNode {
+		return this.getToken(ReactParser.Identifier, 0);
+	}
+	public block(): BlockContext {
+		return this.getTypedRuleContext(BlockContext, 0) as BlockContext;
+	}
+	public parameters(): ParametersContext {
+		return this.getTypedRuleContext(ParametersContext, 0) as ParametersContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_functionDeclaration;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterFunctionDeclaration) {
-			listener.enterFunctionDeclaration(this);
+	    if(listener.enterFunctionDeclaration) {
+	 		listener.enterFunctionDeclaration(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitFunctionDeclaration) {
-			listener.exitFunctionDeclaration(this);
+	    if(listener.exitFunctionDeclaration) {
+	 		listener.exitFunctionDeclaration(this);
 		}
 	}
 	// @Override
@@ -1360,25 +1266,27 @@ export class FunctionDeclarationContext extends ParserRuleContext {
 
 
 export class AssignmentContext extends ParserRuleContext {
-	public Identifier(): TerminalNode { return this.getToken(ReactParser.Identifier, 0); }
-	public expression(): ExpressionContext {
-		return this.getRuleContext(0, ExpressionContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_assignment; }
-	// @Override
+	public Identifier(): TerminalNode {
+		return this.getToken(ReactParser.Identifier, 0);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_assignment;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterAssignment) {
-			listener.enterAssignment(this);
+	    if(listener.enterAssignment) {
+	 		listener.enterAssignment(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitAssignment) {
-			listener.exitAssignment(this);
+	    if(listener.exitAssignment) {
+	 		listener.exitAssignment(this);
 		}
 	}
 	// @Override
@@ -1393,27 +1301,27 @@ export class AssignmentContext extends ParserRuleContext {
 
 
 export class FunctionExpressionContext extends ParserRuleContext {
-	public block(): BlockContext {
-		return this.getRuleContext(0, BlockContext);
-	}
-	public parameters(): ParametersContext | undefined {
-		return this.tryGetRuleContext(0, ParametersContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_functionExpression; }
-	// @Override
+	public block(): BlockContext {
+		return this.getTypedRuleContext(BlockContext, 0) as BlockContext;
+	}
+	public parameters(): ParametersContext {
+		return this.getTypedRuleContext(ParametersContext, 0) as ParametersContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_functionExpression;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterFunctionExpression) {
-			listener.enterFunctionExpression(this);
+	    if(listener.enterFunctionExpression) {
+	 		listener.enterFunctionExpression(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitFunctionExpression) {
-			listener.exitFunctionExpression(this);
+	    if(listener.exitFunctionExpression) {
+	 		listener.exitFunctionExpression(this);
 		}
 	}
 	// @Override
@@ -1428,30 +1336,27 @@ export class FunctionExpressionContext extends ParserRuleContext {
 
 
 export class ParametersContext extends ParserRuleContext {
-	public Identifier(): TerminalNode[];
-	public Identifier(i: number): TerminalNode;
-	public Identifier(i?: number): TerminalNode | TerminalNode[] {
-		if (i === undefined) {
-			return this.getTokens(ReactParser.Identifier);
-		} else {
-			return this.getToken(ReactParser.Identifier, i);
-		}
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_parameters; }
-	// @Override
+	public Identifier_list(): TerminalNode[] {
+	    	return this.getTokens(ReactParser.Identifier);
+	}
+	public Identifier(i: number): TerminalNode {
+		return this.getToken(ReactParser.Identifier, i);
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_parameters;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterParameters) {
-			listener.enterParameters(this);
+	    if(listener.enterParameters) {
+	 		listener.enterParameters(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitParameters) {
-			listener.exitParameters(this);
+	    if(listener.exitParameters) {
+	 		listener.exitParameters(this);
 		}
 	}
 	// @Override
@@ -1466,30 +1371,27 @@ export class ParametersContext extends ParserRuleContext {
 
 
 export class BlockContext extends ParserRuleContext {
-	public statement(): StatementContext[];
-	public statement(i: number): StatementContext;
-	public statement(i?: number): StatementContext | StatementContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(StatementContext);
-		} else {
-			return this.getRuleContext(i, StatementContext);
-		}
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_block; }
-	// @Override
+	public statement_list(): StatementContext[] {
+		return this.getTypedRuleContexts(StatementContext) as StatementContext[];
+	}
+	public statement(i: number): StatementContext {
+		return this.getTypedRuleContext(StatementContext, i) as StatementContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_block;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterBlock) {
-			listener.enterBlock(this);
+	    if(listener.enterBlock) {
+	 		listener.enterBlock(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitBlock) {
-			listener.exitBlock(this);
+	    if(listener.exitBlock) {
+	 		listener.exitBlock(this);
 		}
 	}
 	// @Override
@@ -1503,72 +1405,37 @@ export class BlockContext extends ParserRuleContext {
 }
 
 
-export class ExpressionStatementContext extends ParserRuleContext {
-	public expression(): ExpressionContext {
-		return this.getRuleContext(0, ExpressionContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_expressionStatement; }
-	// @Override
-	public enterRule(listener: ReactListener): void {
-		if (listener.enterExpressionStatement) {
-			listener.enterExpressionStatement(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: ReactListener): void {
-		if (listener.exitExpressionStatement) {
-			listener.exitExpressionStatement(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitExpressionStatement) {
-			return visitor.visitExpressionStatement(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
 export class ExpressionContext extends ParserRuleContext {
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_expression; }
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_expression;
+	}
 	public copyFrom(ctx: ExpressionContext): void {
 		super.copyFrom(ctx);
 	}
 }
 export class MultiplicationContext extends ExpressionContext {
-	public expression(): ExpressionContext[];
-	public expression(i: number): ExpressionContext;
-	public expression(i?: number): ExpressionContext | ExpressionContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ExpressionContext);
-		} else {
-			return this.getRuleContext(i, ExpressionContext);
-		}
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
 	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
 	}
-	// @Override
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterMultiplication) {
-			listener.enterMultiplication(this);
+	    if(listener.enterMultiplication) {
+	 		listener.enterMultiplication(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitMultiplication) {
-			listener.exitMultiplication(this);
+	    if(listener.exitMultiplication) {
+	 		listener.exitMultiplication(this);
 		}
 	}
 	// @Override
@@ -1580,65 +1447,25 @@ export class MultiplicationContext extends ExpressionContext {
 		}
 	}
 }
-export class DivisionContext extends ExpressionContext {
-	public expression(): ExpressionContext[];
-	public expression(i: number): ExpressionContext;
-	public expression(i?: number): ExpressionContext | ExpressionContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ExpressionContext);
-		} else {
-			return this.getRuleContext(i, ExpressionContext);
-		}
-	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: ReactListener): void {
-		if (listener.enterDivision) {
-			listener.enterDivision(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: ReactListener): void {
-		if (listener.exitDivision) {
-			listener.exitDivision(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitDivision) {
-			return visitor.visitDivision(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
 export class AdditionContext extends ExpressionContext {
-	public expression(): ExpressionContext[];
-	public expression(i: number): ExpressionContext;
-	public expression(i?: number): ExpressionContext | ExpressionContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ExpressionContext);
-		} else {
-			return this.getRuleContext(i, ExpressionContext);
-		}
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
 	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
 	}
-	// @Override
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterAddition) {
-			listener.enterAddition(this);
+	    if(listener.enterAddition) {
+	 		listener.enterAddition(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitAddition) {
-			listener.exitAddition(this);
+	    if(listener.exitAddition) {
+	 		listener.exitAddition(this);
 		}
 	}
 	// @Override
@@ -1650,240 +1477,25 @@ export class AdditionContext extends ExpressionContext {
 		}
 	}
 }
-export class SubtractionContext extends ExpressionContext {
-	public expression(): ExpressionContext[];
-	public expression(i: number): ExpressionContext;
-	public expression(i?: number): ExpressionContext | ExpressionContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ExpressionContext);
-		} else {
-			return this.getRuleContext(i, ExpressionContext);
-		}
-	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: ReactListener): void {
-		if (listener.enterSubtraction) {
-			listener.enterSubtraction(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: ReactListener): void {
-		if (listener.exitSubtraction) {
-			listener.exitSubtraction(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitSubtraction) {
-			return visitor.visitSubtraction(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-export class MoreThanContext extends ExpressionContext {
-	public expression(): ExpressionContext[];
-	public expression(i: number): ExpressionContext;
-	public expression(i?: number): ExpressionContext | ExpressionContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ExpressionContext);
-		} else {
-			return this.getRuleContext(i, ExpressionContext);
-		}
-	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: ReactListener): void {
-		if (listener.enterMoreThan) {
-			listener.enterMoreThan(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: ReactListener): void {
-		if (listener.exitMoreThan) {
-			listener.exitMoreThan(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitMoreThan) {
-			return visitor.visitMoreThan(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-export class MoreThanOrEqualContext extends ExpressionContext {
-	public expression(): ExpressionContext[];
-	public expression(i: number): ExpressionContext;
-	public expression(i?: number): ExpressionContext | ExpressionContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ExpressionContext);
-		} else {
-			return this.getRuleContext(i, ExpressionContext);
-		}
-	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: ReactListener): void {
-		if (listener.enterMoreThanOrEqual) {
-			listener.enterMoreThanOrEqual(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: ReactListener): void {
-		if (listener.exitMoreThanOrEqual) {
-			listener.exitMoreThanOrEqual(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitMoreThanOrEqual) {
-			return visitor.visitMoreThanOrEqual(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-export class LessThanOrEqualContext extends ExpressionContext {
-	public expression(): ExpressionContext[];
-	public expression(i: number): ExpressionContext;
-	public expression(i?: number): ExpressionContext | ExpressionContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ExpressionContext);
-		} else {
-			return this.getRuleContext(i, ExpressionContext);
-		}
-	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: ReactListener): void {
-		if (listener.enterLessThanOrEqual) {
-			listener.enterLessThanOrEqual(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: ReactListener): void {
-		if (listener.exitLessThanOrEqual) {
-			listener.exitLessThanOrEqual(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitLessThanOrEqual) {
-			return visitor.visitLessThanOrEqual(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-export class LessThanContext extends ExpressionContext {
-	public expression(): ExpressionContext[];
-	public expression(i: number): ExpressionContext;
-	public expression(i?: number): ExpressionContext | ExpressionContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ExpressionContext);
-		} else {
-			return this.getRuleContext(i, ExpressionContext);
-		}
-	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: ReactListener): void {
-		if (listener.enterLessThan) {
-			listener.enterLessThan(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: ReactListener): void {
-		if (listener.exitLessThan) {
-			listener.exitLessThan(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitLessThan) {
-			return visitor.visitLessThan(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-export class EqualContext extends ExpressionContext {
-	public expression(): ExpressionContext[];
-	public expression(i: number): ExpressionContext;
-	public expression(i?: number): ExpressionContext | ExpressionContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ExpressionContext);
-		} else {
-			return this.getRuleContext(i, ExpressionContext);
-		}
-	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: ReactListener): void {
-		if (listener.enterEqual) {
-			listener.enterEqual(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: ReactListener): void {
-		if (listener.exitEqual) {
-			listener.exitEqual(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitEqual) {
-			return visitor.visitEqual(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
 export class NotEqualContext extends ExpressionContext {
-	public expression(): ExpressionContext[];
-	public expression(i: number): ExpressionContext;
-	public expression(i?: number): ExpressionContext | ExpressionContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ExpressionContext);
-		} else {
-			return this.getRuleContext(i, ExpressionContext);
-		}
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
 	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
 	}
-	// @Override
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterNotEqual) {
-			listener.enterNotEqual(this);
+	    if(listener.enterNotEqual) {
+	 		listener.enterNotEqual(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitNotEqual) {
-			listener.exitNotEqual(this);
+	    if(listener.exitNotEqual) {
+	 		listener.exitNotEqual(this);
 		}
 	}
 	// @Override
@@ -1895,24 +1507,253 @@ export class NotEqualContext extends ExpressionContext {
 		}
 	}
 }
-export class BracedExpressionContext extends ExpressionContext {
-	public expression(): ExpressionContext {
-		return this.getRuleContext(0, ExpressionContext);
+export class LessThanOrEqualContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
 	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
 	}
-	// @Override
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterBracedExpression) {
-			listener.enterBracedExpression(this);
+	    if(listener.enterLessThanOrEqual) {
+	 		listener.enterLessThanOrEqual(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitLessThanOrEqual) {
+	 		listener.exitLessThanOrEqual(this);
 		}
 	}
 	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitLessThanOrEqual) {
+			return visitor.visitLessThanOrEqual(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class MoreThanOrEqualContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterMoreThanOrEqual) {
+	 		listener.enterMoreThanOrEqual(this);
+		}
+	}
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitBracedExpression) {
-			listener.exitBracedExpression(this);
+	    if(listener.exitMoreThanOrEqual) {
+	 		listener.exitMoreThanOrEqual(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitMoreThanOrEqual) {
+			return visitor.visitMoreThanOrEqual(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class StringContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public StringLiteral(): TerminalNode {
+		return this.getToken(ReactParser.StringLiteral, 0);
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterString) {
+	 		listener.enterString(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitString) {
+	 		listener.exitString(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitString) {
+			return visitor.visitString(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class LessThanContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterLessThan) {
+	 		listener.enterLessThan(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitLessThan) {
+	 		listener.exitLessThan(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitLessThan) {
+			return visitor.visitLessThan(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class IdentifierContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public Identifier(): TerminalNode {
+		return this.getToken(ReactParser.Identifier, 0);
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterIdentifier) {
+	 		listener.enterIdentifier(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitIdentifier) {
+	 		listener.exitIdentifier(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitIdentifier) {
+			return visitor.visitIdentifier(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class SubtractionContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterSubtraction) {
+	 		listener.enterSubtraction(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitSubtraction) {
+	 		listener.exitSubtraction(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitSubtraction) {
+			return visitor.visitSubtraction(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class NumberContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public IntegerLiteral(): TerminalNode {
+		return this.getToken(ReactParser.IntegerLiteral, 0);
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterNumber) {
+	 		listener.enterNumber(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitNumber) {
+	 		listener.exitNumber(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitNumber) {
+			return visitor.visitNumber(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class EqualContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterEqual) {
+	 		listener.enterEqual(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitEqual) {
+	 		listener.exitEqual(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitEqual) {
+			return visitor.visitEqual(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class BracedExpressionContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterBracedExpression) {
+	 		listener.enterBracedExpression(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitBracedExpression) {
+	 		listener.exitBracedExpression(this);
 		}
 	}
 	// @Override
@@ -1924,24 +1765,82 @@ export class BracedExpressionContext extends ExpressionContext {
 		}
 	}
 }
-export class FunctionalExpressionContext extends ExpressionContext {
-	public funcExpr(): FuncExprContext {
-		return this.getRuleContext(0, FuncExprContext);
+export class DivisionContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
 	}
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
 	}
-	// @Override
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterFunctionalExpression) {
-			listener.enterFunctionalExpression(this);
+	    if(listener.enterDivision) {
+	 		listener.enterDivision(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitDivision) {
+	 		listener.exitDivision(this);
 		}
 	}
 	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitDivision) {
+			return visitor.visitDivision(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class MoreThanContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterMoreThan) {
+	 		listener.enterMoreThan(this);
+		}
+	}
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitFunctionalExpression) {
-			listener.exitFunctionalExpression(this);
+	    if(listener.exitMoreThan) {
+	 		listener.exitMoreThan(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitMoreThan) {
+			return visitor.visitMoreThan(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+export class FunctionalExpressionContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public funcExpr(): FuncExprContext {
+		return this.getTypedRuleContext(FuncExprContext, 0) as FuncExprContext;
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterFunctionalExpression) {
+	 		listener.enterFunctionalExpression(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitFunctionalExpression) {
+	 		listener.exitFunctionalExpression(this);
 		}
 	}
 	// @Override
@@ -1953,87 +1852,33 @@ export class FunctionalExpressionContext extends ExpressionContext {
 		}
 	}
 }
-export class IDContext extends ExpressionContext {
-	public Identifier(): TerminalNode { return this.getToken(ReactParser.Identifier, 0); }
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: ReactListener): void {
-		if (listener.enterID) {
-			listener.enterID(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: ReactListener): void {
-		if (listener.exitID) {
-			listener.exitID(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitID) {
-			return visitor.visitID(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-export class LitteralContext extends ExpressionContext {
-	public Literal(): TerminalNode { return this.getToken(ReactParser.Literal, 0); }
-	constructor(ctx: ExpressionContext) {
-		super(ctx.parent, ctx.invokingState);
-		this.copyFrom(ctx);
-	}
-	// @Override
-	public enterRule(listener: ReactListener): void {
-		if (listener.enterLitteral) {
-			listener.enterLitteral(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: ReactListener): void {
-		if (listener.exitLitteral) {
-			listener.exitLitteral(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitLitteral) {
-			return visitor.visitLitteral(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
 
 
 export class FuncExprContext extends ParserRuleContext {
-	public functionCall(): FunctionCallContext | undefined {
-		return this.tryGetRuleContext(0, FunctionCallContext);
-	}
-	public arrowFunction(): ArrowFunctionContext | undefined {
-		return this.tryGetRuleContext(0, ArrowFunctionContext);
-	}
-	public functionExpression(): FunctionExpressionContext | undefined {
-		return this.tryGetRuleContext(0, FunctionExpressionContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_funcExpr; }
-	// @Override
+	public functionCall(): FunctionCallContext {
+		return this.getTypedRuleContext(FunctionCallContext, 0) as FunctionCallContext;
+	}
+	public arrowFunction(): ArrowFunctionContext {
+		return this.getTypedRuleContext(ArrowFunctionContext, 0) as ArrowFunctionContext;
+	}
+	public functionExpression(): FunctionExpressionContext {
+		return this.getTypedRuleContext(FunctionExpressionContext, 0) as FunctionExpressionContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_funcExpr;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterFuncExpr) {
-			listener.enterFuncExpr(this);
+	    if(listener.enterFuncExpr) {
+	 		listener.enterFuncExpr(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitFuncExpr) {
-			listener.exitFuncExpr(this);
+	    if(listener.exitFuncExpr) {
+	 		listener.exitFuncExpr(this);
 		}
 	}
 	// @Override
@@ -2048,25 +1893,27 @@ export class FuncExprContext extends ParserRuleContext {
 
 
 export class FunctionCallContext extends ParserRuleContext {
-	public Identifier(): TerminalNode { return this.getToken(ReactParser.Identifier, 0); }
-	public arguments(): ArgumentsContext | undefined {
-		return this.tryGetRuleContext(0, ArgumentsContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_functionCall; }
-	// @Override
+	public Identifier(): TerminalNode {
+		return this.getToken(ReactParser.Identifier, 0);
+	}
+	public arguments(): ArgumentsContext {
+		return this.getTypedRuleContext(ArgumentsContext, 0) as ArgumentsContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_functionCall;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterFunctionCall) {
-			listener.enterFunctionCall(this);
+	    if(listener.enterFunctionCall) {
+	 		listener.enterFunctionCall(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitFunctionCall) {
-			listener.exitFunctionCall(this);
+	    if(listener.exitFunctionCall) {
+	 		listener.exitFunctionCall(this);
 		}
 	}
 	// @Override
@@ -2081,27 +1928,27 @@ export class FunctionCallContext extends ParserRuleContext {
 
 
 export class ArrowFunctionContext extends ParserRuleContext {
-	public block(): BlockContext {
-		return this.getRuleContext(0, BlockContext);
-	}
-	public parameters(): ParametersContext | undefined {
-		return this.tryGetRuleContext(0, ParametersContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_arrowFunction; }
-	// @Override
+	public block(): BlockContext {
+		return this.getTypedRuleContext(BlockContext, 0) as BlockContext;
+	}
+	public parameters(): ParametersContext {
+		return this.getTypedRuleContext(ParametersContext, 0) as ParametersContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_arrowFunction;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterArrowFunction) {
-			listener.enterArrowFunction(this);
+	    if(listener.enterArrowFunction) {
+	 		listener.enterArrowFunction(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitArrowFunction) {
-			listener.exitArrowFunction(this);
+	    if(listener.exitArrowFunction) {
+	 		listener.exitArrowFunction(this);
 		}
 	}
 	// @Override
@@ -2116,30 +1963,27 @@ export class ArrowFunctionContext extends ParserRuleContext {
 
 
 export class ArgumentsContext extends ParserRuleContext {
-	public expression(): ExpressionContext[];
-	public expression(i: number): ExpressionContext;
-	public expression(i?: number): ExpressionContext | ExpressionContext[] {
-		if (i === undefined) {
-			return this.getRuleContexts(ExpressionContext);
-		} else {
-			return this.getRuleContext(i, ExpressionContext);
-		}
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_arguments; }
-	// @Override
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_arguments;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterArguments) {
-			listener.enterArguments(this);
+	    if(listener.enterArguments) {
+	 		listener.enterArguments(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitArguments) {
-			listener.exitArguments(this);
+	    if(listener.exitArguments) {
+	 		listener.exitArguments(this);
 		}
 	}
 	// @Override
@@ -2154,24 +1998,24 @@ export class ArgumentsContext extends ParserRuleContext {
 
 
 export class ConsoleLogExpressionContext extends ParserRuleContext {
-	public arguments(): ArgumentsContext | undefined {
-		return this.tryGetRuleContext(0, ArgumentsContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
+    	this.parser = parser;
 	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_consoleLogExpression; }
-	// @Override
+	public arguments(): ArgumentsContext {
+		return this.getTypedRuleContext(ArgumentsContext, 0) as ArgumentsContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_consoleLogExpression;
+	}
 	public enterRule(listener: ReactListener): void {
-		if (listener.enterConsoleLogExpression) {
-			listener.enterConsoleLogExpression(this);
+	    if(listener.enterConsoleLogExpression) {
+	 		listener.enterConsoleLogExpression(this);
 		}
 	}
-	// @Override
 	public exitRule(listener: ReactListener): void {
-		if (listener.exitConsoleLogExpression) {
-			listener.exitConsoleLogExpression(this);
+	    if(listener.exitConsoleLogExpression) {
+	 		listener.exitConsoleLogExpression(this);
 		}
 	}
 	// @Override
@@ -2183,37 +2027,3 @@ export class ConsoleLogExpressionContext extends ParserRuleContext {
 		}
 	}
 }
-
-
-export class ConsoleLogStatementContext extends ParserRuleContext {
-	public consoleLogExpression(): ConsoleLogExpressionContext {
-		return this.getRuleContext(0, ConsoleLogExpressionContext);
-	}
-	constructor(parent: ParserRuleContext | undefined, invokingState: number) {
-		super(parent, invokingState);
-	}
-	// @Override
-	public get ruleIndex(): number { return ReactParser.RULE_consoleLogStatement; }
-	// @Override
-	public enterRule(listener: ReactListener): void {
-		if (listener.enterConsoleLogStatement) {
-			listener.enterConsoleLogStatement(this);
-		}
-	}
-	// @Override
-	public exitRule(listener: ReactListener): void {
-		if (listener.exitConsoleLogStatement) {
-			listener.exitConsoleLogStatement(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitConsoleLogStatement) {
-			return visitor.visitConsoleLogStatement(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-

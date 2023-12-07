@@ -1,12 +1,12 @@
 import {Expression} from "./Expression.ts";
-import {Id} from "./Id.ts";
+import {Identifier} from "./Identifier.ts";
 import Block from "../Block.ts";
 
 export class ArrowFunc extends Expression {
-    parameters: Id[];
+    parameters: Identifier[];
     block: Block;
 
-    constructor(parameters: Id[], block: Block) {
+    constructor(parameters: Identifier[], block: Block) {
         super();
         this.parameters = parameters;
         this.block = block;

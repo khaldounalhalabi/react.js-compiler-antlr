@@ -1,12 +1,12 @@
-// /src/ast/VariableTypeNode.ts
 export class VariableType {
-    type: string;
+    public type: string;
+
 
     constructor(type: string) {
         this.type = type;
     }
 
-    public toString(): string {
+    public toString() {
         return this.type;
     }
 }

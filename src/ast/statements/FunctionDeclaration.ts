@@ -1,13 +1,13 @@
 import {Statement} from "../Statement.ts";
-import {Id} from "../Expressions/Id.ts";
-import Block from "../Block.ts";
+import {Identifier} from "../Expressions/Identifier.ts";
+import {Block} from "../Block.ts";
 
 export class FunctionDeclarationNode extends Statement {
-    identifier: Id;
-    parameters: Id[];
+    identifier: Identifier;
+    parameters: Identifier[];
     block: Block;
 
-    constructor(identifier: Id, parameters: Id[], block: Block) {
+    constructor(identifier: Identifier, parameters: Identifier[], block: Block) {
         super();
         this.identifier = identifier;
         this.parameters = parameters;

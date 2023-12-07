@@ -1,6 +1,6 @@
 import {Expression} from "./Expression.ts";
 
-export class Substraction extends Expression{
+export class Subtraction extends Expression{
     public left: Expression;
 
     public right: Expression;
