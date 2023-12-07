@@ -7,6 +7,9 @@ statement: variableDeclaration
          | expression ';'?
          | consoleLogExpression
          | assignment
+         | useState
+         | useEffect
+         | useRef
          ;
 
 variableDeclaration: variableType Identifier '=' expression ';'?;
@@ -52,6 +55,12 @@ arrowFunction: '(' parameters? ')' '=>' block;
 arguments: expression (',' expression)*;
 
 consoleLogExpression: 'console.log' '(' arguments? ')' ';'?;
+
+useState: 'const' '[' Identifier ',' Identifier ']' '=' 'useState' '(' expression ')' ';'? ;
+
+useEffect: 'useEffect' '(' (arrowFunction|functionExpression) (',')? ('['parameters']')? ')' ';'?;
+
+useRef: 'const' Identifier '=' 'useRef' '(' expression? ')' ';'?;
 
 IntegerLiteral: [0-9]+;
 

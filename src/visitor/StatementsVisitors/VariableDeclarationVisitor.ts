@@ -6,10 +6,6 @@ export class VariableDeclarationVisitor extends ReactVisitor<VariableDeclaration
 
     visitVariableDeclaration: (ctx: VariableDeclarationContext) => VariableDeclaration = (ctx: VariableDeclarationContext) => {
 
-        const idToken = ctx.Identifier();
-        const type = ctx.variableType().accept(this);
-        const value: string = ctx.expression();
-
-        return new VariableDeclaration(this.visitVariableType(type), idToken, value); // Or return your own result
+        return new VariableDeclaration()
     }
 }
