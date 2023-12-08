@@ -4,7 +4,7 @@ import {VariableTypeContext} from "../antlr/ReactParser.ts";
 
 export class VariableTypeVisitor extends ReactVisitor<VariableType> {
     visitVariableType: (ctx: VariableTypeContext) => VariableType = (ctx: VariableTypeContext) => {
-        const type = ctx
-        return new VariableType();
+        console.log(ctx.children[0]);
+        return new VariableType('var');
     }
 }
