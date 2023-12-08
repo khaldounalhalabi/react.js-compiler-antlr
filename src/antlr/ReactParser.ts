@@ -169,6 +169,13 @@ export default class ReactParser extends Parser {
 		return new FailedPredicateException(this, predicate, message);
 	}
 
+
+	  private assert(b: boolean, msg: string): void {
+	    if (!b) {
+	      throw new Error(msg);
+	    }
+	  }
+
 	constructor(input: TokenStream) {
 		super(input);
 		this._interp = new ParserATNSimulator(this, ReactParser._ATN, ReactParser.DecisionsToDFA, new PredictionContextCache());
@@ -1454,15 +1461,13 @@ export default class ReactParser extends Parser {
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			{
 			this.state = 293;
 			this.match(ReactParser.T__31);
-			assert getText().equals(jsxTagName)
-			this.state = 295;
+			this.state = 294;
 			this.jsxTagName();
+			 this.assert(getText() === jsxTagName.text, `Mismatched opening and closing tags: ${jsxTagName.text}`); 
 			this.state = 296;
 			this.match(ReactParser.T__16);
-			}
 			}
 		}
 		catch (re) {
@@ -1852,8 +1857,8 @@ export default class ReactParser extends Parser {
 	0,279,283,3,46,23,0,280,282,3,48,24,0,281,280,1,0,0,0,282,285,1,0,0,0,283,
 	281,1,0,0,0,283,284,1,0,0,0,284,286,1,0,0,0,285,283,1,0,0,0,286,290,5,17,
 	0,0,287,289,3,54,27,0,288,287,1,0,0,0,289,292,1,0,0,0,290,288,1,0,0,0,290,
-	291,1,0,0,0,291,293,1,0,0,0,292,290,1,0,0,0,293,294,5,32,0,0,294,295,6,
-	21,-1,0,295,296,3,46,23,0,296,297,5,17,0,0,297,43,1,0,0,0,298,299,5,20,
+	291,1,0,0,0,291,293,1,0,0,0,292,290,1,0,0,0,293,294,5,32,0,0,294,295,3,
+	46,23,0,295,296,6,21,-1,0,296,297,5,17,0,0,297,43,1,0,0,0,298,299,5,20,
 	0,0,299,303,3,46,23,0,300,302,3,48,24,0,301,300,1,0,0,0,302,305,1,0,0,0,
 	303,301,1,0,0,0,303,304,1,0,0,0,304,306,1,0,0,0,305,303,1,0,0,0,306,307,
 	5,33,0,0,307,45,1,0,0,0,308,309,7,1,0,0,309,47,1,0,0,0,310,311,3,50,25,
