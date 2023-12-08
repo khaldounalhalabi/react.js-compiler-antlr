@@ -11,6 +11,7 @@ import { FunctionDeclarationContext } from "./ReactParser";
 import { AssignmentContext } from "./ReactParser";
 import { FunctionExpressionContext } from "./ReactParser";
 import { ParametersContext } from "./ReactParser";
+import { ReturnContext } from "./ReactParser";
 import { BlockContext } from "./ReactParser";
 import { MultiplicationContext } from "./ReactParser";
 import { AdditionContext } from "./ReactParser";
@@ -35,6 +36,14 @@ import { ConsoleLogExpressionContext } from "./ReactParser";
 import { UseStateContext } from "./ReactParser";
 import { UseEffectContext } from "./ReactParser";
 import { UseRefContext } from "./ReactParser";
+import { JsxElementFullContext } from "./ReactParser";
+import { SlefClosinJsxElementContext } from "./ReactParser";
+import { JsxElementContext } from "./ReactParser";
+import { JsxTagNameContext } from "./ReactParser";
+import { JsxAttributeContext } from "./ReactParser";
+import { JsxAttributeNameContext } from "./ReactParser";
+import { JsxAttributeValueContext } from "./ReactParser";
+import { JsxElementContentContext } from "./ReactParser";
 
 
 /**
@@ -122,6 +131,16 @@ export default class ReactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitParameters?: (ctx: ParametersContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.return`.
+	 * @param ctx the parse tree
+	 */
+	enterReturn?: (ctx: ReturnContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.return`.
+	 * @param ctx the parse tree
+	 */
+	exitReturn?: (ctx: ReturnContext) => void;
 	/**
 	 * Enter a parse tree produced by `ReactParser.block`.
 	 * @param ctx the parse tree
@@ -392,5 +411,85 @@ export default class ReactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitUseRef?: (ctx: UseRefContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.jsxElementFull`.
+	 * @param ctx the parse tree
+	 */
+	enterJsxElementFull?: (ctx: JsxElementFullContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.jsxElementFull`.
+	 * @param ctx the parse tree
+	 */
+	exitJsxElementFull?: (ctx: JsxElementFullContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.slefClosinJsxElement`.
+	 * @param ctx the parse tree
+	 */
+	enterSlefClosinJsxElement?: (ctx: SlefClosinJsxElementContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.slefClosinJsxElement`.
+	 * @param ctx the parse tree
+	 */
+	exitSlefClosinJsxElement?: (ctx: SlefClosinJsxElementContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.jsxElement`.
+	 * @param ctx the parse tree
+	 */
+	enterJsxElement?: (ctx: JsxElementContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.jsxElement`.
+	 * @param ctx the parse tree
+	 */
+	exitJsxElement?: (ctx: JsxElementContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.jsxTagName`.
+	 * @param ctx the parse tree
+	 */
+	enterJsxTagName?: (ctx: JsxTagNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.jsxTagName`.
+	 * @param ctx the parse tree
+	 */
+	exitJsxTagName?: (ctx: JsxTagNameContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.jsxAttribute`.
+	 * @param ctx the parse tree
+	 */
+	enterJsxAttribute?: (ctx: JsxAttributeContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.jsxAttribute`.
+	 * @param ctx the parse tree
+	 */
+	exitJsxAttribute?: (ctx: JsxAttributeContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.jsxAttributeName`.
+	 * @param ctx the parse tree
+	 */
+	enterJsxAttributeName?: (ctx: JsxAttributeNameContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.jsxAttributeName`.
+	 * @param ctx the parse tree
+	 */
+	exitJsxAttributeName?: (ctx: JsxAttributeNameContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.jsxAttributeValue`.
+	 * @param ctx the parse tree
+	 */
+	enterJsxAttributeValue?: (ctx: JsxAttributeValueContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.jsxAttributeValue`.
+	 * @param ctx the parse tree
+	 */
+	exitJsxAttributeValue?: (ctx: JsxAttributeValueContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.jsxElementContent`.
+	 * @param ctx the parse tree
+	 */
+	enterJsxElementContent?: (ctx: JsxElementContentContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.jsxElementContent`.
+	 * @param ctx the parse tree
+	 */
+	exitJsxElementContent?: (ctx: JsxElementContentContext) => void;
 }
 

@@ -11,6 +11,7 @@ import { FunctionDeclarationContext } from "./ReactParser";
 import { AssignmentContext } from "./ReactParser";
 import { FunctionExpressionContext } from "./ReactParser";
 import { ParametersContext } from "./ReactParser";
+import { ReturnContext } from "./ReactParser";
 import { BlockContext } from "./ReactParser";
 import { MultiplicationContext } from "./ReactParser";
 import { AdditionContext } from "./ReactParser";
@@ -35,6 +36,14 @@ import { ConsoleLogExpressionContext } from "./ReactParser";
 import { UseStateContext } from "./ReactParser";
 import { UseEffectContext } from "./ReactParser";
 import { UseRefContext } from "./ReactParser";
+import { JsxElementFullContext } from "./ReactParser";
+import { SlefClosinJsxElementContext } from "./ReactParser";
+import { JsxElementContext } from "./ReactParser";
+import { JsxTagNameContext } from "./ReactParser";
+import { JsxAttributeContext } from "./ReactParser";
+import { JsxAttributeNameContext } from "./ReactParser";
+import { JsxAttributeValueContext } from "./ReactParser";
+import { JsxElementContentContext } from "./ReactParser";
 
 
 /**
@@ -93,6 +102,12 @@ export default class ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitParameters?: (ctx: ParametersContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.return`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitReturn?: (ctx: ReturnContext) => Result;
 	/**
 	 * Visit a parse tree produced by `ReactParser.block`.
 	 * @param ctx the parse tree
@@ -252,5 +267,53 @@ export default class ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitUseRef?: (ctx: UseRefContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.jsxElementFull`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitJsxElementFull?: (ctx: JsxElementFullContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.slefClosinJsxElement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSlefClosinJsxElement?: (ctx: SlefClosinJsxElementContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.jsxElement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitJsxElement?: (ctx: JsxElementContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.jsxTagName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitJsxTagName?: (ctx: JsxTagNameContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.jsxAttribute`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitJsxAttribute?: (ctx: JsxAttributeContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.jsxAttributeName`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitJsxAttributeName?: (ctx: JsxAttributeNameContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.jsxAttributeValue`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitJsxAttributeValue?: (ctx: JsxAttributeValueContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.jsxElementContent`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitJsxElementContent?: (ctx: JsxElementContentContext) => Result;
 }
 

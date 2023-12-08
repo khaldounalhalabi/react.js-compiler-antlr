@@ -1,5 +1,7 @@
 grammar React;
 
+import Jsx;
+
 program: statement+;
 
 statement: variableDeclaration
@@ -24,7 +26,9 @@ functionExpression: 'function' '(' parameters? ')' block;
 
 parameters: Identifier (',' Identifier)*;
 
-block: '{' statement* '}';
+return:'return' (expression|'(' jsxElement ')') ';';
+
+block: '{' statement* return?'}';
 
 expression: expression '*' expression                           #Multiplication
           | expression '/' expression                           #Division
@@ -50,21 +54,16 @@ funcExpr: functionCall
 
 functionCall: Identifier '(' arguments? ')';
 
-arrowFunction: '(' parameters? ')' '=>' block;
+arrowFunction: '(' parameters? ')' '=>' (block|expression);
 
 arguments: expression (',' expression)*;
 
 consoleLogExpression: 'console.log' '(' arguments? ')' ';'?;
 
-useState: 'const' '[' Identifier ',' Identifier ']' '=' 'useState' '(' expression ')' ';'? ;
-
-useEffect: 'useEffect' '(' (arrowFunction|functionExpression) (',')? ('['parameters']')? ')' ';'?;
-
-useRef: 'const' Identifier '=' 'useRef' '(' expression? ')' ';'?;
-
 IntegerLiteral: [0-9]+;
 
-StringLiteral: '"' (EscapeSequence | ~["\\])* '"';
+StringLiteral: '"' (EscapeSequence | ~["\\])* '"' | '\'' ('\\"' | ~'\'')* '\'';
+
 fragment EscapeSequence: '\\' [nrt"'\\];
 
 Identifier: [a-zA-Z_] [a-zA-Z_0-9]*;
