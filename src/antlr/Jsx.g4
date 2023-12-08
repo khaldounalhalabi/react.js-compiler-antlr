@@ -8,11 +8,11 @@ useEffect: 'useEffect' '(' (arrowFunction|functionExpression) (',')? ('['paramet
 
 useRef: 'const' Identifier '=' 'useRef' '(' expression? ')' ';'?;
 
+jsxElement:jsxElementFull|selfClosingJsxElement;
+
 jsxElementFull: '<' jsxTagName jsxAttribute* '>' jsxElementContent* ('</' {assert getText().equals(jsxTagName)} jsxTagName '>');
 
-slefClosinJsxElement:'<' jsxTagName jsxAttribute* '/>';
-
-jsxElement:jsxElementFull|slefClosinJsxElement;
+selfClosingJsxElement:'<' jsxTagName jsxAttribute* '/>';
 
 jsxTagName: 'main' | 'div' | 'img' | 'h1' | 'p' | 'a';
 

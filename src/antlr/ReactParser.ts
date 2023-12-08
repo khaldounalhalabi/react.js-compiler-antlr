@@ -62,10 +62,12 @@ export default class ReactParser extends Parser {
 	public static readonly T__40 = 41;
 	public static readonly T__41 = 42;
 	public static readonly T__42 = 43;
-	public static readonly IntegerLiteral = 44;
-	public static readonly StringLiteral = 45;
-	public static readonly Identifier = 46;
-	public static readonly WS = 47;
+	public static readonly T__43 = 44;
+	public static readonly T__44 = 45;
+	public static readonly IntegerLiteral = 46;
+	public static readonly StringLiteral = 47;
+	public static readonly Identifier = 48;
+	public static readonly WS = 49;
 	public static readonly EOF = Token.EOF;
 	public static readonly RULE_program = 0;
 	public static readonly RULE_statement = 1;
@@ -83,17 +85,18 @@ export default class ReactParser extends Parser {
 	public static readonly RULE_arrowFunction = 13;
 	public static readonly RULE_arguments = 14;
 	public static readonly RULE_consoleLogExpression = 15;
-	public static readonly RULE_useState = 16;
-	public static readonly RULE_useEffect = 17;
-	public static readonly RULE_useRef = 18;
-	public static readonly RULE_jsxElementFull = 19;
-	public static readonly RULE_slefClosinJsxElement = 20;
-	public static readonly RULE_jsxElement = 21;
-	public static readonly RULE_jsxTagName = 22;
-	public static readonly RULE_jsxAttribute = 23;
-	public static readonly RULE_jsxAttributeName = 24;
-	public static readonly RULE_jsxAttributeValue = 25;
-	public static readonly RULE_jsxElementContent = 26;
+	public static readonly RULE_template = 16;
+	public static readonly RULE_useState = 17;
+	public static readonly RULE_useEffect = 18;
+	public static readonly RULE_useRef = 19;
+	public static readonly RULE_jsxElement = 20;
+	public static readonly RULE_jsxElementFull = 21;
+	public static readonly RULE_selfClosingJsxElement = 22;
+	public static readonly RULE_jsxTagName = 23;
+	public static readonly RULE_jsxAttribute = 24;
+	public static readonly RULE_jsxAttributeName = 25;
+	public static readonly RULE_jsxAttributeValue = 26;
+	public static readonly RULE_jsxElementContent = 27;
 	public static readonly literalNames: (string | null)[] = [ null, "';'", 
                                                             "'='", "'let'", 
                                                             "'var'", "'const'", 
@@ -107,6 +110,7 @@ export default class ReactParser extends Parser {
                                                             "'<='", "'<'", 
                                                             "'=='", "'!='", 
                                                             "'=>'", "'console.log'", 
+                                                            "'`'", "'$'", 
                                                             "'['", "']'", 
                                                             "'useState'", 
                                                             "'useEffect'", 
@@ -141,6 +145,7 @@ export default class ReactParser extends Parser {
                                                              null, null, 
                                                              null, null, 
                                                              null, null, 
+                                                             null, null, 
                                                              "IntegerLiteral", 
                                                              "StringLiteral", 
                                                              "Identifier", 
@@ -150,9 +155,9 @@ export default class ReactParser extends Parser {
 		"program", "statement", "variableDeclaration", "variableType", "functionDeclaration", 
 		"assignment", "functionExpression", "parameters", "return", "block", "expression", 
 		"funcExpr", "functionCall", "arrowFunction", "arguments", "consoleLogExpression", 
-		"useState", "useEffect", "useRef", "jsxElementFull", "slefClosinJsxElement", 
-		"jsxElement", "jsxTagName", "jsxAttribute", "jsxAttributeName", "jsxAttributeValue", 
-		"jsxElementContent",
+		"template", "useState", "useEffect", "useRef", "jsxElement", "jsxElementFull", 
+		"selfClosingJsxElement", "jsxTagName", "jsxAttribute", "jsxAttributeName", 
+		"jsxAttributeValue", "jsxElementContent",
 	];
 	public get grammarFileName(): string { return "React.g4"; }
 	public get literalNames(): (string | null)[] { return ReactParser.literalNames; }
@@ -176,20 +181,20 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 55;
+			this.state = 57;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			do {
 				{
 				{
-				this.state = 54;
+				this.state = 56;
 				this.statement();
 				}
 				}
-				this.state = 57;
+				this.state = 59;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 285212920) !== 0) || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 7) !== 0));
+			} while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 1124073720) !== 0) || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 7) !== 0));
 			}
 		}
 		catch (re) {
@@ -212,34 +217,34 @@ export default class ReactParser extends Parser {
 		this.enterRule(localctx, 2, ReactParser.RULE_statement);
 		let _la: number;
 		try {
-			this.state = 70;
+			this.state = 72;
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 2, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 59;
+				this.state = 61;
 				this.variableDeclaration();
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 60;
+				this.state = 62;
 				this.functionDeclaration();
 				}
 				break;
 			case 3:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 61;
-				this.expression(0);
 				this.state = 63;
+				this.expression(0);
+				this.state = 65;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 				if (_la===1) {
 					{
-					this.state = 62;
+					this.state = 64;
 					this.match(ReactParser.T__0);
 					}
 				}
@@ -249,35 +254,35 @@ export default class ReactParser extends Parser {
 			case 4:
 				this.enterOuterAlt(localctx, 4);
 				{
-				this.state = 65;
+				this.state = 67;
 				this.consoleLogExpression();
 				}
 				break;
 			case 5:
 				this.enterOuterAlt(localctx, 5);
 				{
-				this.state = 66;
+				this.state = 68;
 				this.assignment();
 				}
 				break;
 			case 6:
 				this.enterOuterAlt(localctx, 6);
 				{
-				this.state = 67;
+				this.state = 69;
 				this.useState();
 				}
 				break;
 			case 7:
 				this.enterOuterAlt(localctx, 7);
 				{
-				this.state = 68;
+				this.state = 70;
 				this.useEffect();
 				}
 				break;
 			case 8:
 				this.enterOuterAlt(localctx, 8);
 				{
-				this.state = 69;
+				this.state = 71;
 				this.useRef();
 				}
 				break;
@@ -305,20 +310,20 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 72;
-			this.variableType();
-			this.state = 73;
-			this.match(ReactParser.Identifier);
 			this.state = 74;
-			this.match(ReactParser.T__1);
+			this.variableType();
 			this.state = 75;
-			this.expression(0);
+			this.match(ReactParser.Identifier);
+			this.state = 76;
+			this.match(ReactParser.T__1);
 			this.state = 77;
+			this.expression(0);
+			this.state = 79;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===1) {
 				{
-				this.state = 76;
+				this.state = 78;
 				this.match(ReactParser.T__0);
 				}
 			}
@@ -347,7 +352,7 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 79;
+			this.state = 81;
 			_la = this._input.LA(1);
 			if(!((((_la) & ~0x1F) === 0 && ((1 << _la) & 56) !== 0))) {
 			this._errHandler.recoverInline(this);
@@ -380,25 +385,25 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 81;
-			this.match(ReactParser.T__5);
-			this.state = 82;
-			this.match(ReactParser.Identifier);
 			this.state = 83;
-			this.match(ReactParser.T__6);
+			this.match(ReactParser.T__5);
+			this.state = 84;
+			this.match(ReactParser.Identifier);
 			this.state = 85;
+			this.match(ReactParser.T__6);
+			this.state = 87;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===46) {
+			if (_la===48) {
 				{
-				this.state = 84;
+				this.state = 86;
 				this.parameters();
 				}
 			}
 
-			this.state = 87;
+			this.state = 89;
 			this.match(ReactParser.T__7);
-			this.state = 88;
+			this.state = 90;
 			this.block();
 			}
 		}
@@ -424,18 +429,18 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 90;
-			this.match(ReactParser.Identifier);
-			this.state = 91;
-			this.match(ReactParser.T__1);
 			this.state = 92;
-			this.expression(0);
+			this.match(ReactParser.Identifier);
+			this.state = 93;
+			this.match(ReactParser.T__1);
 			this.state = 94;
+			this.expression(0);
+			this.state = 96;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===1) {
 				{
-				this.state = 93;
+				this.state = 95;
 				this.match(ReactParser.T__0);
 				}
 			}
@@ -464,23 +469,23 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 96;
+			this.state = 98;
 			this.match(ReactParser.T__5);
-			this.state = 97;
-			this.match(ReactParser.T__6);
 			this.state = 99;
+			this.match(ReactParser.T__6);
+			this.state = 101;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===46) {
+			if (_la===48) {
 				{
-				this.state = 98;
+				this.state = 100;
 				this.parameters();
 				}
 			}
 
-			this.state = 101;
+			this.state = 103;
 			this.match(ReactParser.T__7);
-			this.state = 102;
+			this.state = 104;
 			this.block();
 			}
 		}
@@ -506,21 +511,21 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 104;
+			this.state = 106;
 			this.match(ReactParser.Identifier);
-			this.state = 109;
+			this.state = 111;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la===9) {
 				{
 				{
-				this.state = 105;
+				this.state = 107;
 				this.match(ReactParser.T__8);
-				this.state = 106;
+				this.state = 108;
 				this.match(ReactParser.Identifier);
 				}
 				}
-				this.state = 111;
+				this.state = 113;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -547,29 +552,29 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 112;
+			this.state = 114;
 			this.match(ReactParser.T__9);
-			this.state = 118;
+			this.state = 120;
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 8, this._ctx) ) {
 			case 1:
 				{
-				this.state = 113;
+				this.state = 115;
 				this.expression(0);
 				}
 				break;
 			case 2:
 				{
-				this.state = 114;
-				this.match(ReactParser.T__6);
-				this.state = 115;
-				this.jsxElement();
 				this.state = 116;
+				this.match(ReactParser.T__6);
+				this.state = 117;
+				this.jsxElement();
+				this.state = 118;
 				this.match(ReactParser.T__7);
 				}
 				break;
 			}
-			this.state = 120;
+			this.state = 122;
 			this.match(ReactParser.T__0);
 			}
 		}
@@ -595,33 +600,33 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 122;
+			this.state = 124;
 			this.match(ReactParser.T__10);
-			this.state = 126;
+			this.state = 128;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 285212920) !== 0) || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 7) !== 0)) {
+			while ((((_la) & ~0x1F) === 0 && ((1 << _la) & 1124073720) !== 0) || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 7) !== 0)) {
 				{
 				{
-				this.state = 123;
+				this.state = 125;
 				this.statement();
 				}
 				}
-				this.state = 128;
+				this.state = 130;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
-			this.state = 130;
+			this.state = 132;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===10) {
 				{
-				this.state = 129;
+				this.state = 131;
 				this.return_();
 				}
 			}
 
-			this.state = 132;
+			this.state = 134;
 			this.match(ReactParser.T__11);
 			}
 		}
@@ -658,7 +663,7 @@ export default class ReactParser extends Parser {
 			let _alt: number;
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 143;
+			this.state = 146;
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 11, this._ctx) ) {
 			case 1:
@@ -667,11 +672,11 @@ export default class ReactParser extends Parser {
 				this._ctx = localctx;
 				_prevctx = localctx;
 
-				this.state = 135;
-				this.match(ReactParser.T__6);
-				this.state = 136;
-				this.expression(0);
 				this.state = 137;
+				this.match(ReactParser.T__6);
+				this.state = 138;
+				this.expression(0);
+				this.state = 139;
 				this.match(ReactParser.T__7);
 				}
 				break;
@@ -680,40 +685,49 @@ export default class ReactParser extends Parser {
 				localctx = new FunctionalExpressionContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 139;
+				this.state = 141;
 				this.funcExpr();
 				}
 				break;
 			case 3:
 				{
-				localctx = new IdentifierContext(this, localctx);
+				localctx = new TemplateStringContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 140;
-				this.match(ReactParser.Identifier);
+				this.state = 142;
+				this.template();
 				}
 				break;
 			case 4:
 				{
-				localctx = new NumberContext(this, localctx);
+				localctx = new IdentifierContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 141;
-				this.match(ReactParser.IntegerLiteral);
+				this.state = 143;
+				this.match(ReactParser.Identifier);
 				}
 				break;
 			case 5:
 				{
+				localctx = new NumberContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
+				this.state = 144;
+				this.match(ReactParser.IntegerLiteral);
+				}
+				break;
+			case 6:
+				{
 				localctx = new StringContext(this, localctx);
 				this._ctx = localctx;
 				_prevctx = localctx;
-				this.state = 142;
+				this.state = 145;
 				this.match(ReactParser.StringLiteral);
 				}
 				break;
 			}
 			this._ctx.stop = this._input.LT(-1);
-			this.state = 177;
+			this.state = 180;
 			this._errHandler.sync(this);
 			_alt = this._interp.adaptivePredict(this._input, 13, this._ctx);
 			while (_alt !== 2 && _alt !== ATN.INVALID_ALT_NUMBER) {
@@ -723,153 +737,153 @@ export default class ReactParser extends Parser {
 					}
 					_prevctx = localctx;
 					{
-					this.state = 175;
+					this.state = 178;
 					this._errHandler.sync(this);
 					switch ( this._interp.adaptivePredict(this._input, 12, this._ctx) ) {
 					case 1:
 						{
 						localctx = new MultiplicationContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
-						this.state = 145;
-						if (!(this.precpred(this._ctx, 15))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 15)");
+						this.state = 148;
+						if (!(this.precpred(this._ctx, 16))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 16)");
 						}
-						this.state = 146;
+						this.state = 149;
 						this.match(ReactParser.T__12);
-						this.state = 147;
-						this.expression(16);
+						this.state = 150;
+						this.expression(17);
 						}
 						break;
 					case 2:
 						{
 						localctx = new DivisionContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
-						this.state = 148;
-						if (!(this.precpred(this._ctx, 14))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 14)");
+						this.state = 151;
+						if (!(this.precpred(this._ctx, 15))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 15)");
 						}
-						this.state = 149;
+						this.state = 152;
 						this.match(ReactParser.T__13);
-						this.state = 150;
-						this.expression(15);
+						this.state = 153;
+						this.expression(16);
 						}
 						break;
 					case 3:
 						{
 						localctx = new AdditionContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
-						this.state = 151;
-						if (!(this.precpred(this._ctx, 13))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 13)");
+						this.state = 154;
+						if (!(this.precpred(this._ctx, 14))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 14)");
 						}
-						this.state = 152;
+						this.state = 155;
 						this.match(ReactParser.T__14);
-						this.state = 153;
-						this.expression(14);
+						this.state = 156;
+						this.expression(15);
 						}
 						break;
 					case 4:
 						{
 						localctx = new SubtractionContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
-						this.state = 154;
-						if (!(this.precpred(this._ctx, 12))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 12)");
+						this.state = 157;
+						if (!(this.precpred(this._ctx, 13))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 13)");
 						}
-						this.state = 155;
+						this.state = 158;
 						this.match(ReactParser.T__15);
-						this.state = 156;
-						this.expression(13);
+						this.state = 159;
+						this.expression(14);
 						}
 						break;
 					case 5:
 						{
 						localctx = new MoreThanContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
-						this.state = 157;
-						if (!(this.precpred(this._ctx, 11))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 11)");
+						this.state = 160;
+						if (!(this.precpred(this._ctx, 12))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 12)");
 						}
-						this.state = 158;
+						this.state = 161;
 						this.match(ReactParser.T__16);
-						this.state = 159;
-						this.expression(12);
+						this.state = 162;
+						this.expression(13);
 						}
 						break;
 					case 6:
 						{
 						localctx = new MoreThanOrEqualContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
-						this.state = 160;
-						if (!(this.precpred(this._ctx, 10))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 10)");
+						this.state = 163;
+						if (!(this.precpred(this._ctx, 11))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 11)");
 						}
-						this.state = 161;
+						this.state = 164;
 						this.match(ReactParser.T__17);
-						this.state = 162;
-						this.expression(11);
+						this.state = 165;
+						this.expression(12);
 						}
 						break;
 					case 7:
 						{
 						localctx = new LessThanOrEqualContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
-						this.state = 163;
-						if (!(this.precpred(this._ctx, 9))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 9)");
+						this.state = 166;
+						if (!(this.precpred(this._ctx, 10))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 10)");
 						}
-						this.state = 164;
+						this.state = 167;
 						this.match(ReactParser.T__18);
-						this.state = 165;
-						this.expression(10);
+						this.state = 168;
+						this.expression(11);
 						}
 						break;
 					case 8:
 						{
 						localctx = new LessThanContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
-						this.state = 166;
-						if (!(this.precpred(this._ctx, 8))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 8)");
+						this.state = 169;
+						if (!(this.precpred(this._ctx, 9))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 9)");
 						}
-						this.state = 167;
+						this.state = 170;
 						this.match(ReactParser.T__19);
-						this.state = 168;
-						this.expression(9);
+						this.state = 171;
+						this.expression(10);
 						}
 						break;
 					case 9:
 						{
 						localctx = new EqualContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
-						this.state = 169;
-						if (!(this.precpred(this._ctx, 7))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 7)");
+						this.state = 172;
+						if (!(this.precpred(this._ctx, 8))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 8)");
 						}
-						this.state = 170;
+						this.state = 173;
 						this.match(ReactParser.T__20);
-						this.state = 171;
-						this.expression(8);
+						this.state = 174;
+						this.expression(9);
 						}
 						break;
 					case 10:
 						{
 						localctx = new NotEqualContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, ReactParser.RULE_expression);
-						this.state = 172;
-						if (!(this.precpred(this._ctx, 6))) {
-							throw this.createFailedPredicateException("this.precpred(this._ctx, 6)");
+						this.state = 175;
+						if (!(this.precpred(this._ctx, 7))) {
+							throw this.createFailedPredicateException("this.precpred(this._ctx, 7)");
 						}
-						this.state = 173;
+						this.state = 176;
 						this.match(ReactParser.T__21);
-						this.state = 174;
-						this.expression(7);
+						this.state = 177;
+						this.expression(8);
 						}
 						break;
 					}
 					}
 				}
-				this.state = 179;
+				this.state = 182;
 				this._errHandler.sync(this);
 				_alt = this._interp.adaptivePredict(this._input, 13, this._ctx);
 			}
@@ -894,27 +908,27 @@ export default class ReactParser extends Parser {
 		let localctx: FuncExprContext = new FuncExprContext(this, this._ctx, this.state);
 		this.enterRule(localctx, 22, ReactParser.RULE_funcExpr);
 		try {
-			this.state = 183;
+			this.state = 186;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case 46:
+			case 48:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 180;
+				this.state = 183;
 				this.functionCall();
 				}
 				break;
 			case 7:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 181;
+				this.state = 184;
 				this.arrowFunction();
 				}
 				break;
 			case 6:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 182;
+				this.state = 185;
 				this.functionExpression();
 				}
 				break;
@@ -944,21 +958,21 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 185;
-			this.match(ReactParser.Identifier);
-			this.state = 186;
-			this.match(ReactParser.T__6);
 			this.state = 188;
+			this.match(ReactParser.Identifier);
+			this.state = 189;
+			this.match(ReactParser.T__6);
+			this.state = 191;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===6 || _la===7 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 7) !== 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 33554624) !== 0) || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 7) !== 0)) {
 				{
-				this.state = 187;
+				this.state = 190;
 				this.arguments();
 				}
 			}
 
-			this.state = 190;
+			this.state = 193;
 			this.match(ReactParser.T__7);
 			}
 		}
@@ -984,38 +998,39 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 192;
+			this.state = 195;
 			this.match(ReactParser.T__6);
-			this.state = 194;
+			this.state = 197;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===46) {
+			if (_la===48) {
 				{
-				this.state = 193;
+				this.state = 196;
 				this.parameters();
 				}
 			}
 
-			this.state = 196;
+			this.state = 199;
 			this.match(ReactParser.T__7);
-			this.state = 197;
-			this.match(ReactParser.T__22);
 			this.state = 200;
+			this.match(ReactParser.T__22);
+			this.state = 203;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 11:
 				{
-				this.state = 198;
+				this.state = 201;
 				this.block();
 				}
 				break;
 			case 6:
 			case 7:
-			case 44:
-			case 45:
+			case 25:
 			case 46:
+			case 47:
+			case 48:
 				{
-				this.state = 199;
+				this.state = 202;
 				this.expression(0);
 				}
 				break;
@@ -1046,21 +1061,21 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 202;
+			this.state = 205;
 			this.expression(0);
-			this.state = 207;
+			this.state = 210;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			while (_la===9) {
 				{
 				{
-				this.state = 203;
+				this.state = 206;
 				this.match(ReactParser.T__8);
-				this.state = 204;
+				this.state = 207;
 				this.expression(0);
 				}
 				}
-				this.state = 209;
+				this.state = 212;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
 			}
@@ -1088,28 +1103,28 @@ export default class ReactParser extends Parser {
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 210;
-			this.match(ReactParser.T__23);
-			this.state = 211;
-			this.match(ReactParser.T__6);
 			this.state = 213;
+			this.match(ReactParser.T__23);
+			this.state = 214;
+			this.match(ReactParser.T__6);
+			this.state = 216;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===6 || _la===7 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 7) !== 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 33554624) !== 0) || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 7) !== 0)) {
 				{
-				this.state = 212;
+				this.state = 215;
 				this.arguments();
 				}
 			}
 
-			this.state = 215;
+			this.state = 218;
 			this.match(ReactParser.T__7);
-			this.state = 217;
+			this.state = 220;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===1) {
 				{
-				this.state = 216;
+				this.state = 219;
 				this.match(ReactParser.T__0);
 				}
 			}
@@ -1131,41 +1146,76 @@ export default class ReactParser extends Parser {
 		return localctx;
 	}
 	// @RuleVersion(0)
+	public template(): TemplateContext {
+		let localctx: TemplateContext = new TemplateContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 32, ReactParser.RULE_template);
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 222;
+			this.match(ReactParser.T__24);
+			this.state = 223;
+			this.match(ReactParser.T__25);
+			this.state = 224;
+			this.match(ReactParser.T__10);
+			this.state = 225;
+			this.expression(0);
+			this.state = 226;
+			this.match(ReactParser.T__11);
+			this.state = 227;
+			this.match(ReactParser.T__24);
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
 	public useState(): UseStateContext {
 		let localctx: UseStateContext = new UseStateContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 32, ReactParser.RULE_useState);
+		this.enterRule(localctx, 34, ReactParser.RULE_useState);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 219;
-			this.match(ReactParser.T__4);
-			this.state = 220;
-			this.match(ReactParser.T__24);
-			this.state = 221;
-			this.match(ReactParser.Identifier);
-			this.state = 222;
-			this.match(ReactParser.T__8);
-			this.state = 223;
-			this.match(ReactParser.Identifier);
-			this.state = 224;
-			this.match(ReactParser.T__25);
-			this.state = 225;
-			this.match(ReactParser.T__1);
-			this.state = 226;
-			this.match(ReactParser.T__26);
-			this.state = 227;
-			this.match(ReactParser.T__6);
-			this.state = 228;
-			this.expression(0);
 			this.state = 229;
-			this.match(ReactParser.T__7);
+			this.match(ReactParser.T__4);
+			this.state = 230;
+			this.match(ReactParser.T__26);
 			this.state = 231;
+			this.match(ReactParser.Identifier);
+			this.state = 232;
+			this.match(ReactParser.T__8);
+			this.state = 233;
+			this.match(ReactParser.Identifier);
+			this.state = 234;
+			this.match(ReactParser.T__27);
+			this.state = 235;
+			this.match(ReactParser.T__1);
+			this.state = 236;
+			this.match(ReactParser.T__28);
+			this.state = 237;
+			this.match(ReactParser.T__6);
+			this.state = 238;
+			this.expression(0);
+			this.state = 239;
+			this.match(ReactParser.T__7);
+			this.state = 241;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===1) {
 				{
-				this.state = 230;
+				this.state = 240;
 				this.match(ReactParser.T__0);
 				}
 			}
@@ -1189,65 +1239,65 @@ export default class ReactParser extends Parser {
 	// @RuleVersion(0)
 	public useEffect(): UseEffectContext {
 		let localctx: UseEffectContext = new UseEffectContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 34, ReactParser.RULE_useEffect);
+		this.enterRule(localctx, 36, ReactParser.RULE_useEffect);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 233;
-			this.match(ReactParser.T__27);
-			this.state = 234;
+			this.state = 243;
+			this.match(ReactParser.T__29);
+			this.state = 244;
 			this.match(ReactParser.T__6);
-			this.state = 237;
+			this.state = 247;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 7:
 				{
-				this.state = 235;
+				this.state = 245;
 				this.arrowFunction();
 				}
 				break;
 			case 6:
 				{
-				this.state = 236;
+				this.state = 246;
 				this.functionExpression();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			this.state = 240;
+			this.state = 250;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===9) {
 				{
-				this.state = 239;
+				this.state = 249;
 				this.match(ReactParser.T__8);
 				}
 			}
 
-			this.state = 246;
+			this.state = 256;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===25) {
+			if (_la===27) {
 				{
-				this.state = 242;
-				this.match(ReactParser.T__24);
-				this.state = 243;
+				this.state = 252;
+				this.match(ReactParser.T__26);
+				this.state = 253;
 				this.parameters();
-				this.state = 244;
-				this.match(ReactParser.T__25);
+				this.state = 254;
+				this.match(ReactParser.T__27);
 				}
 			}
 
-			this.state = 248;
+			this.state = 258;
 			this.match(ReactParser.T__7);
-			this.state = 250;
+			this.state = 260;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===1) {
 				{
-				this.state = 249;
+				this.state = 259;
 				this.match(ReactParser.T__0);
 				}
 			}
@@ -1271,39 +1321,39 @@ export default class ReactParser extends Parser {
 	// @RuleVersion(0)
 	public useRef(): UseRefContext {
 		let localctx: UseRefContext = new UseRefContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 36, ReactParser.RULE_useRef);
+		this.enterRule(localctx, 38, ReactParser.RULE_useRef);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 252;
+			this.state = 262;
 			this.match(ReactParser.T__4);
-			this.state = 253;
+			this.state = 263;
 			this.match(ReactParser.Identifier);
-			this.state = 254;
+			this.state = 264;
 			this.match(ReactParser.T__1);
-			this.state = 255;
-			this.match(ReactParser.T__28);
-			this.state = 256;
+			this.state = 265;
+			this.match(ReactParser.T__30);
+			this.state = 266;
 			this.match(ReactParser.T__6);
-			this.state = 258;
+			this.state = 268;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
-			if (_la===6 || _la===7 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 7) !== 0)) {
+			if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 33554624) !== 0) || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 7) !== 0)) {
 				{
-				this.state = 257;
+				this.state = 267;
 				this.expression(0);
 				}
 			}
 
-			this.state = 260;
+			this.state = 270;
 			this.match(ReactParser.T__7);
-			this.state = 262;
+			this.state = 272;
 			this._errHandler.sync(this);
 			_la = this._input.LA(1);
 			if (_la===1) {
 				{
-				this.state = 261;
+				this.state = 271;
 				this.match(ReactParser.T__0);
 				}
 			}
@@ -1325,138 +1375,138 @@ export default class ReactParser extends Parser {
 		return localctx;
 	}
 	// @RuleVersion(0)
-	public jsxElementFull(): JsxElementFullContext {
-		let localctx: JsxElementFullContext = new JsxElementFullContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 38, ReactParser.RULE_jsxElementFull);
-		let _la: number;
-		try {
-			this.enterOuterAlt(localctx, 1);
-			{
-			this.state = 264;
-			this.match(ReactParser.T__19);
-			this.state = 265;
-			this.jsxTagName();
-			this.state = 269;
-			this._errHandler.sync(this);
-			_la = this._input.LA(1);
-			while (((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 63) !== 0)) {
-				{
-				{
-				this.state = 266;
-				this.jsxAttribute();
-				}
-				}
-				this.state = 271;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
-			}
-			this.state = 272;
-			this.match(ReactParser.T__16);
-			this.state = 276;
-			this._errHandler.sync(this);
-			_la = this._input.LA(1);
-			while (_la===11 || _la===20 || _la===45) {
-				{
-				{
-				this.state = 273;
-				this.jsxElementContent();
-				}
-				}
-				this.state = 278;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
-			}
-			{
-			this.state = 279;
-			this.match(ReactParser.T__29);
-			assert getText().equals(jsxTagName)
-			this.state = 281;
-			this.jsxTagName();
-			this.state = 282;
-			this.match(ReactParser.T__16);
-			}
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return localctx;
-	}
-	// @RuleVersion(0)
-	public slefClosinJsxElement(): SlefClosinJsxElementContext {
-		let localctx: SlefClosinJsxElementContext = new SlefClosinJsxElementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 40, ReactParser.RULE_slefClosinJsxElement);
-		let _la: number;
-		try {
-			this.enterOuterAlt(localctx, 1);
-			{
-			this.state = 284;
-			this.match(ReactParser.T__19);
-			this.state = 285;
-			this.jsxTagName();
-			this.state = 289;
-			this._errHandler.sync(this);
-			_la = this._input.LA(1);
-			while (((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 63) !== 0)) {
-				{
-				{
-				this.state = 286;
-				this.jsxAttribute();
-				}
-				}
-				this.state = 291;
-				this._errHandler.sync(this);
-				_la = this._input.LA(1);
-			}
-			this.state = 292;
-			this.match(ReactParser.T__30);
-			}
-		}
-		catch (re) {
-			if (re instanceof RecognitionException) {
-				localctx.exception = re;
-				this._errHandler.reportError(this, re);
-				this._errHandler.recover(this, re);
-			} else {
-				throw re;
-			}
-		}
-		finally {
-			this.exitRule();
-		}
-		return localctx;
-	}
-	// @RuleVersion(0)
 	public jsxElement(): JsxElementContext {
 		let localctx: JsxElementContext = new JsxElementContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 42, ReactParser.RULE_jsxElement);
+		this.enterRule(localctx, 40, ReactParser.RULE_jsxElement);
 		try {
-			this.state = 296;
+			this.state = 276;
 			this._errHandler.sync(this);
-			switch ( this._interp.adaptivePredict(this._input, 31, this._ctx) ) {
+			switch ( this._interp.adaptivePredict(this._input, 28, this._ctx) ) {
 			case 1:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 294;
+				this.state = 274;
 				this.jsxElementFull();
 				}
 				break;
 			case 2:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 295;
-				this.slefClosinJsxElement();
+				this.state = 275;
+				this.selfClosingJsxElement();
 				}
 				break;
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public jsxElementFull(): JsxElementFullContext {
+		let localctx: JsxElementFullContext = new JsxElementFullContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 42, ReactParser.RULE_jsxElementFull);
+		let _la: number;
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 278;
+			this.match(ReactParser.T__19);
+			this.state = 279;
+			this.jsxTagName();
+			this.state = 283;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			while (((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 63) !== 0)) {
+				{
+				{
+				this.state = 280;
+				this.jsxAttribute();
+				}
+				}
+				this.state = 285;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+			}
+			this.state = 286;
+			this.match(ReactParser.T__16);
+			this.state = 290;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			while (_la===11 || _la===20 || _la===47) {
+				{
+				{
+				this.state = 287;
+				this.jsxElementContent();
+				}
+				}
+				this.state = 292;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+			}
+			{
+			this.state = 293;
+			this.match(ReactParser.T__31);
+			assert getText().equals(jsxTagName)
+			this.state = 295;
+			this.jsxTagName();
+			this.state = 296;
+			this.match(ReactParser.T__16);
+			}
+			}
+		}
+		catch (re) {
+			if (re instanceof RecognitionException) {
+				localctx.exception = re;
+				this._errHandler.reportError(this, re);
+				this._errHandler.recover(this, re);
+			} else {
+				throw re;
+			}
+		}
+		finally {
+			this.exitRule();
+		}
+		return localctx;
+	}
+	// @RuleVersion(0)
+	public selfClosingJsxElement(): SelfClosingJsxElementContext {
+		let localctx: SelfClosingJsxElementContext = new SelfClosingJsxElementContext(this, this._ctx, this.state);
+		this.enterRule(localctx, 44, ReactParser.RULE_selfClosingJsxElement);
+		let _la: number;
+		try {
+			this.enterOuterAlt(localctx, 1);
+			{
+			this.state = 298;
+			this.match(ReactParser.T__19);
+			this.state = 299;
+			this.jsxTagName();
+			this.state = 303;
+			this._errHandler.sync(this);
+			_la = this._input.LA(1);
+			while (((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 63) !== 0)) {
+				{
+				{
+				this.state = 300;
+				this.jsxAttribute();
+				}
+				}
+				this.state = 305;
+				this._errHandler.sync(this);
+				_la = this._input.LA(1);
+			}
+			this.state = 306;
+			this.match(ReactParser.T__32);
 			}
 		}
 		catch (re) {
@@ -1476,14 +1526,14 @@ export default class ReactParser extends Parser {
 	// @RuleVersion(0)
 	public jsxTagName(): JsxTagNameContext {
 		let localctx: JsxTagNameContext = new JsxTagNameContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 44, ReactParser.RULE_jsxTagName);
+		this.enterRule(localctx, 46, ReactParser.RULE_jsxTagName);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 298;
+			this.state = 308;
 			_la = this._input.LA(1);
-			if(!(((((_la - 32)) & ~0x1F) === 0 && ((1 << (_la - 32)) & 63) !== 0))) {
+			if(!(((((_la - 34)) & ~0x1F) === 0 && ((1 << (_la - 34)) & 63) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -1509,15 +1559,15 @@ export default class ReactParser extends Parser {
 	// @RuleVersion(0)
 	public jsxAttribute(): JsxAttributeContext {
 		let localctx: JsxAttributeContext = new JsxAttributeContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 46, ReactParser.RULE_jsxAttribute);
+		this.enterRule(localctx, 48, ReactParser.RULE_jsxAttribute);
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 300;
+			this.state = 310;
 			this.jsxAttributeName();
-			this.state = 301;
+			this.state = 311;
 			this.match(ReactParser.T__1);
-			this.state = 302;
+			this.state = 312;
 			this.jsxAttributeValue();
 			}
 		}
@@ -1538,14 +1588,14 @@ export default class ReactParser extends Parser {
 	// @RuleVersion(0)
 	public jsxAttributeName(): JsxAttributeNameContext {
 		let localctx: JsxAttributeNameContext = new JsxAttributeNameContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 48, ReactParser.RULE_jsxAttributeName);
+		this.enterRule(localctx, 50, ReactParser.RULE_jsxAttributeName);
 		let _la: number;
 		try {
 			this.enterOuterAlt(localctx, 1);
 			{
-			this.state = 304;
+			this.state = 314;
 			_la = this._input.LA(1);
-			if(!(((((_la - 38)) & ~0x1F) === 0 && ((1 << (_la - 38)) & 63) !== 0))) {
+			if(!(((((_la - 40)) & ~0x1F) === 0 && ((1 << (_la - 40)) & 63) !== 0))) {
 			this._errHandler.recoverInline(this);
 			}
 			else {
@@ -1571,35 +1621,35 @@ export default class ReactParser extends Parser {
 	// @RuleVersion(0)
 	public jsxAttributeValue(): JsxAttributeValueContext {
 		let localctx: JsxAttributeValueContext = new JsxAttributeValueContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 50, ReactParser.RULE_jsxAttributeValue);
+		this.enterRule(localctx, 52, ReactParser.RULE_jsxAttributeValue);
 		let _la: number;
 		try {
-			this.state = 312;
+			this.state = 322;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
-			case 45:
+			case 47:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 306;
+				this.state = 316;
 				this.match(ReactParser.StringLiteral);
 				}
 				break;
 			case 11:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 307;
+				this.state = 317;
 				this.match(ReactParser.T__10);
-				this.state = 309;
+				this.state = 319;
 				this._errHandler.sync(this);
 				_la = this._input.LA(1);
-				if (_la===6 || _la===7 || ((((_la - 44)) & ~0x1F) === 0 && ((1 << (_la - 44)) & 7) !== 0)) {
+				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 33554624) !== 0) || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 7) !== 0)) {
 					{
-					this.state = 308;
+					this.state = 318;
 					this.expression(0);
 					}
 				}
 
-				this.state = 311;
+				this.state = 321;
 				this.match(ReactParser.T__11);
 				}
 				break;
@@ -1624,33 +1674,33 @@ export default class ReactParser extends Parser {
 	// @RuleVersion(0)
 	public jsxElementContent(): JsxElementContentContext {
 		let localctx: JsxElementContentContext = new JsxElementContentContext(this, this._ctx, this.state);
-		this.enterRule(localctx, 52, ReactParser.RULE_jsxElementContent);
+		this.enterRule(localctx, 54, ReactParser.RULE_jsxElementContent);
 		try {
-			this.state = 320;
+			this.state = 330;
 			this._errHandler.sync(this);
 			switch (this._input.LA(1)) {
 			case 20:
 				this.enterOuterAlt(localctx, 1);
 				{
-				this.state = 314;
+				this.state = 324;
 				this.jsxElement();
 				}
 				break;
 			case 11:
 				this.enterOuterAlt(localctx, 2);
 				{
-				this.state = 315;
+				this.state = 325;
 				this.match(ReactParser.T__10);
-				this.state = 316;
+				this.state = 326;
 				this.expression(0);
-				this.state = 317;
+				this.state = 327;
 				this.match(ReactParser.T__11);
 				}
 				break;
-			case 45:
+			case 47:
 				this.enterOuterAlt(localctx, 3);
 				{
-				this.state = 319;
+				this.state = 329;
 				this.match(ReactParser.StringLiteral);
 				}
 				break;
@@ -1683,135 +1733,138 @@ export default class ReactParser extends Parser {
 	private expression_sempred(localctx: ExpressionContext, predIndex: number): boolean {
 		switch (predIndex) {
 		case 0:
-			return this.precpred(this._ctx, 15);
+			return this.precpred(this._ctx, 16);
 		case 1:
-			return this.precpred(this._ctx, 14);
+			return this.precpred(this._ctx, 15);
 		case 2:
-			return this.precpred(this._ctx, 13);
+			return this.precpred(this._ctx, 14);
 		case 3:
-			return this.precpred(this._ctx, 12);
+			return this.precpred(this._ctx, 13);
 		case 4:
-			return this.precpred(this._ctx, 11);
+			return this.precpred(this._ctx, 12);
 		case 5:
-			return this.precpred(this._ctx, 10);
+			return this.precpred(this._ctx, 11);
 		case 6:
-			return this.precpred(this._ctx, 9);
+			return this.precpred(this._ctx, 10);
 		case 7:
-			return this.precpred(this._ctx, 8);
+			return this.precpred(this._ctx, 9);
 		case 8:
-			return this.precpred(this._ctx, 7);
+			return this.precpred(this._ctx, 8);
 		case 9:
-			return this.precpred(this._ctx, 6);
+			return this.precpred(this._ctx, 7);
 		}
 		return true;
 	}
 
-	public static readonly _serializedATN: number[] = [4,1,47,323,2,0,7,0,2,
+	public static readonly _serializedATN: number[] = [4,1,49,333,2,0,7,0,2,
 	1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,6,2,7,7,7,2,8,7,8,2,9,7,9,2,
 	10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,2,14,7,14,2,15,7,15,2,16,7,16,2,17,
 	7,17,2,18,7,18,2,19,7,19,2,20,7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,
-	24,2,25,7,25,2,26,7,26,1,0,4,0,56,8,0,11,0,12,0,57,1,1,1,1,1,1,1,1,3,1,
-	64,8,1,1,1,1,1,1,1,1,1,1,1,3,1,71,8,1,1,2,1,2,1,2,1,2,1,2,3,2,78,8,2,1,
-	3,1,3,1,4,1,4,1,4,1,4,3,4,86,8,4,1,4,1,4,1,4,1,5,1,5,1,5,1,5,3,5,95,8,5,
-	1,6,1,6,1,6,3,6,100,8,6,1,6,1,6,1,6,1,7,1,7,1,7,5,7,108,8,7,10,7,12,7,111,
-	9,7,1,8,1,8,1,8,1,8,1,8,1,8,3,8,119,8,8,1,8,1,8,1,9,1,9,5,9,125,8,9,10,
-	9,12,9,128,9,9,1,9,3,9,131,8,9,1,9,1,9,1,10,1,10,1,10,1,10,1,10,1,10,1,
-	10,1,10,1,10,3,10,144,8,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,
+	24,2,25,7,25,2,26,7,26,2,27,7,27,1,0,4,0,58,8,0,11,0,12,0,59,1,1,1,1,1,
+	1,1,1,3,1,66,8,1,1,1,1,1,1,1,1,1,1,1,3,1,73,8,1,1,2,1,2,1,2,1,2,1,2,3,2,
+	80,8,2,1,3,1,3,1,4,1,4,1,4,1,4,3,4,88,8,4,1,4,1,4,1,4,1,5,1,5,1,5,1,5,3,
+	5,97,8,5,1,6,1,6,1,6,3,6,102,8,6,1,6,1,6,1,6,1,7,1,7,1,7,5,7,110,8,7,10,
+	7,12,7,113,9,7,1,8,1,8,1,8,1,8,1,8,1,8,3,8,121,8,8,1,8,1,8,1,9,1,9,5,9,
+	127,8,9,10,9,12,9,130,9,9,1,9,3,9,133,8,9,1,9,1,9,1,10,1,10,1,10,1,10,1,
+	10,1,10,1,10,1,10,1,10,1,10,3,10,147,8,10,1,10,1,10,1,10,1,10,1,10,1,10,
 	1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,
-	10,1,10,1,10,1,10,1,10,1,10,1,10,5,10,176,8,10,10,10,12,10,179,9,10,1,11,
-	1,11,1,11,3,11,184,8,11,1,12,1,12,1,12,3,12,189,8,12,1,12,1,12,1,13,1,13,
-	3,13,195,8,13,1,13,1,13,1,13,1,13,3,13,201,8,13,1,14,1,14,1,14,5,14,206,
-	8,14,10,14,12,14,209,9,14,1,15,1,15,1,15,3,15,214,8,15,1,15,1,15,3,15,218,
-	8,15,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,16,3,16,232,
-	8,16,1,17,1,17,1,17,1,17,3,17,238,8,17,1,17,3,17,241,8,17,1,17,1,17,1,17,
-	1,17,3,17,247,8,17,1,17,1,17,3,17,251,8,17,1,18,1,18,1,18,1,18,1,18,1,18,
-	3,18,259,8,18,1,18,1,18,3,18,263,8,18,1,19,1,19,1,19,5,19,268,8,19,10,19,
-	12,19,271,9,19,1,19,1,19,5,19,275,8,19,10,19,12,19,278,9,19,1,19,1,19,1,
-	19,1,19,1,19,1,20,1,20,1,20,5,20,288,8,20,10,20,12,20,291,9,20,1,20,1,20,
-	1,21,1,21,3,21,297,8,21,1,22,1,22,1,23,1,23,1,23,1,23,1,24,1,24,1,25,1,
-	25,1,25,3,25,310,8,25,1,25,3,25,313,8,25,1,26,1,26,1,26,1,26,1,26,1,26,
-	3,26,321,8,26,1,26,0,1,20,27,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,
-	32,34,36,38,40,42,44,46,48,50,52,0,3,1,0,3,5,1,0,32,37,1,0,38,43,349,0,
-	55,1,0,0,0,2,70,1,0,0,0,4,72,1,0,0,0,6,79,1,0,0,0,8,81,1,0,0,0,10,90,1,
-	0,0,0,12,96,1,0,0,0,14,104,1,0,0,0,16,112,1,0,0,0,18,122,1,0,0,0,20,143,
-	1,0,0,0,22,183,1,0,0,0,24,185,1,0,0,0,26,192,1,0,0,0,28,202,1,0,0,0,30,
-	210,1,0,0,0,32,219,1,0,0,0,34,233,1,0,0,0,36,252,1,0,0,0,38,264,1,0,0,0,
-	40,284,1,0,0,0,42,296,1,0,0,0,44,298,1,0,0,0,46,300,1,0,0,0,48,304,1,0,
-	0,0,50,312,1,0,0,0,52,320,1,0,0,0,54,56,3,2,1,0,55,54,1,0,0,0,56,57,1,0,
-	0,0,57,55,1,0,0,0,57,58,1,0,0,0,58,1,1,0,0,0,59,71,3,4,2,0,60,71,3,8,4,
-	0,61,63,3,20,10,0,62,64,5,1,0,0,63,62,1,0,0,0,63,64,1,0,0,0,64,71,1,0,0,
-	0,65,71,3,30,15,0,66,71,3,10,5,0,67,71,3,32,16,0,68,71,3,34,17,0,69,71,
-	3,36,18,0,70,59,1,0,0,0,70,60,1,0,0,0,70,61,1,0,0,0,70,65,1,0,0,0,70,66,
-	1,0,0,0,70,67,1,0,0,0,70,68,1,0,0,0,70,69,1,0,0,0,71,3,1,0,0,0,72,73,3,
-	6,3,0,73,74,5,46,0,0,74,75,5,2,0,0,75,77,3,20,10,0,76,78,5,1,0,0,77,76,
-	1,0,0,0,77,78,1,0,0,0,78,5,1,0,0,0,79,80,7,0,0,0,80,7,1,0,0,0,81,82,5,6,
-	0,0,82,83,5,46,0,0,83,85,5,7,0,0,84,86,3,14,7,0,85,84,1,0,0,0,85,86,1,0,
-	0,0,86,87,1,0,0,0,87,88,5,8,0,0,88,89,3,18,9,0,89,9,1,0,0,0,90,91,5,46,
-	0,0,91,92,5,2,0,0,92,94,3,20,10,0,93,95,5,1,0,0,94,93,1,0,0,0,94,95,1,0,
-	0,0,95,11,1,0,0,0,96,97,5,6,0,0,97,99,5,7,0,0,98,100,3,14,7,0,99,98,1,0,
-	0,0,99,100,1,0,0,0,100,101,1,0,0,0,101,102,5,8,0,0,102,103,3,18,9,0,103,
-	13,1,0,0,0,104,109,5,46,0,0,105,106,5,9,0,0,106,108,5,46,0,0,107,105,1,
-	0,0,0,108,111,1,0,0,0,109,107,1,0,0,0,109,110,1,0,0,0,110,15,1,0,0,0,111,
-	109,1,0,0,0,112,118,5,10,0,0,113,119,3,20,10,0,114,115,5,7,0,0,115,116,
-	3,42,21,0,116,117,5,8,0,0,117,119,1,0,0,0,118,113,1,0,0,0,118,114,1,0,0,
-	0,119,120,1,0,0,0,120,121,5,1,0,0,121,17,1,0,0,0,122,126,5,11,0,0,123,125,
-	3,2,1,0,124,123,1,0,0,0,125,128,1,0,0,0,126,124,1,0,0,0,126,127,1,0,0,0,
-	127,130,1,0,0,0,128,126,1,0,0,0,129,131,3,16,8,0,130,129,1,0,0,0,130,131,
-	1,0,0,0,131,132,1,0,0,0,132,133,5,12,0,0,133,19,1,0,0,0,134,135,6,10,-1,
-	0,135,136,5,7,0,0,136,137,3,20,10,0,137,138,5,8,0,0,138,144,1,0,0,0,139,
-	144,3,22,11,0,140,144,5,46,0,0,141,144,5,44,0,0,142,144,5,45,0,0,143,134,
-	1,0,0,0,143,139,1,0,0,0,143,140,1,0,0,0,143,141,1,0,0,0,143,142,1,0,0,0,
-	144,177,1,0,0,0,145,146,10,15,0,0,146,147,5,13,0,0,147,176,3,20,10,16,148,
-	149,10,14,0,0,149,150,5,14,0,0,150,176,3,20,10,15,151,152,10,13,0,0,152,
-	153,5,15,0,0,153,176,3,20,10,14,154,155,10,12,0,0,155,156,5,16,0,0,156,
-	176,3,20,10,13,157,158,10,11,0,0,158,159,5,17,0,0,159,176,3,20,10,12,160,
-	161,10,10,0,0,161,162,5,18,0,0,162,176,3,20,10,11,163,164,10,9,0,0,164,
-	165,5,19,0,0,165,176,3,20,10,10,166,167,10,8,0,0,167,168,5,20,0,0,168,176,
-	3,20,10,9,169,170,10,7,0,0,170,171,5,21,0,0,171,176,3,20,10,8,172,173,10,
-	6,0,0,173,174,5,22,0,0,174,176,3,20,10,7,175,145,1,0,0,0,175,148,1,0,0,
-	0,175,151,1,0,0,0,175,154,1,0,0,0,175,157,1,0,0,0,175,160,1,0,0,0,175,163,
-	1,0,0,0,175,166,1,0,0,0,175,169,1,0,0,0,175,172,1,0,0,0,176,179,1,0,0,0,
-	177,175,1,0,0,0,177,178,1,0,0,0,178,21,1,0,0,0,179,177,1,0,0,0,180,184,
-	3,24,12,0,181,184,3,26,13,0,182,184,3,12,6,0,183,180,1,0,0,0,183,181,1,
-	0,0,0,183,182,1,0,0,0,184,23,1,0,0,0,185,186,5,46,0,0,186,188,5,7,0,0,187,
-	189,3,28,14,0,188,187,1,0,0,0,188,189,1,0,0,0,189,190,1,0,0,0,190,191,5,
-	8,0,0,191,25,1,0,0,0,192,194,5,7,0,0,193,195,3,14,7,0,194,193,1,0,0,0,194,
-	195,1,0,0,0,195,196,1,0,0,0,196,197,5,8,0,0,197,200,5,23,0,0,198,201,3,
-	18,9,0,199,201,3,20,10,0,200,198,1,0,0,0,200,199,1,0,0,0,201,27,1,0,0,0,
-	202,207,3,20,10,0,203,204,5,9,0,0,204,206,3,20,10,0,205,203,1,0,0,0,206,
-	209,1,0,0,0,207,205,1,0,0,0,207,208,1,0,0,0,208,29,1,0,0,0,209,207,1,0,
-	0,0,210,211,5,24,0,0,211,213,5,7,0,0,212,214,3,28,14,0,213,212,1,0,0,0,
-	213,214,1,0,0,0,214,215,1,0,0,0,215,217,5,8,0,0,216,218,5,1,0,0,217,216,
-	1,0,0,0,217,218,1,0,0,0,218,31,1,0,0,0,219,220,5,5,0,0,220,221,5,25,0,0,
-	221,222,5,46,0,0,222,223,5,9,0,0,223,224,5,46,0,0,224,225,5,26,0,0,225,
-	226,5,2,0,0,226,227,5,27,0,0,227,228,5,7,0,0,228,229,3,20,10,0,229,231,
-	5,8,0,0,230,232,5,1,0,0,231,230,1,0,0,0,231,232,1,0,0,0,232,33,1,0,0,0,
-	233,234,5,28,0,0,234,237,5,7,0,0,235,238,3,26,13,0,236,238,3,12,6,0,237,
-	235,1,0,0,0,237,236,1,0,0,0,238,240,1,0,0,0,239,241,5,9,0,0,240,239,1,0,
-	0,0,240,241,1,0,0,0,241,246,1,0,0,0,242,243,5,25,0,0,243,244,3,14,7,0,244,
-	245,5,26,0,0,245,247,1,0,0,0,246,242,1,0,0,0,246,247,1,0,0,0,247,248,1,
-	0,0,0,248,250,5,8,0,0,249,251,5,1,0,0,250,249,1,0,0,0,250,251,1,0,0,0,251,
-	35,1,0,0,0,252,253,5,5,0,0,253,254,5,46,0,0,254,255,5,2,0,0,255,256,5,29,
-	0,0,256,258,5,7,0,0,257,259,3,20,10,0,258,257,1,0,0,0,258,259,1,0,0,0,259,
-	260,1,0,0,0,260,262,5,8,0,0,261,263,5,1,0,0,262,261,1,0,0,0,262,263,1,0,
-	0,0,263,37,1,0,0,0,264,265,5,20,0,0,265,269,3,44,22,0,266,268,3,46,23,0,
-	267,266,1,0,0,0,268,271,1,0,0,0,269,267,1,0,0,0,269,270,1,0,0,0,270,272,
-	1,0,0,0,271,269,1,0,0,0,272,276,5,17,0,0,273,275,3,52,26,0,274,273,1,0,
-	0,0,275,278,1,0,0,0,276,274,1,0,0,0,276,277,1,0,0,0,277,279,1,0,0,0,278,
-	276,1,0,0,0,279,280,5,30,0,0,280,281,6,19,-1,0,281,282,3,44,22,0,282,283,
-	5,17,0,0,283,39,1,0,0,0,284,285,5,20,0,0,285,289,3,44,22,0,286,288,3,46,
-	23,0,287,286,1,0,0,0,288,291,1,0,0,0,289,287,1,0,0,0,289,290,1,0,0,0,290,
-	292,1,0,0,0,291,289,1,0,0,0,292,293,5,31,0,0,293,41,1,0,0,0,294,297,3,38,
-	19,0,295,297,3,40,20,0,296,294,1,0,0,0,296,295,1,0,0,0,297,43,1,0,0,0,298,
-	299,7,1,0,0,299,45,1,0,0,0,300,301,3,48,24,0,301,302,5,2,0,0,302,303,3,
-	50,25,0,303,47,1,0,0,0,304,305,7,2,0,0,305,49,1,0,0,0,306,313,5,45,0,0,
-	307,309,5,11,0,0,308,310,3,20,10,0,309,308,1,0,0,0,309,310,1,0,0,0,310,
-	311,1,0,0,0,311,313,5,12,0,0,312,306,1,0,0,0,312,307,1,0,0,0,313,51,1,0,
-	0,0,314,321,3,42,21,0,315,316,5,11,0,0,316,317,3,20,10,0,317,318,5,12,0,
-	0,318,321,1,0,0,0,319,321,5,45,0,0,320,314,1,0,0,0,320,315,1,0,0,0,320,
-	319,1,0,0,0,321,53,1,0,0,0,35,57,63,70,77,85,94,99,109,118,126,130,143,
-	175,177,183,188,194,200,207,213,217,231,237,240,246,250,258,262,269,276,
-	289,296,309,312,320];
+	10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,5,10,179,8,10,10,10,12,
+	10,182,9,10,1,11,1,11,1,11,3,11,187,8,11,1,12,1,12,1,12,3,12,192,8,12,1,
+	12,1,12,1,13,1,13,3,13,198,8,13,1,13,1,13,1,13,1,13,3,13,204,8,13,1,14,
+	1,14,1,14,5,14,209,8,14,10,14,12,14,212,9,14,1,15,1,15,1,15,3,15,217,8,
+	15,1,15,1,15,3,15,221,8,15,1,16,1,16,1,16,1,16,1,16,1,16,1,16,1,17,1,17,
+	1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,17,1,17,3,17,242,8,17,1,18,1,
+	18,1,18,1,18,3,18,248,8,18,1,18,3,18,251,8,18,1,18,1,18,1,18,1,18,3,18,
+	257,8,18,1,18,1,18,3,18,261,8,18,1,19,1,19,1,19,1,19,1,19,1,19,3,19,269,
+	8,19,1,19,1,19,3,19,273,8,19,1,20,1,20,3,20,277,8,20,1,21,1,21,1,21,5,21,
+	282,8,21,10,21,12,21,285,9,21,1,21,1,21,5,21,289,8,21,10,21,12,21,292,9,
+	21,1,21,1,21,1,21,1,21,1,21,1,22,1,22,1,22,5,22,302,8,22,10,22,12,22,305,
+	9,22,1,22,1,22,1,23,1,23,1,24,1,24,1,24,1,24,1,25,1,25,1,26,1,26,1,26,3,
+	26,320,8,26,1,26,3,26,323,8,26,1,27,1,27,1,27,1,27,1,27,1,27,3,27,331,8,
+	27,1,27,0,1,20,28,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,
+	40,42,44,46,48,50,52,54,0,3,1,0,3,5,1,0,34,39,1,0,40,45,359,0,57,1,0,0,
+	0,2,72,1,0,0,0,4,74,1,0,0,0,6,81,1,0,0,0,8,83,1,0,0,0,10,92,1,0,0,0,12,
+	98,1,0,0,0,14,106,1,0,0,0,16,114,1,0,0,0,18,124,1,0,0,0,20,146,1,0,0,0,
+	22,186,1,0,0,0,24,188,1,0,0,0,26,195,1,0,0,0,28,205,1,0,0,0,30,213,1,0,
+	0,0,32,222,1,0,0,0,34,229,1,0,0,0,36,243,1,0,0,0,38,262,1,0,0,0,40,276,
+	1,0,0,0,42,278,1,0,0,0,44,298,1,0,0,0,46,308,1,0,0,0,48,310,1,0,0,0,50,
+	314,1,0,0,0,52,322,1,0,0,0,54,330,1,0,0,0,56,58,3,2,1,0,57,56,1,0,0,0,58,
+	59,1,0,0,0,59,57,1,0,0,0,59,60,1,0,0,0,60,1,1,0,0,0,61,73,3,4,2,0,62,73,
+	3,8,4,0,63,65,3,20,10,0,64,66,5,1,0,0,65,64,1,0,0,0,65,66,1,0,0,0,66,73,
+	1,0,0,0,67,73,3,30,15,0,68,73,3,10,5,0,69,73,3,34,17,0,70,73,3,36,18,0,
+	71,73,3,38,19,0,72,61,1,0,0,0,72,62,1,0,0,0,72,63,1,0,0,0,72,67,1,0,0,0,
+	72,68,1,0,0,0,72,69,1,0,0,0,72,70,1,0,0,0,72,71,1,0,0,0,73,3,1,0,0,0,74,
+	75,3,6,3,0,75,76,5,48,0,0,76,77,5,2,0,0,77,79,3,20,10,0,78,80,5,1,0,0,79,
+	78,1,0,0,0,79,80,1,0,0,0,80,5,1,0,0,0,81,82,7,0,0,0,82,7,1,0,0,0,83,84,
+	5,6,0,0,84,85,5,48,0,0,85,87,5,7,0,0,86,88,3,14,7,0,87,86,1,0,0,0,87,88,
+	1,0,0,0,88,89,1,0,0,0,89,90,5,8,0,0,90,91,3,18,9,0,91,9,1,0,0,0,92,93,5,
+	48,0,0,93,94,5,2,0,0,94,96,3,20,10,0,95,97,5,1,0,0,96,95,1,0,0,0,96,97,
+	1,0,0,0,97,11,1,0,0,0,98,99,5,6,0,0,99,101,5,7,0,0,100,102,3,14,7,0,101,
+	100,1,0,0,0,101,102,1,0,0,0,102,103,1,0,0,0,103,104,5,8,0,0,104,105,3,18,
+	9,0,105,13,1,0,0,0,106,111,5,48,0,0,107,108,5,9,0,0,108,110,5,48,0,0,109,
+	107,1,0,0,0,110,113,1,0,0,0,111,109,1,0,0,0,111,112,1,0,0,0,112,15,1,0,
+	0,0,113,111,1,0,0,0,114,120,5,10,0,0,115,121,3,20,10,0,116,117,5,7,0,0,
+	117,118,3,40,20,0,118,119,5,8,0,0,119,121,1,0,0,0,120,115,1,0,0,0,120,116,
+	1,0,0,0,121,122,1,0,0,0,122,123,5,1,0,0,123,17,1,0,0,0,124,128,5,11,0,0,
+	125,127,3,2,1,0,126,125,1,0,0,0,127,130,1,0,0,0,128,126,1,0,0,0,128,129,
+	1,0,0,0,129,132,1,0,0,0,130,128,1,0,0,0,131,133,3,16,8,0,132,131,1,0,0,
+	0,132,133,1,0,0,0,133,134,1,0,0,0,134,135,5,12,0,0,135,19,1,0,0,0,136,137,
+	6,10,-1,0,137,138,5,7,0,0,138,139,3,20,10,0,139,140,5,8,0,0,140,147,1,0,
+	0,0,141,147,3,22,11,0,142,147,3,32,16,0,143,147,5,48,0,0,144,147,5,46,0,
+	0,145,147,5,47,0,0,146,136,1,0,0,0,146,141,1,0,0,0,146,142,1,0,0,0,146,
+	143,1,0,0,0,146,144,1,0,0,0,146,145,1,0,0,0,147,180,1,0,0,0,148,149,10,
+	16,0,0,149,150,5,13,0,0,150,179,3,20,10,17,151,152,10,15,0,0,152,153,5,
+	14,0,0,153,179,3,20,10,16,154,155,10,14,0,0,155,156,5,15,0,0,156,179,3,
+	20,10,15,157,158,10,13,0,0,158,159,5,16,0,0,159,179,3,20,10,14,160,161,
+	10,12,0,0,161,162,5,17,0,0,162,179,3,20,10,13,163,164,10,11,0,0,164,165,
+	5,18,0,0,165,179,3,20,10,12,166,167,10,10,0,0,167,168,5,19,0,0,168,179,
+	3,20,10,11,169,170,10,9,0,0,170,171,5,20,0,0,171,179,3,20,10,10,172,173,
+	10,8,0,0,173,174,5,21,0,0,174,179,3,20,10,9,175,176,10,7,0,0,176,177,5,
+	22,0,0,177,179,3,20,10,8,178,148,1,0,0,0,178,151,1,0,0,0,178,154,1,0,0,
+	0,178,157,1,0,0,0,178,160,1,0,0,0,178,163,1,0,0,0,178,166,1,0,0,0,178,169,
+	1,0,0,0,178,172,1,0,0,0,178,175,1,0,0,0,179,182,1,0,0,0,180,178,1,0,0,0,
+	180,181,1,0,0,0,181,21,1,0,0,0,182,180,1,0,0,0,183,187,3,24,12,0,184,187,
+	3,26,13,0,185,187,3,12,6,0,186,183,1,0,0,0,186,184,1,0,0,0,186,185,1,0,
+	0,0,187,23,1,0,0,0,188,189,5,48,0,0,189,191,5,7,0,0,190,192,3,28,14,0,191,
+	190,1,0,0,0,191,192,1,0,0,0,192,193,1,0,0,0,193,194,5,8,0,0,194,25,1,0,
+	0,0,195,197,5,7,0,0,196,198,3,14,7,0,197,196,1,0,0,0,197,198,1,0,0,0,198,
+	199,1,0,0,0,199,200,5,8,0,0,200,203,5,23,0,0,201,204,3,18,9,0,202,204,3,
+	20,10,0,203,201,1,0,0,0,203,202,1,0,0,0,204,27,1,0,0,0,205,210,3,20,10,
+	0,206,207,5,9,0,0,207,209,3,20,10,0,208,206,1,0,0,0,209,212,1,0,0,0,210,
+	208,1,0,0,0,210,211,1,0,0,0,211,29,1,0,0,0,212,210,1,0,0,0,213,214,5,24,
+	0,0,214,216,5,7,0,0,215,217,3,28,14,0,216,215,1,0,0,0,216,217,1,0,0,0,217,
+	218,1,0,0,0,218,220,5,8,0,0,219,221,5,1,0,0,220,219,1,0,0,0,220,221,1,0,
+	0,0,221,31,1,0,0,0,222,223,5,25,0,0,223,224,5,26,0,0,224,225,5,11,0,0,225,
+	226,3,20,10,0,226,227,5,12,0,0,227,228,5,25,0,0,228,33,1,0,0,0,229,230,
+	5,5,0,0,230,231,5,27,0,0,231,232,5,48,0,0,232,233,5,9,0,0,233,234,5,48,
+	0,0,234,235,5,28,0,0,235,236,5,2,0,0,236,237,5,29,0,0,237,238,5,7,0,0,238,
+	239,3,20,10,0,239,241,5,8,0,0,240,242,5,1,0,0,241,240,1,0,0,0,241,242,1,
+	0,0,0,242,35,1,0,0,0,243,244,5,30,0,0,244,247,5,7,0,0,245,248,3,26,13,0,
+	246,248,3,12,6,0,247,245,1,0,0,0,247,246,1,0,0,0,248,250,1,0,0,0,249,251,
+	5,9,0,0,250,249,1,0,0,0,250,251,1,0,0,0,251,256,1,0,0,0,252,253,5,27,0,
+	0,253,254,3,14,7,0,254,255,5,28,0,0,255,257,1,0,0,0,256,252,1,0,0,0,256,
+	257,1,0,0,0,257,258,1,0,0,0,258,260,5,8,0,0,259,261,5,1,0,0,260,259,1,0,
+	0,0,260,261,1,0,0,0,261,37,1,0,0,0,262,263,5,5,0,0,263,264,5,48,0,0,264,
+	265,5,2,0,0,265,266,5,31,0,0,266,268,5,7,0,0,267,269,3,20,10,0,268,267,
+	1,0,0,0,268,269,1,0,0,0,269,270,1,0,0,0,270,272,5,8,0,0,271,273,5,1,0,0,
+	272,271,1,0,0,0,272,273,1,0,0,0,273,39,1,0,0,0,274,277,3,42,21,0,275,277,
+	3,44,22,0,276,274,1,0,0,0,276,275,1,0,0,0,277,41,1,0,0,0,278,279,5,20,0,
+	0,279,283,3,46,23,0,280,282,3,48,24,0,281,280,1,0,0,0,282,285,1,0,0,0,283,
+	281,1,0,0,0,283,284,1,0,0,0,284,286,1,0,0,0,285,283,1,0,0,0,286,290,5,17,
+	0,0,287,289,3,54,27,0,288,287,1,0,0,0,289,292,1,0,0,0,290,288,1,0,0,0,290,
+	291,1,0,0,0,291,293,1,0,0,0,292,290,1,0,0,0,293,294,5,32,0,0,294,295,6,
+	21,-1,0,295,296,3,46,23,0,296,297,5,17,0,0,297,43,1,0,0,0,298,299,5,20,
+	0,0,299,303,3,46,23,0,300,302,3,48,24,0,301,300,1,0,0,0,302,305,1,0,0,0,
+	303,301,1,0,0,0,303,304,1,0,0,0,304,306,1,0,0,0,305,303,1,0,0,0,306,307,
+	5,33,0,0,307,45,1,0,0,0,308,309,7,1,0,0,309,47,1,0,0,0,310,311,3,50,25,
+	0,311,312,5,2,0,0,312,313,3,52,26,0,313,49,1,0,0,0,314,315,7,2,0,0,315,
+	51,1,0,0,0,316,323,5,47,0,0,317,319,5,11,0,0,318,320,3,20,10,0,319,318,
+	1,0,0,0,319,320,1,0,0,0,320,321,1,0,0,0,321,323,5,12,0,0,322,316,1,0,0,
+	0,322,317,1,0,0,0,323,53,1,0,0,0,324,331,3,40,20,0,325,326,5,11,0,0,326,
+	327,3,20,10,0,327,328,5,12,0,0,328,331,1,0,0,0,329,331,5,47,0,0,330,324,
+	1,0,0,0,330,325,1,0,0,0,330,329,1,0,0,0,331,55,1,0,0,0,35,59,65,72,79,87,
+	96,101,111,120,128,132,146,178,180,186,191,197,203,210,216,220,241,247,
+	250,256,260,268,272,276,283,290,303,319,322,330];
 
 	private static __ATN: ATN;
 	public static get _ATN(): ATN {
@@ -2208,6 +2261,33 @@ export class ExpressionContext extends ParserRuleContext {
 	}
 	public copyFrom(ctx: ExpressionContext): void {
 		super.copyFrom(ctx);
+	}
+}
+export class TemplateStringContext extends ExpressionContext {
+	constructor(parser: ReactParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public template(): TemplateContext {
+		return this.getTypedRuleContext(TemplateContext, 0) as TemplateContext;
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterTemplateString) {
+	 		listener.enterTemplateString(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitTemplateString) {
+	 		listener.exitTemplateString(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitTemplateString) {
+			return visitor.visitTemplateString(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
 	}
 }
 export class MultiplicationContext extends ExpressionContext {
@@ -2825,6 +2905,38 @@ export class ConsoleLogExpressionContext extends ParserRuleContext {
 }
 
 
+export class TemplateContext extends ParserRuleContext {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_template;
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterTemplate) {
+	 		listener.enterTemplate(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitTemplate) {
+	 		listener.exitTemplate(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitTemplate) {
+			return visitor.visitTemplate(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
 export class UseStateContext extends ParserRuleContext {
 	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
@@ -2936,6 +3048,41 @@ export class UseRefContext extends ParserRuleContext {
 }
 
 
+export class JsxElementContext extends ParserRuleContext {
+	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
+		super(parent, invokingState);
+    	this.parser = parser;
+	}
+	public jsxElementFull(): JsxElementFullContext {
+		return this.getTypedRuleContext(JsxElementFullContext, 0) as JsxElementFullContext;
+	}
+	public selfClosingJsxElement(): SelfClosingJsxElementContext {
+		return this.getTypedRuleContext(SelfClosingJsxElementContext, 0) as SelfClosingJsxElementContext;
+	}
+    public get ruleIndex(): number {
+    	return ReactParser.RULE_jsxElement;
+	}
+	public enterRule(listener: ReactListener): void {
+	    if(listener.enterJsxElement) {
+	 		listener.enterJsxElement(this);
+		}
+	}
+	public exitRule(listener: ReactListener): void {
+	    if(listener.exitJsxElement) {
+	 		listener.exitJsxElement(this);
+		}
+	}
+	// @Override
+	public accept<Result>(visitor: ReactVisitor<Result>): Result {
+		if (visitor.visitJsxElement) {
+			return visitor.visitJsxElement(this);
+		} else {
+			return visitor.visitChildren(this);
+		}
+	}
+}
+
+
 export class JsxElementFullContext extends ParserRuleContext {
 	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
@@ -2983,7 +3130,7 @@ export class JsxElementFullContext extends ParserRuleContext {
 }
 
 
-export class SlefClosinJsxElementContext extends ParserRuleContext {
+export class SelfClosingJsxElementContext extends ParserRuleContext {
 	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
@@ -2998,57 +3145,22 @@ export class SlefClosinJsxElementContext extends ParserRuleContext {
 		return this.getTypedRuleContext(JsxAttributeContext, i) as JsxAttributeContext;
 	}
     public get ruleIndex(): number {
-    	return ReactParser.RULE_slefClosinJsxElement;
+    	return ReactParser.RULE_selfClosingJsxElement;
 	}
 	public enterRule(listener: ReactListener): void {
-	    if(listener.enterSlefClosinJsxElement) {
-	 		listener.enterSlefClosinJsxElement(this);
+	    if(listener.enterSelfClosingJsxElement) {
+	 		listener.enterSelfClosingJsxElement(this);
 		}
 	}
 	public exitRule(listener: ReactListener): void {
-	    if(listener.exitSlefClosinJsxElement) {
-	 		listener.exitSlefClosinJsxElement(this);
+	    if(listener.exitSelfClosingJsxElement) {
+	 		listener.exitSelfClosingJsxElement(this);
 		}
 	}
 	// @Override
 	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitSlefClosinJsxElement) {
-			return visitor.visitSlefClosinJsxElement(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
-}
-
-
-export class JsxElementContext extends ParserRuleContext {
-	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
-		super(parent, invokingState);
-    	this.parser = parser;
-	}
-	public jsxElementFull(): JsxElementFullContext {
-		return this.getTypedRuleContext(JsxElementFullContext, 0) as JsxElementFullContext;
-	}
-	public slefClosinJsxElement(): SlefClosinJsxElementContext {
-		return this.getTypedRuleContext(SlefClosinJsxElementContext, 0) as SlefClosinJsxElementContext;
-	}
-    public get ruleIndex(): number {
-    	return ReactParser.RULE_jsxElement;
-	}
-	public enterRule(listener: ReactListener): void {
-	    if(listener.enterJsxElement) {
-	 		listener.enterJsxElement(this);
-		}
-	}
-	public exitRule(listener: ReactListener): void {
-	    if(listener.exitJsxElement) {
-	 		listener.exitJsxElement(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitJsxElement) {
-			return visitor.visitJsxElement(this);
+		if (visitor.visitSelfClosingJsxElement) {
+			return visitor.visitSelfClosingJsxElement(this);
 		} else {
 			return visitor.visitChildren(this);
 		}

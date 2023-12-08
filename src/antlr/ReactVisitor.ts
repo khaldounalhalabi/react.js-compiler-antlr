@@ -13,6 +13,7 @@ import { FunctionExpressionContext } from "./ReactParser";
 import { ParametersContext } from "./ReactParser";
 import { ReturnContext } from "./ReactParser";
 import { BlockContext } from "./ReactParser";
+import { TemplateStringContext } from "./ReactParser";
 import { MultiplicationContext } from "./ReactParser";
 import { AdditionContext } from "./ReactParser";
 import { NotEqualContext } from "./ReactParser";
@@ -33,12 +34,13 @@ import { FunctionCallContext } from "./ReactParser";
 import { ArrowFunctionContext } from "./ReactParser";
 import { ArgumentsContext } from "./ReactParser";
 import { ConsoleLogExpressionContext } from "./ReactParser";
+import { TemplateContext } from "./ReactParser";
 import { UseStateContext } from "./ReactParser";
 import { UseEffectContext } from "./ReactParser";
 import { UseRefContext } from "./ReactParser";
-import { JsxElementFullContext } from "./ReactParser";
-import { SlefClosinJsxElementContext } from "./ReactParser";
 import { JsxElementContext } from "./ReactParser";
+import { JsxElementFullContext } from "./ReactParser";
+import { SelfClosingJsxElementContext } from "./ReactParser";
 import { JsxTagNameContext } from "./ReactParser";
 import { JsxAttributeContext } from "./ReactParser";
 import { JsxAttributeNameContext } from "./ReactParser";
@@ -114,6 +116,13 @@ export default class ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitBlock?: (ctx: BlockContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `TemplateString`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTemplateString?: (ctx: TemplateStringContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `Multiplication`
 	 * labeled alternative in `ReactParser.expression`.
@@ -250,6 +259,12 @@ export default class ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 */
 	visitConsoleLogExpression?: (ctx: ConsoleLogExpressionContext) => Result;
 	/**
+	 * Visit a parse tree produced by `ReactParser.template`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTemplate?: (ctx: TemplateContext) => Result;
+	/**
 	 * Visit a parse tree produced by `ReactParser.useState`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -268,23 +283,23 @@ export default class ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 */
 	visitUseRef?: (ctx: UseRefContext) => Result;
 	/**
+	 * Visit a parse tree produced by `ReactParser.jsxElement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitJsxElement?: (ctx: JsxElementContext) => Result;
+	/**
 	 * Visit a parse tree produced by `ReactParser.jsxElementFull`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitJsxElementFull?: (ctx: JsxElementFullContext) => Result;
 	/**
-	 * Visit a parse tree produced by `ReactParser.slefClosinJsxElement`.
+	 * Visit a parse tree produced by `ReactParser.selfClosingJsxElement`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	visitSlefClosinJsxElement?: (ctx: SlefClosinJsxElementContext) => Result;
-	/**
-	 * Visit a parse tree produced by `ReactParser.jsxElement`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitJsxElement?: (ctx: JsxElementContext) => Result;
+	visitSelfClosingJsxElement?: (ctx: SelfClosingJsxElementContext) => Result;
 	/**
 	 * Visit a parse tree produced by `ReactParser.jsxTagName`.
 	 * @param ctx the parse tree

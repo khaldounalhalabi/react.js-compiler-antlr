@@ -42,6 +42,7 @@ expression: expression '*' expression                           #Multiplication
           | expression '!=' expression                          #NotEqual
           | '(' expression ')'                                  #BracedExpression
           | funcExpr                                            #FunctionalExpression
+          | template                                            #TemplateString
           | Identifier                                          #Identifier
           | IntegerLiteral                                      #Number
           | StringLiteral                                       #String
@@ -59,6 +60,8 @@ arrowFunction: '(' parameters? ')' '=>' (block|expression);
 arguments: expression (',' expression)*;
 
 consoleLogExpression: 'console.log' '(' arguments? ')' ';'?;
+
+template:'`' '$' '{' expression '}' '`';
 
 IntegerLiteral: [0-9]+;
 
