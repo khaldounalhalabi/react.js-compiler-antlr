@@ -22,5 +22,5 @@ jsxAttributeName: 'src' | 'onClick' | 'ref' | 'width' | 'height' | 'className';
 
 jsxAttributeValue: StringLiteral | '{'expression?'}';
 
-jsxElementContent:jsxElement | '{' expression '}';
+jsxElementContent:jsxElement | '{' expression '}' | StringLiteral;
 
