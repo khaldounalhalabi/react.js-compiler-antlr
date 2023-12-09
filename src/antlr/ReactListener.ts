@@ -21,12 +21,12 @@ import { LessThanOrEqualContext } from "./ReactParser";
 import { MoreThanOrEqualContext } from "./ReactParser";
 import { StringContext } from "./ReactParser";
 import { LessThanContext } from "./ReactParser";
-import { IdentifierContext } from "./ReactParser";
 import { SubtractionContext } from "./ReactParser";
 import { NumberContext } from "./ReactParser";
 import { EqualContext } from "./ReactParser";
 import { BracedExpressionContext } from "./ReactParser";
 import { DivisionContext } from "./ReactParser";
+import { IDContext } from "./ReactParser";
 import { MoreThanContext } from "./ReactParser";
 import { FunctionalExpressionContext } from "./ReactParser";
 import { FuncExprContext } from "./ReactParser";
@@ -250,18 +250,6 @@ export default class ReactListener extends ParseTreeListener {
 	 */
 	exitLessThan?: (ctx: LessThanContext) => void;
 	/**
-	 * Enter a parse tree produced by the `Identifier`
-	 * labeled alternative in `ReactParser.expression`.
-	 * @param ctx the parse tree
-	 */
-	enterIdentifier?: (ctx: IdentifierContext) => void;
-	/**
-	 * Exit a parse tree produced by the `Identifier`
-	 * labeled alternative in `ReactParser.expression`.
-	 * @param ctx the parse tree
-	 */
-	exitIdentifier?: (ctx: IdentifierContext) => void;
-	/**
 	 * Enter a parse tree produced by the `Subtraction`
 	 * labeled alternative in `ReactParser.expression`.
 	 * @param ctx the parse tree
@@ -321,6 +309,18 @@ export default class ReactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitDivision?: (ctx: DivisionContext) => void;
+	/**
+	 * Enter a parse tree produced by the `ID`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	enterID?: (ctx: IDContext) => void;
+	/**
+	 * Exit a parse tree produced by the `ID`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	exitID?: (ctx: IDContext) => void;
 	/**
 	 * Enter a parse tree produced by the `MoreThan`
 	 * labeled alternative in `ReactParser.expression`.

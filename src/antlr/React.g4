@@ -26,7 +26,7 @@ functionExpression: 'function' '(' parameters? ')' block;
 
 parameters: Identifier (',' Identifier)*;
 
-return:'return' (expression|'(' jsxElement ')') ';';
+return:'return' (expression|'(' jsxElement ')')? ';';
 
 block: '{' statement* return?'}';
 
@@ -43,7 +43,7 @@ expression: expression '*' expression                           #Multiplication
           | '(' expression ')'                                  #BracedExpression
           | funcExpr                                            #FunctionalExpression
           | template                                            #TemplateString
-          | Identifier                                          #Identifier
+          | Identifier                                          #ID
           | IntegerLiteral                                      #Number
           | StringLiteral                                       #String
           ;

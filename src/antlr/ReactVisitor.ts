@@ -21,12 +21,12 @@ import { LessThanOrEqualContext } from "./ReactParser";
 import { MoreThanOrEqualContext } from "./ReactParser";
 import { StringContext } from "./ReactParser";
 import { LessThanContext } from "./ReactParser";
-import { IdentifierContext } from "./ReactParser";
 import { SubtractionContext } from "./ReactParser";
 import { NumberContext } from "./ReactParser";
 import { EqualContext } from "./ReactParser";
 import { BracedExpressionContext } from "./ReactParser";
 import { DivisionContext } from "./ReactParser";
+import { IDContext } from "./ReactParser";
 import { MoreThanContext } from "./ReactParser";
 import { FunctionalExpressionContext } from "./ReactParser";
 import { FuncExprContext } from "./ReactParser";
@@ -173,13 +173,6 @@ export default class ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 */
 	visitLessThan?: (ctx: LessThanContext) => Result;
 	/**
-	 * Visit a parse tree produced by the `Identifier`
-	 * labeled alternative in `ReactParser.expression`.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	visitIdentifier?: (ctx: IdentifierContext) => Result;
-	/**
 	 * Visit a parse tree produced by the `Subtraction`
 	 * labeled alternative in `ReactParser.expression`.
 	 * @param ctx the parse tree
@@ -214,6 +207,13 @@ export default class ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitDivision?: (ctx: DivisionContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `ID`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitID?: (ctx: IDContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `MoreThan`
 	 * labeled alternative in `ReactParser.expression`.
