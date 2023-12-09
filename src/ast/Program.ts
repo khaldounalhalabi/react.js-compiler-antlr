@@ -1,13 +1,13 @@
-import {Statement} from "./Statement.ts";
+import { Statement } from "./Statement.ts";
 
 export class Program {
-    public statements: Statement[];
+  public statements: Statement[];
 
-    constructor() {
-        this.statements = [];
-    }
+  constructor(statements: Statement[]) {
+    this.statements = statements;
+  }
 
-    public addExpression(statement: Statement): void {
-        this.statements.push(statement);
-    }
+  public addExpression(statement: Statement): void {
+    this.statements.push(statement);
+  }
 }

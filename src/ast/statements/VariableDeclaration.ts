@@ -1,14 +1,13 @@
 import {Expression} from "../Expressions/Expression.ts";
 import {Identifier} from "../Expressions/Identifier.ts";
-import {Statement} from "../Statement.ts";
+import {VariableType} from "../VariableType.ts";
 
-export class VariableDeclaration extends Statement {
-    variableType: string;
+export class VariableDeclaration{
+    variableType: VariableType;
     identifier: Identifier;
     expression: Expression | null;
 
-    constructor(variableType: string, identifier: Identifier, expression: Expression | null) {
-        super();
+    constructor(variableType: VariableType, identifier: Identifier, expression: Expression | null) {
         this.variableType = variableType;
         this.identifier = identifier;
         this.expression = expression;
@@ -16,6 +15,6 @@ export class VariableDeclaration extends Statement {
 
     toString(): string {
         const expressionStr = this.expression ? ` = ${this.expression.toString()}` : '';
-        return `${this.variableType} ${this.identifier.toString()}${expressionStr}`;
+        return `${this.variableType.toString()} ${this.identifier.toString()}${expressionStr}`;
     }
 }

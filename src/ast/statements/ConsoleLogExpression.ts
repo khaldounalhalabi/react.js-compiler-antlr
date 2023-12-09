@@ -1,5 +1,5 @@
 import {Statement} from "../Statement.ts";
-import {Arguments} from "../Expressions/Arguments.ts";
+import {Arguments} from "../Arguments.ts";
 
 export class ConsoleLogExpression extends Statement {
     args: Arguments | null;

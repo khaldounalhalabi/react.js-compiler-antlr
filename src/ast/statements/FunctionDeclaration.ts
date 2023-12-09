@@ -2,7 +2,7 @@ import {Statement} from "../Statement.ts";
 import {Identifier} from "../Expressions/Identifier.ts";
 import {Block} from "../Block.ts";
 
-export class FunctionDeclarationNode extends Statement {
+export class FunctionDeclaration extends Statement {
     identifier: Identifier;
     parameters: Identifier[];
     block: Block;

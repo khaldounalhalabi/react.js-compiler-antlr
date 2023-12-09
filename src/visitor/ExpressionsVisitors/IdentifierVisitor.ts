@@ -4,7 +4,8 @@ import {IdentifierContext} from "../../antlr/ReactParser.ts";
 
 export class IdentifierVisitor extends ReactVisitor<Identifier> {
     visitIdentifier: (ctx: IdentifierContext) => Identifier = (ctx: IdentifierContext) => {
-        let id: string = ctx.Identifier().getText();
+        console.log('visit Identifier')
+        let id: string = ctx.symbol.text;
         return new Identifier(id);
     }
 }
