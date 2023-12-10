@@ -1,9 +1,10 @@
 import { Expression } from "./Expressions/Expression.ts";
 
-export class Arguments {
+export class Arguments extends Expression {
   expressions: Expression[];
 
   constructor(expressions: Expression[]) {
+    super();
     this.expressions = expressions;
   }
 

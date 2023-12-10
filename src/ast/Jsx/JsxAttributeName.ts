@@ -1,8 +1,11 @@
-export class JsxAttributeName {
+import {Jsx} from "./Jsx.ts";
+
+export class JsxAttributeName extends Jsx{
     public name: string;
 
 
     constructor(name: string) {
+        super();
         this.name = name;
     }
 

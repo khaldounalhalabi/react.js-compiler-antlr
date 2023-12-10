@@ -13,7 +13,8 @@ export class ParameterVisitor extends ReactVisitor<Parameter[]> {
 
     const identifiers: TerminalNode = ctx.Identifier_list();
     const parameters: Parameter[] = [];
-    let expressionVisitor: ExpressionVisitor = new ExpressionVisitor();
+    // TODO::possible problem
+    const expressionVisitor: ExpressionVisitor = new ExpressionVisitor();
     for (let i: number = 0; i < identifiers.length; i++) {
       let id: Identifier = expressionVisitor.visitID(identifiers[i]);
       parameters.push(new Parameter(id));

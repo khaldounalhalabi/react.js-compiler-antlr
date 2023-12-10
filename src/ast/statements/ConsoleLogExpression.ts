@@ -1,16 +1,16 @@
-import {Statement} from "../Statement.ts";
-import {Arguments} from "../Arguments.ts";
+import { Statement } from "../Statement.ts";
+import { Arguments } from "../Arguments.ts";
 
 export class ConsoleLogExpression extends Statement {
-    args: Arguments | null;
+  args: Arguments | undefined;
 
-    constructor(args: Arguments | null) {
-        super();
-        this.args = args;
-    }
+  constructor(args: Arguments | undefined) {
+    super();
+    this.args = args;
+  }
 
-    toString(): string {
-        const argsStr = this.args ? this.args.toString() : '';
-        return `console.log(${argsStr})`;
-    }
+  toString(): string {
+    const argsStr = this.args ? this.args.toString() : "";
+    return `console.log(${argsStr})`;
+  }
 }

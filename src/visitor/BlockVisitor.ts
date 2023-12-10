@@ -15,6 +15,7 @@ export class BlockVisitor extends ReactVisitor<Block> {
       statements.push(statementVisitor.visit(statementsCtx[i]));
     }
 
+    // TODO::possible problem
     const returnVisitor = new ReturnVisitor();
     const returnStatement = returnVisitor.visitReturn(ctx.return_());
 

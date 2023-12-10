@@ -17,11 +17,12 @@ export class FunctionalExpressionVisitor extends ExpressionVisitor {
   visitArrowFunction: (ctx: ArrowFunctionContext) => ArrowFunction = (
     ctx: ArrowFunctionContext,
   ) => {
-    console.log('arrow function visitor')
-
+    console.log("arrow function visitor");
+    // TODO::possible problem
     const parametersVisitor = new ParameterVisitor();
     const parameters = parametersVisitor.visitParameters(ctx.parameters());
 
+    // TODO::possible problem
     const blockVisitor = new BlockVisitor();
     const block = blockVisitor.visitBlock(ctx.block());
 
@@ -31,11 +32,12 @@ export class FunctionalExpressionVisitor extends ExpressionVisitor {
   visitFunctionExpression: (
     ctx: FunctionExpressionContext,
   ) => FunctionExpression = (ctx: FunctionExpressionContext) => {
-    console.log('function expression visitor')
-
+    console.log("function expression visitor");
+    // TODO::possible problem
     const parametersVisitor = new ParameterVisitor();
     const parameters = parametersVisitor.visitParameters(ctx.parameters());
 
+    // TODO::possible problem
     const blockVisitor = new BlockVisitor();
     const block = blockVisitor.visitBlock(ctx.block());
 
@@ -45,7 +47,7 @@ export class FunctionalExpressionVisitor extends ExpressionVisitor {
   visitFunctionCall: (ctx: FunctionCallContext) => FunctionCall = (
     ctx: FunctionCallContext,
   ) => {
-    console.log('function call visitor')
+    console.log("function call visitor");
 
     let id = this.visitID(ctx.Identifier());
     const args = this.visitArguments(ctx.arguments());
@@ -55,7 +57,7 @@ export class FunctionalExpressionVisitor extends ExpressionVisitor {
   visitArguments: (ctx: ArgumentsContext) => Arguments = (
     ctx: ArgumentsContext,
   ) => {
-    console.log('arguments visitor')
+    console.log("arguments visitor");
 
     const expressionCtx = ctx.expression_list();
     let expressions: Expression[] = [];
