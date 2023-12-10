@@ -7,6 +7,7 @@ import {
   FunctionDeclarationContext,
   UseEffectContext,
   UseRefContext,
+  UseStateContext,
   VariableDeclarationContext,
   VariableTypeContext,
 } from "../antlr/ReactParser.ts";
@@ -23,6 +24,8 @@ import { ParameterVisitor } from "./ParameterVisitor.ts";
 import { BlockVisitor } from "./BlockVisitor.ts";
 import { UseEffect } from "../ast/statements/UseEffect.ts";
 import { UseRef } from "../ast/statements/UseRef.ts";
+import { UseState } from "../ast/statements/UseState.ts";
+import { TerminalNode } from "antlr4";
 
 export class StatementVisitor extends ReactVisitor<Statement> {
   visitVariableDeclaration: (
@@ -97,5 +100,38 @@ export class StatementVisitor extends ReactVisitor<Statement> {
     return new UseEffect(func, params);
   };
 
-  visitUseRef: (ctx: UseRefContext) => UseRef = (ctx: UseRefContext) => {};
+  visitUseRef: (ctx: UseRefContext) => UseRef = (ctx: UseRefContext) => {
+    let exprVisitor = new ExpressionVisitor();
+    let idCtx = ctx.Identifier();
+    let id = exprVisitor.visitID(idCtx);
+
+    let exprCtx = undefined;
+    let expr = undefined;
+
+    if (ctx.expression()) {
+      exprCtx = ctx.expression();
+      expr = exprVisitor.visit(exprCtx);
+    }
+
+    return new UseRef(id, expr);
+  };
+
+  visitUseState: (ctx: UseStateContext) => UseState = (
+    ctx: UseStateContext,
+  ) => {
+    const exprVisitor = new ExpressionVisitor();
+    const idCtx: TerminalNode[] = ctx.Identifier_list();
+    const ids: Identifier[] = [];
+
+    for (let i = 0; i < idCtx.length; i++) {
+      ids.push(exprVisitor.visitID(idCtx[i]));
+    }
+
+    let expression = undefined;
+    if (ctx.expression()) {
+      expression = exprVisitor.visit(ctx.expression());
+    }
+
+    return new UseState(ids[0], ids[1], expression);
+  };
 }
