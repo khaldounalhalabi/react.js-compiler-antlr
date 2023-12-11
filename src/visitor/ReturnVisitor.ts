@@ -8,7 +8,6 @@ export class ReturnVisitor extends ReactVisitor<Return> {
   visitReturn: (ctx: ReturnContext) => Return = (ctx: ReturnContext) => {
     console.log("return visitor");
     if (ctx.expression()) {
-      console.log("return expression visitor");
       // TODO::possible problem
       const expressionVisitor = new ExpressionVisitor();
       const expression = expressionVisitor.visit(ctx.expression());

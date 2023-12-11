@@ -1,4 +1,3 @@
-import { InstructionVisitor } from "./InstructionVisitor.ts";
 import ReactVisitor from "../antlr/ReactVisitor.ts";
 import { Statement } from "../ast/Statement.ts";
 import {
@@ -26,17 +25,37 @@ import { UseEffect } from "../ast/statements/UseEffect.ts";
 import { UseRef } from "../ast/statements/UseRef.ts";
 import { UseState } from "../ast/statements/UseState.ts";
 import { TerminalNode } from "antlr4";
+import { Parameter } from "../ast/Parameters.ts";
 
 export class StatementVisitor extends ReactVisitor<Statement> {
+  public exprVisitor: ExpressionVisitor;
+
+  public blockVisitor: BlockVisitor;
+
+  public funcExprVisitor: FunctionalExpressionVisitor;
+
+  public parameterVisitor: ParameterVisitor;
+
+  constructor(
+    exprVisitor: ExpressionVisitor,
+    blockVisitor: BlockVisitor,
+    funcExprVisitor: FunctionalExpressionVisitor,
+    parameterVisitor: ParameterVisitor,
+  ) {
+    super();
+    this.exprVisitor = exprVisitor;
+    this.blockVisitor = blockVisitor;
+    this.funcExprVisitor = funcExprVisitor;
+    this.parameterVisitor = parameterVisitor;
+  }
+
   visitVariableDeclaration: (
     ctx: VariableDeclarationContext,
   ) => VariableDeclaration = (ctx: VariableDeclarationContext) => {
     console.log("variable declaration visitor");
     let varType: VariableType = this.visit(ctx.variableType());
-    // TODO::possible problem
-    let expressionVisitor = new FunctionalExpressionVisitor();
-    let id: Identifier = expressionVisitor.visitID(ctx.Identifier());
-    let expression: Expression = expressionVisitor.visit(ctx.expression());
+    let id: Identifier = this.funcExprVisitor.visitID(ctx.Identifier());
+    let expression: Expression = this.funcExprVisitor.visit(ctx.expression());
 
     return new VariableDeclaration(varType, id, expression);
   };
@@ -52,12 +71,11 @@ export class StatementVisitor extends ReactVisitor<Statement> {
   visitAssignment: (ctx: AssignmentContext) => Assignment = (
     ctx: AssignmentContext,
   ) => {
-    const exprVisitor = new ExpressionVisitor();
+    console.log("visit Assignment");
     const idCtx = ctx.Identifier();
-    // TODO::possible problem
-    const id = exprVisitor.visitID(idCtx);
+    const id = this.exprVisitor.visitID(idCtx);
 
-    const expression = exprVisitor.visit(ctx.expression());
+    const expression = this.exprVisitor.visit(ctx.expression());
     return new Assignment(id, expression);
   };
 
@@ -65,10 +83,9 @@ export class StatementVisitor extends ReactVisitor<Statement> {
     ctx: ConsoleLogExpressionContext,
   ) => ConsoleLogExpression = (ctx: ConsoleLogExpressionContext) => {
     let args = undefined;
-
+    console.log("visit ConsoleLog Expression");
     if (ctx.arguments()) {
-      // TODO::possible problem
-      args = new FunctionalExpressionVisitor().visitArguments(ctx.arguments());
+      args = this.funcExprVisitor.visitArguments(ctx.arguments());
     }
 
     return new ConsoleLogExpression(args);
@@ -77,40 +94,43 @@ export class StatementVisitor extends ReactVisitor<Statement> {
   visitFunctionDeclaration: (
     ctx: FunctionDeclarationContext,
   ) => FunctionDeclaration = (ctx: FunctionDeclarationContext) => {
-    // TODO:: possible problem
-    const id = new ExpressionVisitor().visitID(ctx.Identifier());
-    const parameters = new ParameterVisitor().visit(ctx.parameters());
-    const block = new BlockVisitor().visit(ctx.block());
-    return new FunctionDeclaration(id, parameters, block);
+    console.log("visit Function Declaration");
+    const id = this.exprVisitor.visitID(ctx.Identifier());
+    const parameters: Parameter[] = this.parameterVisitor.visitParameters(
+      ctx.parameters(),
+    );
+    const block = this.blockVisitor.visit(ctx.block());
+    return new FunctionDeclaration(id, block, parameters);
   };
 
   visitUseEffect: (ctx: UseEffectContext) => UseEffect = (
     ctx: UseEffectContext,
   ) => {
+    console.log("visitUseEffect");
     let funcCtx = ctx.functionExpression();
-    let func = new FunctionalExpressionVisitor().visit(funcCtx);
+    let func = this.funcExprVisitor.visit(funcCtx);
 
     let paramCtx = undefined;
     let params = undefined;
 
     if (ctx.parameters()) {
       paramCtx = ctx.parameters();
-      params = new ParameterVisitor().visitParameters(paramCtx);
+      params = this.parameterVisitor.visitParameters(paramCtx);
     }
     return new UseEffect(func, params);
   };
 
   visitUseRef: (ctx: UseRefContext) => UseRef = (ctx: UseRefContext) => {
-    let exprVisitor = new ExpressionVisitor();
+    console.log("visitUseRef");
     let idCtx = ctx.Identifier();
-    let id = exprVisitor.visitID(idCtx);
+    let id = this.exprVisitor.visitID(idCtx);
 
     let exprCtx = undefined;
     let expr = undefined;
 
     if (ctx.expression()) {
       exprCtx = ctx.expression();
-      expr = exprVisitor.visit(exprCtx);
+      expr = this.exprVisitor.visit(exprCtx);
     }
 
     return new UseRef(id, expr);
@@ -119,17 +139,17 @@ export class StatementVisitor extends ReactVisitor<Statement> {
   visitUseState: (ctx: UseStateContext) => UseState = (
     ctx: UseStateContext,
   ) => {
-    const exprVisitor = new ExpressionVisitor();
+    console.log("visitUseState");
     const idCtx: TerminalNode[] = ctx.Identifier_list();
     const ids: Identifier[] = [];
 
     for (let i = 0; i < idCtx.length; i++) {
-      ids.push(exprVisitor.visitID(idCtx[i]));
+      ids.push(this.exprVisitor.visitID(idCtx[i]));
     }
 
     let expression = undefined;
     if (ctx.expression()) {
-      expression = exprVisitor.visit(ctx.expression());
+      expression = this.exprVisitor.visit(ctx.expression());
     }
 
     return new UseState(ids[0], ids[1], expression);

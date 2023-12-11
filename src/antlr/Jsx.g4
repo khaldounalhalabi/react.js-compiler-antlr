@@ -8,7 +8,7 @@ import React;
     }
   }
 }
-useState: 'const' '[' Identifier ',' Identifier ']' '=' 'useState' '(' expression ')' ';'? ;
+useState: 'const' '[' Identifier ',' Identifier ']' '=' 'useState' '(' expression? ')' ';'? ;
 
 useEffect: 'useEffect' '(' (arrowFunction|functionExpression) (',')? ('['parameters']')? ')' ';'?;
 
@@ -16,7 +16,7 @@ useRef: 'const' Identifier '=' 'useRef' '(' expression? ')' ';'?;
 
 jsxElement:jsxElementFull|selfClosingJsxElement;
 
-jsxElementFull: '<' jsxTagName jsxAttribute* '>' jsxElementContent* '</' jsxTagName { this.assert(getText() === jsxTagName.text, `Mismatched opening and closing tags: ${jsxTagName.text}`); } '>';
+jsxElementFull: '<' jsxTagName jsxAttribute* '>' jsxElementContent* '</' jsxTagName '>';
 
 selfClosingJsxElement:'<' jsxTagName jsxAttribute* '/>';
 

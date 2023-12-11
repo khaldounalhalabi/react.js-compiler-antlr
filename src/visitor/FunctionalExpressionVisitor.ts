@@ -14,17 +14,26 @@ import { Arguments } from "../ast/Arguments.ts";
 import { Expression } from "../ast/Expressions/Expression.ts";
 
 export class FunctionalExpressionVisitor extends ExpressionVisitor {
+  public blockVisitor: BlockVisitor;
+
+  public parameterVisitor: ParameterVisitor;
+
+  constructor(
+    blockVisitor: BlockVisitor,
+    parameterVisitor: ParameterVisitor,
+  ) {
+    super();
+    this.blockVisitor = blockVisitor;
+    this.parameterVisitor = parameterVisitor;
+  }
+
   visitArrowFunction: (ctx: ArrowFunctionContext) => ArrowFunction = (
     ctx: ArrowFunctionContext,
   ) => {
     console.log("arrow function visitor");
-    // TODO::possible problem
-    const parametersVisitor = new ParameterVisitor();
-    const parameters = parametersVisitor.visitParameters(ctx.parameters());
+    const parameters = this.parameterVisitor.visitParameters(ctx.parameters());
 
-    // TODO::possible problem
-    const blockVisitor = new BlockVisitor();
-    const block = blockVisitor.visitBlock(ctx.block());
+    const block = this.blockVisitor.visitBlock(ctx.block());
 
     return new ArrowFunction(parameters, block);
   };
@@ -33,13 +42,9 @@ export class FunctionalExpressionVisitor extends ExpressionVisitor {
     ctx: FunctionExpressionContext,
   ) => FunctionExpression = (ctx: FunctionExpressionContext) => {
     console.log("function expression visitor");
-    // TODO::possible problem
-    const parametersVisitor = new ParameterVisitor();
-    const parameters = parametersVisitor.visitParameters(ctx.parameters());
+    const parameters = this.parameterVisitor.visitParameters(ctx.parameters());
 
-    // TODO::possible problem
-    const blockVisitor = new BlockVisitor();
-    const block = blockVisitor.visitBlock(ctx.block());
+    const block = this.blockVisitor.visitBlock(ctx.block());
 
     return new FunctionExpression(parameters, block);
   };

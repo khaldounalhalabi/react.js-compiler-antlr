@@ -11,6 +11,7 @@ export class BlockVisitor extends ReactVisitor<Block> {
     const statementsCtx = ctx.statement_list();
     const statements: Statement[] = [];
     const statementVisitor = new StatementVisitor();
+
     for (let i = 0; i < statementsCtx.length; i++) {
       statements.push(statementVisitor.visit(statementsCtx[i]));
     }

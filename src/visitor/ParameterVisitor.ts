@@ -6,14 +6,20 @@ import { ExpressionVisitor } from "./ExpressionVisitor.ts";
 import { TerminalNode } from "antlr4";
 
 export class ParameterVisitor extends ReactVisitor<Parameter[]> {
+  public exprVisitor;
+
+  constructor(exprVisitor: ExpressionVisitor) {
+    super();
+    this.exprVisitor = exprVisitor;
+  }
+
   visitParameters: (ctx: ParametersContext) => Parameter[] = (
     ctx: ParametersContext,
   ) => {
-    console.log('parameters visitor')
+    console.log("parameters visitor");
 
     const identifiers: TerminalNode = ctx.Identifier_list();
     const parameters: Parameter[] = [];
-    // TODO::possible problem
     const expressionVisitor: ExpressionVisitor = new ExpressionVisitor();
     for (let i: number = 0; i < identifiers.length; i++) {
       let id: Identifier = expressionVisitor.visitID(identifiers[i]);

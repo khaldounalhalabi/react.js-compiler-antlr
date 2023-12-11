@@ -82,6 +82,7 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
   ) => {
     console.log("visitJsxElementFull");
     const jsxTagNameCtx: JsxTagNameContext[] = ctx.jsxTagName_list();
+    const tagName = this.visitJsxTagName(jsxTagNameCtx[0]);
     const jsxAttributeCtx: JsxAttributeContext[] = ctx.jsxAttribute_list();
     const jsxElementContentCtx: JsxElementContentContext[] =
       ctx.jsxElementContent_list();
@@ -96,11 +97,7 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
       jsxElementContent.push(this.visit(jsxElementContentCtx[i]));
     }
 
-    return new JsxElementFull(
-      this.visit(jsxTagNameCtx[0]),
-      jsxElementContent,
-      jsxAttributes,
-    );
+    return new JsxElementFull(tagName, jsxElementContent, jsxAttributes);
   };
 
   visitSelfClosingJsxElement: (
@@ -128,10 +125,10 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
     if (ctx.jsxElementFull()) {
       //TODO::test this method ctx.jsxElementFull()
       jsxElementContext = ctx.jsxElementFull();
-      jsxElement = this.visit(jsxElementContext);
+      jsxElement = this.visitJsxElementFull(jsxElementContext);
     } else {
       jsxElementContext = ctx.selfClosingJsxElement();
-      jsxElement = this.visit(jsxElementContext);
+      jsxElement = this.visitSelfClosingJsxElement(jsxElementContext);
     }
     return new JsxElement(jsxElement);
   };

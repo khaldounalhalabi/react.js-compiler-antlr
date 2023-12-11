@@ -1,0 +1,22 @@
+function Home(x) {
+  const [selectedImage , setSelectedImage] = useState();
+  return (
+    <div>
+    <h1></h1>
+      <div>
+        <div>
+          <div>
+            <img/>
+          </div>
+        </div>
+        {'asas'}
+        <div>
+          <img/>
+          <img />
+          <img />
+          <img />
+        </div>
+      </div>
+    </div>
+  );
+}
