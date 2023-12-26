@@ -1,6 +1,5 @@
 import {
   AdditionContext,
-  ArrowFunctionContext,
   DivisionContext,
   EqualContext,
   ExpressionContext,
@@ -33,17 +32,11 @@ import { NotEqual } from "../ast/Expressions/NotEqual.ts";
 import { Number as AntlrNumber } from "../ast/Expressions/Number.ts";
 import { Subtraction } from "../ast/Expressions/Subtraction.ts";
 import { TemplateString } from "../ast/Expressions/TemplateString.ts";
-import { BlockVisitor } from "./BlockVisitor.ts";
-import { FunctionalExpressionVisitor } from "./FunctionalExpressionVisitor.ts";
-import { JsxElementVisitor } from "./JsxElementVisitor.ts";
-import { ParameterVisitor } from "./ParameterVisitor.ts";
-import { ReturnVisitor } from "./ReturnVisitor.ts";
 
 export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitAddition: (ctx: AdditionContext) => Addition = (
     ctx: AdditionContext,
   ) => {
-    console.log("visit Addition");
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
     let right: Expression = this.visit(expressions[1]);
@@ -54,7 +47,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitDivision: (ctx: DivisionContext) => Division = (
     ctx: DivisionContext,
   ) => {
-    console.log("division visitor");
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
     let right: Expression = this.visit(expressions[1]);
@@ -63,7 +55,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   };
 
   visitEqual: (ctx: EqualContext) => Equal = (ctx: EqualContext) => {
-    console.log("equal visitor");
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
     let right: Expression = this.visit(expressions[1]);
@@ -72,7 +63,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   };
 
   visitID: (ctx: IDContext) => Identifier = (ctx: IDContext) => {
-    console.log("visit Identifier");
     let id: string = ctx.getText();
     return new Identifier(id);
   };
@@ -80,7 +70,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitLessThanOrEqual: (ctx: LessThanOrEqualContext) => LessThanOrEqual = (
     ctx: LessThanOrEqualContext,
   ) => {
-    console.log("less than or equal visitor");
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
     let right: Expression = this.visit(expressions[1]);
@@ -91,7 +80,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitLessThan: (ctx: LessThanContext) => LessThan = (
     ctx: LessThanContext,
   ) => {
-    console.log("less than visitor");
 
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
@@ -103,7 +91,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitMoreThanOrEqual: (ctx: MoreThanOrEqualContext) => MoreThanOrEqual = (
     ctx: MoreThanOrEqualContext,
   ) => {
-    console.log("more than or equal visitor");
 
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
@@ -115,7 +102,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitMoreThan: (ctx: MoreThanContext) => MoreThan = (
     ctx: MoreThanContext,
   ) => {
-    console.log("more than visitor");
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
     let right: Expression = this.visit(expressions[1]);
@@ -126,7 +112,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitMultiplication: (ctx: MultiplicationContext) => Multiplication = (
     ctx: MultiplicationContext,
   ) => {
-    console.log("multiplication visitor");
 
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
@@ -138,7 +123,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitNotEqual: (ctx: NotEqualContext) => NotEqual = (
     ctx: NotEqualContext,
   ) => {
-    console.log("not equal visitor");
 
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
@@ -148,7 +132,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   };
 
   visitNumber: (ctx: NumberContext) => AntlrNumber = (ctx: NumberContext) => {
-    console.log("number visitor");
     let strNum = ctx.IntegerLiteral().getText();
     let num = parseInt(strNum);
 
@@ -156,7 +139,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   };
 
   visitString: (ctx: StringContext) => AntlrString = (ctx: StringContext) => {
-    console.log("string visitor");
 
     let str = ctx.StringLiteral().getText();
     return new AntlrString(str);
@@ -165,7 +147,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitSubtraction: (ctx: SubtractionContext) => Subtraction = (
     ctx: SubtractionContext,
   ) => {
-    console.log("subtraction visitor");
 
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
@@ -177,7 +158,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitTemplateString: (ctx: TemplateStringContext) => TemplateString = (
     ctx: TemplateStringContext,
   ) => {
-    console.log("template string visitor");
 
     return this.visitTemplate(ctx.template());
   };
@@ -185,7 +165,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitTemplate: (ctx: TemplateContext) => TemplateString = (
     ctx: TemplateContext,
   ) => {
-    console.log("template visitor");
 
     let expressionCtx: ExpressionContext = ctx.expression();
     let expression: Expression = this.visit(expressionCtx);

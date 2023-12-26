@@ -21,10 +21,18 @@ import { JsxElementContent } from "../ast/Jsx/JsxElementContent.ts";
 import { SelfClosingJsxElement } from "../ast/Jsx/SelfClosingJsxElement.ts";
 
 export class JsxElementVisitor extends ReactVisitor<Jsx> {
+
+  protected expressionVisitor : ExpressionVisitor;
+
+
+  constructor(expressionVisitor: ExpressionVisitor) {
+    super();
+    this.expressionVisitor = expressionVisitor;
+  }
+
   visitJsxTagName: (ctx: JsxTagNameContext) => JsxTagName = (
     ctx: JsxTagNameContext,
   ) => {
-    console.log("visitJsxTagName");
     const tagName = ctx.getText();
     return new JsxTagName(tagName);
   };
@@ -32,7 +40,6 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
   visitJsxAttribute: (ctx: JsxAttributeContext) => JsxAttribute = (
     ctx: JsxAttributeContext,
   ) => {
-    console.log("visitJsxAttribute");
     const attrName = ctx.jsxAttributeName();
     const attrValue = ctx.jsxAttributeValue();
     return new JsxAttribute(this.visit(attrName), this.visit(attrValue));
@@ -41,19 +48,16 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
   visitJsxAttributeName: (ctx: JsxAttributeNameContext) => JsxAttributeName = (
     ctx: JsxAttributeNameContext,
   ) => {
-    console.log("visitJsxAttributeName");
     const name = ctx.getText();
     return new JsxAttributeName(name);
   };
 
   visitJsxAttributeValue: (ctx: JsxAttributeValueContext) => JsxAttributeValue =
     (ctx: JsxAttributeValueContext) => {
-      console.log("visitJsxAttributeValue");
       let value;
       if (ctx.expression()) {
         const valueCtx = ctx.expression();
-        // TODO::possible problem
-        value = new ExpressionVisitor().visit(valueCtx);
+        value = this.expressionVisitor.visit(valueCtx);
       } else {
         value = ctx.getText();
       }
@@ -62,13 +66,11 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
 
   visitJsxElementContent: (ctx: JsxElementContentContext) => JsxElementContent =
     (ctx: JsxElementContentContext) => {
-      console.log("visitJsxElementContent");
       let contentCtx;
       let content;
       if (ctx.expression()) {
         contentCtx = ctx.expression();
-        // TODO::possible problem
-        content = new ExpressionVisitor().visit(contentCtx);
+        content = this.expressionVisitor.visit(contentCtx);
       } else if (ctx.jsxElement()) {
         contentCtx = ctx.jsxElement();
         content = this.visit(contentCtx);
@@ -80,7 +82,6 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
   visitJsxElementFull: (ctx: JsxElementFullContext) => JsxElementFull = (
     ctx: JsxElementFullContext,
   ) => {
-    console.log("visitJsxElementFull");
     const jsxTagNameCtx: JsxTagNameContext[] = ctx.jsxTagName_list();
     const tagName = this.visitJsxTagName(jsxTagNameCtx[0]);
     const jsxAttributeCtx: JsxAttributeContext[] = ctx.jsxAttribute_list();
@@ -103,7 +104,6 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
   visitSelfClosingJsxElement: (
     ctx: SelfClosingJsxElementContext,
   ) => SelfClosingJsxElement = (ctx: SelfClosingJsxElementContext) => {
-    console.log("visitSelfClosingJsxElement");
     const jsxTagNameCtx: JsxTagNameContext = ctx.jsxTagName();
     const jsxAttributeCtx: JsxAttributeContext[] = ctx.jsxAttribute_list();
 
@@ -118,12 +118,10 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
   visitJsxElement: (ctx: JsxElementContext) => JsxElement = (
     ctx: JsxElementContext,
   ) => {
-    console.log("visitJsxElement");
     let jsxElementContext;
     let jsxElement;
 
     if (ctx.jsxElementFull()) {
-      //TODO::test this method ctx.jsxElementFull()
       jsxElementContext = ctx.jsxElementFull();
       jsxElement = this.visitJsxElementFull(jsxElementContext);
     } else {

@@ -11,6 +11,8 @@ import { FunctionalExpressionVisitor } from "./FunctionalExpressionVisitor.ts";
 import { BlockVisitor } from "./BlockVisitor.ts";
 
 export class ProgramVisitor extends ReactVisitor<Program> {
+  public semanticErrors: string[] = [];
+
   public exprVisitor;
 
   public blockVisitor;
@@ -25,13 +27,13 @@ export class ProgramVisitor extends ReactVisitor<Program> {
 
   public statementVisitor;
 
-  constructor() {
+  constructor(semanticErrors: string[]) {
     super();
+    this.semanticErrors = semanticErrors
     this.returnVisitor = new ReturnVisitor();
-    this.jsxElementVisitor = new JsxElementVisitor();
     this.blockVisitor = new BlockVisitor();
-
     this.exprVisitor = new ExpressionVisitor();
+    this.jsxElementVisitor = new JsxElementVisitor(this.exprVisitor);
     this.parameterVisitor = new ParameterVisitor(this.exprVisitor);
     this.funcExprVisitor = new FunctionalExpressionVisitor(
       this.blockVisitor,
@@ -42,11 +44,11 @@ export class ProgramVisitor extends ReactVisitor<Program> {
       this.blockVisitor,
       this.funcExprVisitor,
       this.parameterVisitor,
+      this.semanticErrors,
     );
   }
 
   visitProgram: (ctx: ProgramContext) => Program = (ctx: ProgramContext) => {
-    console.log("Program Visitor");
     let statement: Statement = this.statementVisitor.visit(ctx.children[0]);
     let statements: Statement[] = [statement];
     return new Program(statements);

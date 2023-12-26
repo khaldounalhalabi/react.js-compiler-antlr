@@ -16,7 +16,6 @@ export class ParameterVisitor extends ReactVisitor<Parameter[]> {
   visitParameters: (ctx: ParametersContext) => Parameter[] = (
     ctx: ParametersContext,
   ) => {
-    console.log("parameters visitor");
 
     const identifiers: TerminalNode = ctx.Identifier_list();
     const parameters: Parameter[] = [];

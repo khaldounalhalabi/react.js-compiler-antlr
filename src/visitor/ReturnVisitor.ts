@@ -6,16 +6,15 @@ import { JsxElementVisitor } from "./JsxElementVisitor.ts";
 
 export class ReturnVisitor extends ReactVisitor<Return> {
   visitReturn: (ctx: ReturnContext) => Return = (ctx: ReturnContext) => {
-    console.log("return visitor");
-    if (ctx.expression()) {
+    const expressionVisitor = new ExpressionVisitor();
+    if (ctx?.expression()) {
       // TODO::possible problem
-      const expressionVisitor = new ExpressionVisitor();
       const expression = expressionVisitor.visit(ctx.expression());
       return new Return(undefined, expression);
-    } else if (ctx.jsxElement()) {
+    } else if (ctx?.jsxElement()) {
       const jsxCtx = ctx.jsxElement();
       // TODO::possible problem
-      const jsx = new JsxElementVisitor().visit(jsxCtx);
+      const jsx = new JsxElementVisitor(expressionVisitor).visit(jsxCtx);
       return new Return(jsx, undefined);
     } else {
       return new Return();
