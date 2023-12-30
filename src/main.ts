@@ -21,8 +21,10 @@ const tokens = new CommonTokenStream(lexer);
 let parser = new ReactParser(tokens);
 let tree = parser.program();
 
-const programVisitor = new ProgramVisitor([]);
-programVisitor.visitProgram(tree);
+const programVisitor = new ProgramVisitor();
+tree.accept(programVisitor);
+
+// programVisitor.visitProgram(tree);
 
 console.log(programVisitor.semanticErrors);
 if (programVisitor.semanticErrors.length >= 0){

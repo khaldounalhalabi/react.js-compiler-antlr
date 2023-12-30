@@ -26,7 +26,7 @@ import { UseRef } from "../ast/statements/UseRef.ts";
 import { UseState } from "../ast/statements/UseState.ts";
 import { TerminalNode } from "antlr4";
 import { Parameter } from "../ast/Parameters.ts";
-import {FunctionExpression} from "../ast/Expressions/FunctionalExpression/FunctionExpression.ts";
+import { FunctionExpression } from "../ast/Expressions/FunctionalExpression/FunctionExpression.ts";
 
 export class StatementVisitor extends ReactVisitor<Statement> {
   public identifiers: string[] = [];
@@ -45,27 +45,34 @@ export class StatementVisitor extends ReactVisitor<Statement> {
     blockVisitor: BlockVisitor,
     funcExprVisitor: FunctionalExpressionVisitor,
     parameterVisitor: ParameterVisitor,
-    semanticErrors : string[]
+    semanticErrors: string[],
   ) {
     super();
     this.exprVisitor = exprVisitor;
     this.blockVisitor = blockVisitor;
     this.funcExprVisitor = funcExprVisitor;
     this.parameterVisitor = parameterVisitor;
-    this.semanticErrors = semanticErrors
+    this.semanticErrors = semanticErrors;
   }
 
   visitVariableDeclaration: (
     ctx: VariableDeclarationContext,
   ) => VariableDeclaration = (ctx: VariableDeclarationContext) => {
+    console.log("variable declaration visitor");
     let varType: VariableType = this.visit(ctx.variableType());
     let id: Identifier = this.funcExprVisitor.visitID(ctx.Identifier());
     let expression: Expression = this.funcExprVisitor.visit(ctx.expression());
-``
-    if (this.identifiers.includes(id.name)){
-      this.semanticErrors.push("Error : Variable" + id.name + "Already Declared (" + ctx.Identifier().line + " , " + ctx.Identifier().column + ")")
-    }
-    else if (expression instanceof FunctionExpression){
+    if (this.identifiers.includes(id.name)) {
+      this.semanticErrors.push(
+        "Error : Variable" +
+          id.name +
+          "Already Declared (" +
+          ctx.Identifier().line +
+          " , " +
+          ctx.Identifier().column +
+          ")",
+      );
+    } else if (expression instanceof FunctionExpression) {
       this.identifiers.push(id.name);
     } else {
       this.identifiers.push(id.name);
@@ -84,18 +91,28 @@ export class StatementVisitor extends ReactVisitor<Statement> {
   visitAssignment: (ctx: AssignmentContext) => Assignment = (
     ctx: AssignmentContext,
   ) => {
+    console.log("sssssssssssssssssssssss");
     const idCtx = ctx.Identifier();
     const id = this.funcExprVisitor.visitID(idCtx);
     const expression = this.funcExprVisitor.visit(ctx.expression());
 
-    if (!this.identifiers.includes(id.name)){
-      this.semanticErrors.push("Error : Variable" + id.name + "Doesn't Declared (" + ctx.Identifier().line + " , " + ctx.Identifier().column + ")")
-    }
-    else if (expression instanceof FunctionExpression){
+    if (!this.identifiers.includes(id.name)) {
+      this.semanticErrors.push(
+        "Error : Variable" +
+          id.name +
+          "Doesn't Declared (" +
+          ctx.Identifier().line +
+          " , " +
+          ctx.Identifier().column +
+          ")",
+      );
+    } else if (expression instanceof FunctionExpression) {
       this.identifiers.push(id.name);
     } else {
       this.identifiers.push(id.name);
     }
+
+    console.log(this.identifiers);
 
     return new Assignment(id, expression);
   };
