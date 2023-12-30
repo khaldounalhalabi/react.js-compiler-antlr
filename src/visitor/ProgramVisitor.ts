@@ -27,9 +27,8 @@ export class ProgramVisitor extends ReactVisitor<Program> {
 
   public statementVisitor;
 
-  constructor(semanticErrors: string[]) {
+  constructor() {
     super();
-    this.semanticErrors = semanticErrors
     this.returnVisitor = new ReturnVisitor();
     this.blockVisitor = new BlockVisitor();
     this.exprVisitor = new ExpressionVisitor();
