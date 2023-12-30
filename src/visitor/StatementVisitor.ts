@@ -25,7 +25,6 @@ import { UseEffect } from "../ast/statements/UseEffect.ts";
 import { UseRef } from "../ast/statements/UseRef.ts";
 import { UseState } from "../ast/statements/UseState.ts";
 import { TerminalNode } from "antlr4";
-import { Parameter } from "../ast/Parameters.ts";
 import { FunctionExpression } from "../ast/Expressions/FunctionalExpression/FunctionExpression.ts";
 
 export class StatementVisitor extends ReactVisitor<Statement> {
@@ -58,18 +57,17 @@ export class StatementVisitor extends ReactVisitor<Statement> {
   visitVariableDeclaration: (
     ctx: VariableDeclarationContext,
   ) => VariableDeclaration = (ctx: VariableDeclarationContext) => {
-    console.log("variable declaration visitor");
     let varType: VariableType = this.visit(ctx.variableType());
     let id: Identifier = this.funcExprVisitor.visitID(ctx.Identifier());
     let expression: Expression = this.funcExprVisitor.visit(ctx.expression());
     if (this.identifiers.includes(id.name)) {
       this.semanticErrors.push(
-        "Error : Variable" +
+        "Error : Variable " +
           id.name +
-          "Already Declared (" +
-          ctx.Identifier().line +
+          " Already Declared (" +
+          ctx.start.line +
           " , " +
-          ctx.Identifier().column +
+          ctx.start.column +
           ")",
       );
     } else if (expression instanceof FunctionExpression) {
@@ -91,29 +89,21 @@ export class StatementVisitor extends ReactVisitor<Statement> {
   visitAssignment: (ctx: AssignmentContext) => Assignment = (
     ctx: AssignmentContext,
   ) => {
-    console.log("sssssssssssssssssssssss");
     const idCtx = ctx.Identifier();
     const id = this.funcExprVisitor.visitID(idCtx);
     const expression = this.funcExprVisitor.visit(ctx.expression());
 
     if (!this.identifiers.includes(id.name)) {
       this.semanticErrors.push(
-        "Error : Variable" +
+        "Error : Variable " +
           id.name +
-          "Doesn't Declared (" +
-          ctx.Identifier().line +
+          " Doesn't Declared (" +
+          ctx.start.line +
           " , " +
-          ctx.Identifier().column +
+          ctx.start.column +
           ")",
       );
-    } else if (expression instanceof FunctionExpression) {
-      this.identifiers.push(id.name);
-    } else {
-      this.identifiers.push(id.name);
     }
-
-    console.log(this.identifiers);
-
     return new Assignment(id, expression);
   };
 
@@ -132,9 +122,10 @@ export class StatementVisitor extends ReactVisitor<Statement> {
     ctx: FunctionDeclarationContext,
   ) => FunctionDeclaration = (ctx: FunctionDeclarationContext) => {
     const id = this.exprVisitor.visitID(ctx.Identifier());
-    const parameters: Parameter[] = this.parameterVisitor.visitParameters(
-      ctx.parameters(),
-    );
+    let parameters = undefined;
+    if (ctx.parameters()) {
+      parameters = this.parameterVisitor.visitParameters(ctx.parameters());
+    }
     const block = this.blockVisitor.visit(ctx.block());
     return new FunctionDeclaration(id, block, parameters);
   };

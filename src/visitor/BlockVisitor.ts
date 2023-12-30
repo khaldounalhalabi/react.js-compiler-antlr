@@ -13,7 +13,6 @@ export class BlockVisitor extends ReactVisitor<Block> {
     const statementsCtx = ctx.statement_list();
     const statements: Statement[] = [];
 
-    // TODO::this is the point where the blocks complicated
     const expressionVisitor = new ExpressionVisitor();
     const parameterVisitor = new ParameterVisitor(expressionVisitor);
     const statementVisitor = new StatementVisitor(
@@ -28,7 +27,10 @@ export class BlockVisitor extends ReactVisitor<Block> {
       statements.push(statementVisitor.visit(statementsCtx[i]));
     }
 
-    // TODO::possible problem
+    statementVisitor.semanticErrors.forEach((se) => {
+      console.error(se);
+    });
+
     const returnVisitor = new ReturnVisitor();
     const returnStatement = returnVisitor.visitReturn(ctx.return_());
 

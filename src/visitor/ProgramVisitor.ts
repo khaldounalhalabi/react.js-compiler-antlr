@@ -48,8 +48,11 @@ export class ProgramVisitor extends ReactVisitor<Program> {
   }
 
   visitProgram: (ctx: ProgramContext) => Program = (ctx: ProgramContext) => {
-    let statement: Statement = this.statementVisitor.visit(ctx.children[0]);
-    let statements: Statement[] = [statement];
+    let statements: Statement[] = [];
+    ctx.statement_list().forEach((st) => {
+      statements.push(this.statementVisitor.visit(st));
+    });
+
     return new Program(statements);
   };
 }

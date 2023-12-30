@@ -2,6 +2,13 @@ import ReactParser from "./antlr/ReactParser.ts";
 import ReactLexer from "./antlr/ReactLexer.ts";
 import { CharStream, CommonTokenStream } from "antlr4";
 import { ProgramVisitor } from "./visitor/ProgramVisitor.ts";
+import {ReturnVisitor} from "./visitor/ReturnVisitor.ts";
+import {BlockVisitor} from "./visitor/BlockVisitor.ts";
+import {ExpressionVisitor} from "./visitor/ExpressionVisitor.ts";
+import {JsxElementVisitor} from "./visitor/JsxElementVisitor.ts";
+import {ParameterVisitor} from "./visitor/ParameterVisitor.ts";
+import {FunctionalExpressionVisitor} from "./visitor/FunctionalExpressionVisitor.ts";
+import {StatementVisitor} from "./visitor/StatementVisitor.ts";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = ``;
 let inputStream: string = "";
@@ -22,11 +29,8 @@ let parser = new ReactParser(tokens);
 let tree = parser.program();
 
 const programVisitor = new ProgramVisitor();
-tree.accept(programVisitor);
+programVisitor.visit(tree);
 
-// programVisitor.visitProgram(tree);
-
-console.log(programVisitor.semanticErrors);
 if (programVisitor.semanticErrors.length >= 0){
     programVisitor.semanticErrors.forEach((error) => {
         console.error(error)
