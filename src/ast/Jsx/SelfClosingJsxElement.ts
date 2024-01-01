@@ -22,4 +22,11 @@ export class SelfClosingJsxElement extends Jsx {
 
     return `<${this.tagName.toString()} ${attributes}/>`;
   }
+
+  public astNode(): string {
+    const attributesAst =
+      this.jsxAttributes?.map((attr) => attr.astNode()).join(", \n \t") ?? "";
+
+    return `SelfClosingJsxElement : [\n \t ${this.tagName.astNode()} \n \t , ${attributesAst} \n]`;
+  }
 }

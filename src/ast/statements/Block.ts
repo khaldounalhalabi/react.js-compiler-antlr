@@ -1,11 +1,12 @@
-import { Statement } from "./Statement.ts";
-import { Return } from "./statements/Return.ts";
+import { Statement } from "../Statement.ts";
+import { Return } from "./Return.ts";
 
-export class Block {
+export class Block extends Statement{
   public statements: Statement[];
   public returnStatement?: Return;
 
   constructor(statements: Statement[], returnStatement?: Return) {
+    super();
     this.statements = statements;
     this.returnStatement = returnStatement;
   }
@@ -16,6 +17,12 @@ export class Block {
       .join("\n");
     return `{\n${statementStrings}\n ${
       this.returnStatement?.toString() ?? ""
-    } \n`;
+    } \n}`;
+  }
+
+  public astNode(): string {
+    const statAst =
+      this.statements.map((st) => st.astNode()).join(", \n \t") ?? "";
+    return `Block : [\n \t ${statAst} , \n \t ${this.returnStatement?.astNode()} \n ]`;
   }
 }

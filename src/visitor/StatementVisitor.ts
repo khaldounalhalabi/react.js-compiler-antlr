@@ -11,7 +11,7 @@ import {
   VariableTypeContext,
 } from "../antlr/ReactParser.ts";
 import { VariableDeclaration } from "../ast/statements/VariableDeclaration.ts";
-import { VariableType } from "../ast/VariableType.ts";
+import { VariableType } from "../ast/Expressions/VariableType.ts";
 import { FunctionalExpressionVisitor } from "./FunctionalExpressionVisitor.ts";
 import { Identifier } from "../ast/Expressions/Identifier.ts";
 import { Expression } from "../ast/Expressions/Expression.ts";
@@ -24,11 +24,13 @@ import { BlockVisitor } from "./BlockVisitor.ts";
 import { UseEffect } from "../ast/statements/UseEffect.ts";
 import { UseRef } from "../ast/statements/UseRef.ts";
 import { UseState } from "../ast/statements/UseState.ts";
+// @ts-ignore
 import { TerminalNode } from "antlr4";
 import { FunctionExpression } from "../ast/Expressions/FunctionalExpression/FunctionExpression.ts";
 
 export class StatementVisitor extends ReactVisitor<Statement> {
-  public identifiers: string[] = [];
+  [x: string]: any;
+  public identifiers: Map<string, any>;
   public semanticErrors: string[];
 
   public exprVisitor: ExpressionVisitor;
@@ -45,6 +47,7 @@ export class StatementVisitor extends ReactVisitor<Statement> {
     funcExprVisitor: FunctionalExpressionVisitor,
     parameterVisitor: ParameterVisitor,
     semanticErrors: string[],
+    identifiers: Map<string, any>,
   ) {
     super();
     this.exprVisitor = exprVisitor;
@@ -52,15 +55,16 @@ export class StatementVisitor extends ReactVisitor<Statement> {
     this.funcExprVisitor = funcExprVisitor;
     this.parameterVisitor = parameterVisitor;
     this.semanticErrors = semanticErrors;
+    this.identifiers = identifiers;
   }
 
   visitVariableDeclaration: (
     ctx: VariableDeclarationContext,
   ) => VariableDeclaration = (ctx: VariableDeclarationContext) => {
-    let varType: VariableType = this.visit(ctx.variableType());
+    let varType: VariableType = this.visitVariableType(ctx.variableType());
     let id: Identifier = this.funcExprVisitor.visitID(ctx.Identifier());
     let expression: Expression = this.funcExprVisitor.visit(ctx.expression());
-    if (this.identifiers.includes(id.name)) {
+    if (this.identifiers.has(id.name)) {
       this.semanticErrors.push(
         "Error : Variable " +
           id.name +
@@ -71,9 +75,9 @@ export class StatementVisitor extends ReactVisitor<Statement> {
           ")",
       );
     } else if (expression instanceof FunctionExpression) {
-      this.identifiers.push(id.name);
+      this.identifiers.set(id.name, expression);
     } else {
-      this.identifiers.push(id.name);
+      this.identifiers.set(id.name, expression);
     }
 
     return new VariableDeclaration(varType, id, expression);
@@ -82,7 +86,7 @@ export class StatementVisitor extends ReactVisitor<Statement> {
   visitVariableType: (ctx: VariableTypeContext) => VariableType = (
     ctx: VariableTypeContext,
   ) => {
-    let varType: string = ctx.children[0].text;
+    let varType: string = ctx.getText();
     return new VariableType(varType);
   };
 
@@ -93,7 +97,7 @@ export class StatementVisitor extends ReactVisitor<Statement> {
     const id = this.funcExprVisitor.visitID(idCtx);
     const expression = this.funcExprVisitor.visit(ctx.expression());
 
-    if (!this.identifiers.includes(id.name)) {
+    if (!this.identifiers.has(id.name)) {
       this.semanticErrors.push(
         "Error : Variable " +
           id.name +

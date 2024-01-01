@@ -1,6 +1,6 @@
 import { Identifier } from "../Identifier.ts";
 import { FunctionalExpression } from "./FunctionalExpression.ts";
-import { Arguments } from "../../Arguments.ts";
+import { Arguments } from "../Arguments.ts";
 
 export class FunctionCall extends FunctionalExpression {
   public identifier: Identifier;
@@ -13,8 +13,10 @@ export class FunctionCall extends FunctionalExpression {
   }
 
   public toString(): string {
-    return `${this.identifier.toString()}(${
-      this.args?.toString() ?? ""
-    })`;
+    return `${this.identifier.toString()}(${this.args?.toString() ?? ""})`;
+  }
+
+  public astNode(): string {
+    return `FunctionCall : [\n \t ${this.identifier.astNode()} , \n \t ${this.args?.astNode()} \n]`;
   }
 }

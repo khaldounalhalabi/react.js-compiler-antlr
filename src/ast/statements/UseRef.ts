@@ -1,21 +1,26 @@
-import {Statement} from "../Statement.ts";
-import {Identifier} from "../Expressions/Identifier.ts";
-import {Expression} from "../Expressions/Expression.ts";
+import { Statement } from "../Statement.ts";
+import { Identifier } from "../Expressions/Identifier.ts";
+import { Expression } from "../Expressions/Expression.ts";
 
 export class UseRef extends Statement {
-    public identifier: Identifier;
+  public identifier: Identifier;
 
-    public expression?: Expression;
+  public expression?: Expression;
 
+  constructor(identifier: Identifier, expression?: Expression) {
+    super();
+    this.identifier = identifier;
 
-    constructor(identifier: Identifier, expression?: Expression) {
-        super();
-        this.identifier = identifier;
+    if (expression) this.expression = expression;
+  }
 
-        if (expression) this.expression = expression;
-    }
+  public toString() {
+    return `const ${this.identifier.toString()} = useRef(${
+      this.expression?.toString() ?? ""
+    })`;
+  }
 
-    public toString() {
-        return `const ${this.identifier.toString()} = useRef(${this.expression?.toString() ?? ''})`
-    }
+  public astNode(): string {
+    return `UseRef : [\n \t ${this.identifier.astNode()} , \n \t ${this.expression?.astNode()} \n]`;
+  }
 }

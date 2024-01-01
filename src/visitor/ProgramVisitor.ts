@@ -11,7 +11,11 @@ import { FunctionalExpressionVisitor } from "./FunctionalExpressionVisitor.ts";
 import { BlockVisitor } from "./BlockVisitor.ts";
 
 export class ProgramVisitor extends ReactVisitor<Program> {
+  [x: string]: any;
+
   public semanticErrors: string[] = [];
+
+  public identifiers: Map<string, any>;
 
   public exprVisitor;
 
@@ -38,12 +42,14 @@ export class ProgramVisitor extends ReactVisitor<Program> {
       this.blockVisitor,
       this.parameterVisitor,
     );
+    this.identifiers = new Map<string, any>();
     this.statementVisitor = new StatementVisitor(
       this.exprVisitor,
       this.blockVisitor,
       this.funcExprVisitor,
       this.parameterVisitor,
       this.semanticErrors,
+      this.identifiers,
     );
   }
 

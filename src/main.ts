@@ -1,14 +1,8 @@
 import ReactParser from "./antlr/ReactParser.ts";
 import ReactLexer from "./antlr/ReactLexer.ts";
+// @ts-ignore
 import { CharStream, CommonTokenStream } from "antlr4";
 import { ProgramVisitor } from "./visitor/ProgramVisitor.ts";
-import {ReturnVisitor} from "./visitor/ReturnVisitor.ts";
-import {BlockVisitor} from "./visitor/BlockVisitor.ts";
-import {ExpressionVisitor} from "./visitor/ExpressionVisitor.ts";
-import {JsxElementVisitor} from "./visitor/JsxElementVisitor.ts";
-import {ParameterVisitor} from "./visitor/ParameterVisitor.ts";
-import {FunctionalExpressionVisitor} from "./visitor/FunctionalExpressionVisitor.ts";
-import {StatementVisitor} from "./visitor/StatementVisitor.ts";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = ``;
 let inputStream: string = "";
@@ -22,17 +16,17 @@ await fetch("./src/test.txt")
 
 console.log(inputStream);
 
-const chars = new CharStream(inputStream); // replace this with a FileStream as required
+const chars = new CharStream(inputStream);
 let lexer = new ReactLexer(chars);
 const tokens = new CommonTokenStream(lexer);
 let parser = new ReactParser(tokens);
 let tree = parser.program();
 
 const programVisitor = new ProgramVisitor();
-programVisitor.visit(tree);
+programVisitor.visitProgram(tree).astNode();
 
-if (programVisitor.semanticErrors.length >= 0){
-    programVisitor.semanticErrors.forEach((error) => {
-        console.error(error)
-    });
+if (programVisitor.semanticErrors.length >= 0) {
+  programVisitor.semanticErrors.forEach((error) => {
+    console.error(error);
+  });
 }

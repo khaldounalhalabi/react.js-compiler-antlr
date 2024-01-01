@@ -1,8 +1,7 @@
-import {Statement} from "../Statement.ts";
+import { Statement } from "../Statement.ts";
 
 export abstract class Expression extends Statement {
+  public abstract toString(): string;
 
-    public toString(): string {
-        return `${this}`;
-    }
+  public abstract astNode(): string;
 }

@@ -35,4 +35,14 @@ export class JsxElementFull extends Jsx {
                     ${contentSpread}
                 </${this.tagName.toString()}>`;
   }
+
+  public astNode(): string {
+    const attributesAst =
+      this.jsxAttributes?.map((attr) => attr.astNode()).join(", \n \t") ?? "";
+
+    const contentAst =
+      this.content?.map((co) => co.astNode()).join(", \n \t") ?? "";
+
+    return `JsxElementFull : [\n \t ${this.tagName.astNode()}  , \n \t ${attributesAst} , \n \t , ${contentAst} \n]`;
+  }
 }

@@ -10,7 +10,7 @@ import { BlockVisitor } from "./BlockVisitor.ts";
 import { FunctionExpression } from "../ast/Expressions/FunctionalExpression/FunctionExpression.ts";
 import { FunctionCall } from "../ast/Expressions/FunctionalExpression/FunctionCall.ts";
 import { ExpressionVisitor } from "./ExpressionVisitor.ts";
-import { Arguments } from "../ast/Arguments.ts";
+import { Arguments } from "../ast/Expressions/Arguments.ts";
 import { Expression } from "../ast/Expressions/Expression.ts";
 
 export class FunctionalExpressionVisitor extends ExpressionVisitor {

@@ -34,6 +34,7 @@ import { Subtraction } from "../ast/Expressions/Subtraction.ts";
 import { TemplateString } from "../ast/Expressions/TemplateString.ts";
 
 export class ExpressionVisitor extends ReactVisitor<Expression> {
+  [x: string]: any;
   visitAddition: (ctx: AdditionContext) => Addition = (
     ctx: AdditionContext,
   ) => {
@@ -80,7 +81,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitLessThan: (ctx: LessThanContext) => LessThan = (
     ctx: LessThanContext,
   ) => {
-
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
     let right: Expression = this.visit(expressions[1]);
@@ -91,7 +91,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitMoreThanOrEqual: (ctx: MoreThanOrEqualContext) => MoreThanOrEqual = (
     ctx: MoreThanOrEqualContext,
   ) => {
-
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
     let right: Expression = this.visit(expressions[1]);
@@ -112,7 +111,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitMultiplication: (ctx: MultiplicationContext) => Multiplication = (
     ctx: MultiplicationContext,
   ) => {
-
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
     let right: Expression = this.visit(expressions[1]);
@@ -123,7 +121,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitNotEqual: (ctx: NotEqualContext) => NotEqual = (
     ctx: NotEqualContext,
   ) => {
-
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
     let right: Expression = this.visit(expressions[1]);
@@ -139,7 +136,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   };
 
   visitString: (ctx: StringContext) => AntlrString = (ctx: StringContext) => {
-
     let str = ctx.StringLiteral().getText();
     return new AntlrString(str);
   };
@@ -147,7 +143,6 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitSubtraction: (ctx: SubtractionContext) => Subtraction = (
     ctx: SubtractionContext,
   ) => {
-
     let expressions: ExpressionContext[] = ctx.expression_list();
     let left: Expression = this.visit(expressions[0]);
     let right: Expression = this.visit(expressions[1]);
@@ -158,14 +153,12 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   visitTemplateString: (ctx: TemplateStringContext) => TemplateString = (
     ctx: TemplateStringContext,
   ) => {
-
     return this.visitTemplate(ctx.template());
   };
 
   visitTemplate: (ctx: TemplateContext) => TemplateString = (
     ctx: TemplateContext,
   ) => {
-
     let expressionCtx: ExpressionContext = ctx.expression();
     let expression: Expression = this.visit(expressionCtx);
 

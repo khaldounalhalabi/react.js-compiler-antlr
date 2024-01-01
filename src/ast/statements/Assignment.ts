@@ -15,4 +15,8 @@ export class Assignment extends Statement {
   toString(): string {
     return `${this.identifier.toString()} = ${this.expression.toString()}`;
   }
+
+  public astNode(): string {
+    return `Assignment : [\n \t ${this.identifier.astNode()} , \n \t = , \n \t ${this.expression.astNode()} \n]`;
+  }
 }

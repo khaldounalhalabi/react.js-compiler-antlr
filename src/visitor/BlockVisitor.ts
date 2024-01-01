@@ -1,6 +1,6 @@
 import { StatementVisitor } from "./StatementVisitor.ts";
 import { BlockContext } from "../antlr/ReactParser.ts";
-import { Block } from "../ast/Block.ts";
+import { Block } from "../ast/statements/Block.ts";
 import { Statement } from "../ast/Statement.ts";
 import { ReturnVisitor } from "./ReturnVisitor.ts";
 import ReactVisitor from "../antlr/ReactVisitor.ts";
@@ -9,10 +9,15 @@ import { ParameterVisitor } from "./ParameterVisitor.ts";
 import { FunctionalExpressionVisitor } from "./FunctionalExpressionVisitor.ts";
 
 export class BlockVisitor extends ReactVisitor<Block> {
+  [x: string]: any;
+  public semanticErrors: string[] | undefined;
+  public identifiers: Map<string, any> | undefined;
+
   visitBlock: (ctx: BlockContext) => Block = (ctx: BlockContext) => {
+    this.semanticErrors = [];
+    this.identifiers = new Map<string, any>();
     const statementsCtx = ctx.statement_list();
     const statements: Statement[] = [];
-
     const expressionVisitor = new ExpressionVisitor();
     const parameterVisitor = new ParameterVisitor(expressionVisitor);
     const statementVisitor = new StatementVisitor(
@@ -20,14 +25,15 @@ export class BlockVisitor extends ReactVisitor<Block> {
       this,
       new FunctionalExpressionVisitor(this, parameterVisitor),
       parameterVisitor,
-      [],
+      this.semanticErrors,
+      this.identifiers,
     );
 
     for (let i = 0; i < statementsCtx.length; i++) {
       statements.push(statementVisitor.visit(statementsCtx[i]));
     }
 
-    statementVisitor.semanticErrors.forEach((se) => {
+    this.semanticErrors.forEach((se) => {
       console.error(se);
     });
 

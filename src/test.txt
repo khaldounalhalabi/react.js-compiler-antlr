@@ -1,9 +1,2 @@
 let x = 0;
 let z = 0;
-
-
-function test(x , y){
-let x = 0;
-let x = 0;
-z= 0;
-}

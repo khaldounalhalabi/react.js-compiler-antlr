@@ -17,4 +17,8 @@ export class Return {
       return `return ${this.jsxElement.toString()}`;
     } else return "return";
   }
+
+  public astNode(): string {
+    return `ReturnStatement : [\n \t ${this.jsxElement?.astNode()} , \n \t ${this.expression?.astNode()} \n]`;
+  }
 }

@@ -12,4 +12,8 @@ export class BracedExpression extends Expression {
     public toString(): string {
         return this.expression.toString();
     }
+
+    public astNode(){
+        return this.expression.astNode();
+    }
 }

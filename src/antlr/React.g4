@@ -1,5 +1,7 @@
 grammar React;
-
+options {
+  output=AST;
+}
 import Jsx;
 
 program: statement+;

@@ -1,5 +1,5 @@
 import ReactVisitor from "../antlr/ReactVisitor.ts";
-import { Parameter } from "../ast/Parameters.ts";
+import { Parameter } from "../ast/Expressions/Parameters.ts";
 import { ParametersContext } from "../antlr/ReactParser.ts";
 import { Identifier } from "../ast/Expressions/Identifier.ts";
 import { ExpressionVisitor } from "./ExpressionVisitor.ts";

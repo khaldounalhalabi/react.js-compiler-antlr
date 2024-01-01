@@ -21,9 +21,9 @@ import { JsxElementContent } from "../ast/Jsx/JsxElementContent.ts";
 import { SelfClosingJsxElement } from "../ast/Jsx/SelfClosingJsxElement.ts";
 
 export class JsxElementVisitor extends ReactVisitor<Jsx> {
+  [x: string]: any;
 
-  protected expressionVisitor : ExpressionVisitor;
-
+  protected expressionVisitor: ExpressionVisitor;
 
   constructor(expressionVisitor: ExpressionVisitor) {
     super();

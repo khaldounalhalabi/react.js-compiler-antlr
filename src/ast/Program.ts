@@ -10,4 +10,11 @@ export class Program {
   public addExpression(statement: Statement): void {
     this.statements.push(statement);
   }
+
+  public astNode() {
+    const statAst =
+      this.statements?.map((st : Statement) => st.astNode()).join(", \n \t") ?? "";
+
+    return `Program : [\n \t ${statAst} \n]`;
+  }
 }
