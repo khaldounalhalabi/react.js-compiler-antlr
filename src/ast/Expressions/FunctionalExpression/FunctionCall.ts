@@ -1,8 +1,9 @@
 import { Identifier } from "../Identifier.ts";
-import { FunctionalExpression } from "./FunctionalExpression.ts";
 import { Arguments } from "../Arguments.ts";
+import { TreeNode } from "../../../Types/TreeNode.ts";
+import {Expression} from "../../abstracts/Expression.ts";
 
-export class FunctionCall extends FunctionalExpression {
+export class FunctionCall extends Expression {
   public identifier: Identifier;
   public args?: Arguments; // Assuming arguments can be expressions
 
@@ -17,6 +18,18 @@ export class FunctionCall extends FunctionalExpression {
   }
 
   public astNode(): string {
-    return `FunctionCall : [\n \t ${this.identifier.astNode()} , \n \t ${this.args?.astNode()} \n]`;
+    return `FunctionCall -> ${this.identifier.astNode()} FunctionCall -> ${this.args?.astNode()}`;
+  }
+
+  treeObject(): TreeNode {
+    return this.args
+      ? {
+          name: "Function Call",
+          children: [this.identifier.treeObject(), this.args?.treeObject()],
+        }
+      : {
+          name: "Function Call",
+          children: [this.identifier.treeObject()],
+        };
   }
 }

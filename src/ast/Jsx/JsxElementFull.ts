@@ -1,7 +1,8 @@
 import { JsxAttribute } from "./JsxAttribute.ts";
 import { JsxElementContent } from "./JsxElementContent.ts";
 import { JsxTagName } from "./JsxTagName.ts";
-import { Jsx } from "./Jsx.ts";
+import { Jsx } from "../abstracts/Jsx.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class JsxElementFull extends Jsx {
   public tagName: JsxTagName;
@@ -38,11 +39,53 @@ export class JsxElementFull extends Jsx {
 
   public astNode(): string {
     const attributesAst =
-      this.jsxAttributes?.map((attr) => attr.astNode()).join(", \n \t") ?? "";
+      this.jsxAttributes?.map((attr) => attr.astNode()).join(" , ") ??
+      undefined;
 
     const contentAst =
-      this.content?.map((co) => co.astNode()).join(", \n \t") ?? "";
+      this.content?.map((co) => co.astNode()).join(" , ") ?? undefined;
 
-    return `JsxElementFull : [\n \t ${this.tagName.astNode()}  , \n \t ${attributesAst} , \n \t , ${contentAst} \n]`;
+    return `JsxElementFull -> ${this.tagName.astNode()}  ${
+      attributesAst ? `JsxElementFull -> ${attributesAst}` : ""
+    } ${
+      contentAst
+        ? `
+    JsxElementFull -> ${contentAst}`
+        : ""
+    }`;
+  }
+
+  treeObject(): TreeNode {
+    let contentObjects: TreeNode[] = [];
+    this.content?.forEach((co) => {
+      contentObjects.push(co.treeObject());
+    });
+
+    let attrs: TreeNode[] = [];
+    this.jsxAttributes?.forEach((att) => {
+      attrs.push(att.treeObject());
+    });
+
+    if (this.content && this.jsxAttributes) {
+      return {
+        name: "Jsx Element Full",
+        children: [this.tagName.treeObject(), ...attrs, ...contentObjects],
+      };
+    } else if (this.content && !this.jsxAttributes){
+      return {
+        name: "Jsx Element Full",
+        children: [this.tagName.treeObject(), ...contentObjects],
+      };
+    } else if (!this.content && this.jsxAttributes) {
+      return {
+        name: "Jsx Element Full",
+        children: [this.tagName.treeObject(), ...attrs],
+      };
+    } else {
+      return {
+        name: "Jsx Element Full",
+        children: [this.tagName.treeObject()],
+      };
+    }
   }
 }

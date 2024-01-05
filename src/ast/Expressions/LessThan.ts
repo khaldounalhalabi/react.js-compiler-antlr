@@ -1,4 +1,5 @@
-import {Expression} from "./Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class LessThan extends Expression {
   public left: Expression;
@@ -16,6 +17,17 @@ export class LessThan extends Expression {
   }
 
   public astNode(): string {
-      return `LessThan : [\n \t ${this.left} , \n , \t ,< ,\n \t ${this.right}]`;
+    return `LessThan -> ${this.left.astNode()} LessThan -> LessThanSign LessThan -> ${this.right.astNode()}]`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "Less Than",
+      children: [
+        this.left.treeObject(),
+        { name: "<" },
+        this.right.treeObject(),
+      ],
+    };
   }
 }

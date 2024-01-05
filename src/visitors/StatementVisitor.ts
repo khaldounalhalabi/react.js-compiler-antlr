@@ -1,8 +1,9 @@
 import ReactVisitor from "../antlr/ReactVisitor.ts";
-import { Statement } from "../ast/Statement.ts";
+import { Statement } from "../ast/abstracts/Statement.ts";
 import {
   AssignmentContext,
   ConsoleLogExpressionContext,
+  FunctionCallContext,
   FunctionDeclarationContext,
   UseEffectContext,
   UseRefContext,
@@ -14,7 +15,7 @@ import { VariableDeclaration } from "../ast/statements/VariableDeclaration.ts";
 import { VariableType } from "../ast/Expressions/VariableType.ts";
 import { FunctionalExpressionVisitor } from "./FunctionalExpressionVisitor.ts";
 import { Identifier } from "../ast/Expressions/Identifier.ts";
-import { Expression } from "../ast/Expressions/Expression.ts";
+import { Expression } from "../ast/abstracts/Expression.ts";
 import { Assignment } from "../ast/statements/Assignment.ts";
 import { ExpressionVisitor } from "./ExpressionVisitor.ts";
 import { ConsoleLogExpression } from "../ast/statements/ConsoleLogExpression.ts";
@@ -27,9 +28,11 @@ import { UseState } from "../ast/statements/UseState.ts";
 // @ts-ignore
 import { TerminalNode } from "antlr4";
 import { FunctionExpression } from "../ast/Expressions/FunctionalExpression/FunctionExpression.ts";
+import { FunctionCall } from "../ast/Expressions/FunctionalExpression/FunctionCall.ts";
 
 export class StatementVisitor extends ReactVisitor<Statement> {
   [x: string]: any;
+
   public identifiers: Map<string, any>;
   public semanticErrors: string[];
 
@@ -181,5 +184,13 @@ export class StatementVisitor extends ReactVisitor<Statement> {
     }
 
     return new UseState(ids[0], ids[1], expression);
+  };
+
+  visitFunctionCall: (ctx: FunctionCallContext) => FunctionCall = (
+    ctx: FunctionCallContext,
+  ) => {
+    let id = this.exprVisitor.visitID(ctx.Identifier());
+    const args = this.funcExprVisitor.visitArguments(ctx.arguments());
+    return new FunctionCall(id, args);
   };
 }

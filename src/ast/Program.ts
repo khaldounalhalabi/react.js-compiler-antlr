@@ -1,4 +1,5 @@
-import { Statement } from "./Statement.ts";
+import { Statement } from "./abstracts/Statement.ts";
+import { TreeNode } from "../Types/TreeNode.ts";
 
 export class Program {
   public statements: Statement[];
@@ -13,8 +14,23 @@ export class Program {
 
   public astNode() {
     const statAst =
-      this.statements?.map((st : Statement) => st.astNode()).join(", \n \t") ?? "";
+    // @ts-ignore
+      this.statements?.map((st: Statement) => st[0]?.astNode()).join(" , ") ??
+      "void";
 
-    return `Program : [\n \t ${statAst} \n]`;
+    return `Program -> ${statAst}`;
+  }
+
+  treeObject(): TreeNode {
+    let sts: TreeNode[] = [];
+    this.statements.forEach((s) => {
+      // @ts-ignore
+      sts.push(s[0].treeObject());
+    });
+
+    return {
+      name: "Program",
+      children: [...sts],
+    };
   }
 }

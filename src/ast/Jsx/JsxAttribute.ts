@@ -1,6 +1,7 @@
 import { JsxAttributeName } from "./JsxAttributeName.ts";
 import { JsxAttributeValue } from "./JsxAttributeValue.ts";
-import { Jsx } from "./Jsx.ts";
+import { Jsx } from "../abstracts/Jsx.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class JsxAttribute extends Jsx {
   public name: JsxAttributeName;
@@ -18,6 +19,17 @@ export class JsxAttribute extends Jsx {
   }
 
   public astNode(): string {
-    return `JsxAttribute : [\n \t ${this.name.astNode()} , \n \t = , \n \t ${this.value.astNode()} \n]`;
+    return `JsxAttribute -> ${this.name.astNode()} JsxAttribute -> AssignSymbol JsxAttribute -> ${this.value.astNode()}`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "Jsx Attribute",
+      children: [
+        this.name.treeObject(),
+        { name: "=" },
+        this.value.treeObject(),
+      ],
+    };
   }
 }

@@ -1,11 +1,12 @@
-import { Expression } from "../Expressions/Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
 import { String } from "../Expressions/String.ts";
-import { Jsx } from "./Jsx.ts";
+import { Jsx } from "../abstracts/Jsx.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class JsxAttributeValue extends Jsx {
   public value: String | Expression;
 
-  constructor(value: Expression) {
+  constructor(value: Expression | String) {
     super();
     this.value = value;
   }
@@ -15,6 +16,24 @@ export class JsxAttributeValue extends Jsx {
   }
 
   public astNode(): string {
-    return `JsxAttributeValue : [\n \t ${this.value.astNode()} \n]`;
+    if (this.value instanceof String)
+      return `JsxAttributeValue -> ${this.value}`;
+    else {
+      return `JsxAttributeValue -> ${this.value.astNode()}`;
+    }
+  }
+
+  treeObject(): TreeNode {
+    if (this.value instanceof Expression) {
+      return {
+        name: "Jsx Attribute Value",
+        // children: [this.value.treeObject()],
+      };
+    } else {
+      return {
+        name: "Jsx Attribute Value",
+        // children: [{ name: this.value }],
+      };
+    }
   }
 }

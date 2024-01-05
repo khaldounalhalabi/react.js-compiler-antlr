@@ -1,19 +1,16 @@
 grammar React;
-options {
-  output=AST;
-}
 import Jsx;
 
 program: statement+;
 
 statement: variableDeclaration
          | functionDeclaration
-         | expression ';'?
          | consoleLogExpression
          | assignment
          | useState
          | useEffect
          | useRef
+         | functionCall
          ;
 
 variableDeclaration: variableType Identifier '=' expression ';'?;

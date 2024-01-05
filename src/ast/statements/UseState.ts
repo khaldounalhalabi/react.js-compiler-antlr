@@ -1,6 +1,7 @@
-import { Statement } from "../Statement.ts";
+import { Statement } from "../abstracts/Statement.ts";
 import { Identifier } from "../Expressions/Identifier.ts";
-import { Expression } from "../Expressions/Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class UseState extends Statement {
   public identifier: Identifier;
@@ -28,6 +29,27 @@ export class UseState extends Statement {
   }
 
   public astNode(): string {
-    return `UseState : [\n \t ${this.identifier.astNode()} , \n \t SetIdentifier : [\n \t ${this.setIdentifier.astNode()} \n] , \n \t ${this.expression?.astNode()} \n]`;
+    return `UseState -> ${this.identifier.astNode()} UseState -> ${this.setIdentifier.astNode()} ${
+      this.expression ? `UseState -> ${this.expression?.astNode()}` : ""
+    }`;
+  }
+
+  treeObject(): TreeNode {
+    return this.expression
+      ? {
+          name: "UseState",
+          children: [
+            this.identifier.treeObject(),
+            this.setIdentifier.treeObject(),
+            this.expression?.treeObject(),
+          ],
+        }
+      : {
+          name: "UseState",
+          children: [
+            this.identifier.treeObject(),
+            this.setIdentifier.treeObject(),
+          ],
+        };
   }
 }

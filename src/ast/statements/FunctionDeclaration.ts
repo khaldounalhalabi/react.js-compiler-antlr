@@ -1,7 +1,8 @@
-import { Statement } from "../Statement.ts";
+import { Statement } from "../abstracts/Statement.ts";
 import { Identifier } from "../Expressions/Identifier.ts";
 import { Block } from "./Block.ts";
 import { Parameter } from "../Expressions/Parameters.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class FunctionDeclaration extends Statement {
   identifier: Identifier;
@@ -23,7 +24,30 @@ export class FunctionDeclaration extends Statement {
 
   public astNode(): string {
     const parametersAst =
-      this.parameters?.map((param) => param.astNode()).join(", \n \t") ?? "";
-    return `FunctionDeclaration : [\n \t ${this.identifier.astNode()} , \n \t ${parametersAst} , \n \t ${this.block.astNode()} \n]`;
+      this.parameters?.map((param) => param.astNode()).join(" , ") ?? undefined;
+    return `FunctionDeclaration -> ${this.identifier.astNode()} ${
+      parametersAst ? `FunctionDeclaration -> ${parametersAst}` : ""
+    } FunctionDeclaration -> ${this.block.astNode()}`;
+  }
+
+  treeObject(): TreeNode {
+    let params: TreeNode[] = [];
+    this.parameters?.forEach((p) => {
+      params.push(p.treeObject());
+    });
+
+    return this.parameters
+      ? {
+          name: "Function Declaration",
+          children: [
+            this.identifier.treeObject(),
+            ...params,
+            this.block.treeObject(),
+          ],
+        }
+      : {
+          name: "Function Declaration",
+          children: [this.identifier.treeObject(), this.block.treeObject()],
+        };
   }
 }

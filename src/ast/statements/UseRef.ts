@@ -1,6 +1,7 @@
-import { Statement } from "../Statement.ts";
+import { Statement } from "../abstracts/Statement.ts";
 import { Identifier } from "../Expressions/Identifier.ts";
-import { Expression } from "../Expressions/Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class UseRef extends Statement {
   public identifier: Identifier;
@@ -21,6 +22,23 @@ export class UseRef extends Statement {
   }
 
   public astNode(): string {
-    return `UseRef : [\n \t ${this.identifier.astNode()} , \n \t ${this.expression?.astNode()} \n]`;
+    return `UseRef -> ${this.identifier.astNode()} ${
+      this.expression ? `UseRef -> ${this.expression?.astNode()}` : ""
+    }`;
+  }
+
+  treeObject(): TreeNode {
+    return this.expression
+      ? {
+          name: "UseRef",
+          children: [
+            this.identifier.treeObject(),
+            this.expression?.treeObject(),
+          ],
+        }
+      : {
+          name: "UseRef",
+          children: [this.identifier.treeObject()],
+        };
   }
 }

@@ -1,7 +1,8 @@
-import { Expression } from "../Expressions/Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
 import { Identifier } from "../Expressions/Identifier.ts";
 import { VariableType } from "../Expressions/VariableType.ts";
-import { Statement } from "../Statement.ts";
+import { Statement } from "../abstracts/Statement.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class VariableDeclaration extends Statement {
   variableType: VariableType;
@@ -26,7 +27,30 @@ export class VariableDeclaration extends Statement {
     return `${this.variableType.toString()} ${this.identifier.toString()}${expressionStr}`;
   }
 
-  public astNode() {
-    return `VariableDeclaration : [\n \t ${this.variableType.astNode()} , \n \t ${this.identifier.astNode()} , \n \t ${this.expression?.astNode()} \n]`;
+  public astNode(): string {
+    return `VariableDeclaration -> ${this.variableType.astNode()} VariableDeclaration -> ${this.identifier.astNode()} ${
+      this.expression
+        ? `VariableDeclaration -> ${this.expression?.astNode()}`
+        : ""
+    }`;
+  }
+
+  treeObject(): TreeNode {
+    return this.expression
+      ? {
+          name: "Variable Declaration",
+          children: [
+            this.variableType.treeObject(),
+            this.identifier.treeObject(),
+            this.expression?.treeObject(),
+          ],
+        }
+      : {
+          name: "Variable Declaration",
+          children: [
+            this.variableType.treeObject(),
+            this.identifier.treeObject(),
+          ],
+        };
   }
 }

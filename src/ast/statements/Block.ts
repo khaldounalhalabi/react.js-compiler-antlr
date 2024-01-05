@@ -1,7 +1,8 @@
-import { Statement } from "../Statement.ts";
+import { Statement } from "../abstracts/Statement.ts";
 import { Return } from "./Return.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
-export class Block extends Statement{
+export class Block extends Statement {
   public statements: Statement[];
   public returnStatement?: Return;
 
@@ -22,7 +23,27 @@ export class Block extends Statement{
 
   public astNode(): string {
     const statAst =
-      this.statements.map((st) => st.astNode()).join(", \n \t") ?? "";
-    return `Block : [\n \t ${statAst} , \n \t ${this.returnStatement?.astNode()} \n ]`;
+    // @ts-ignore
+      this.statements.map((st) => st[0].astNode()).join(" , ") ?? "none";
+    return `Block -> ${statAst} ${
+      this.returnStatement ? `Block -> ${this.returnStatement?.astNode()}` : ""
+    }`;
+  }
+
+  treeObject(): TreeNode {
+    let sts: TreeNode[] = [];
+    this.statements.forEach((st) => {
+      // @ts-ignore
+      sts.push(st[0].treeObject());
+    });
+    return this.returnStatement
+      ? {
+          name: "Block",
+          children: [...sts, this.returnStatement?.treeObject()],
+        }
+      : {
+          name: "Block",
+          children: [...sts],
+        };
   }
 }

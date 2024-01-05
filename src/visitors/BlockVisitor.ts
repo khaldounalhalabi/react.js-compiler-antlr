@@ -1,7 +1,7 @@
 import { StatementVisitor } from "./StatementVisitor.ts";
 import { BlockContext } from "../antlr/ReactParser.ts";
 import { Block } from "../ast/statements/Block.ts";
-import { Statement } from "../ast/Statement.ts";
+import { Statement } from "../ast/abstracts/Statement.ts";
 import { ReturnVisitor } from "./ReturnVisitor.ts";
 import ReactVisitor from "../antlr/ReactVisitor.ts";
 import { ExpressionVisitor } from "./ExpressionVisitor.ts";

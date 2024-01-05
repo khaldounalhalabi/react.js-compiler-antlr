@@ -1,4 +1,5 @@
-import {Expression} from "./Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class MoreThanOrEqual extends Expression {
   public left: Expression;
@@ -16,6 +17,17 @@ export class MoreThanOrEqual extends Expression {
   }
 
   public astNode(): string {
-      return `MoreThanOrEqual : [\n \t ${this.left} , \n , \t ,>= ,\n \t ${this.right}]`;
+    return `MoreThanOrEqual -> ${this.left.astNode()} MoreThanOrEqual -> MoreThanOrEqualSign MoreThanOrEqual -> ${this.right.astNode()}`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "More Than Or Equal",
+      children: [
+        this.left.treeObject(),
+        { name: " >=" },
+        this.right.treeObject(),
+      ],
+    };
   }
 }

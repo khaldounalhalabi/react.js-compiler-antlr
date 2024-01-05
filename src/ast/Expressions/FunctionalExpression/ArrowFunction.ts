@@ -1,8 +1,9 @@
 import { Parameter } from "../Parameters.ts";
 import { Block } from "../../statements/Block.ts";
-import { FunctionalExpression } from "./FunctionalExpression.ts";
+import { TreeNode } from "../../../Types/TreeNode.ts";
+import {Expression} from "../../abstracts/Expression.ts";
 
-export class ArrowFunction extends FunctionalExpression {
+export class ArrowFunction extends Expression {
   public parameters: Parameter[];
   public block: Block;
 
@@ -23,8 +24,19 @@ export class ArrowFunction extends FunctionalExpression {
 
   public astNode(): string {
     const parametersAst =
-      this.parameters?.map((param) => param.astNode()).join(", \n \t") ?? "";
+      this.parameters?.map((param) => param.astNode()).join(" , ") ?? undefined;
 
-    return `ArrowFunction : [\n \t ${parametersAst} , \n \t ${this.block.astNode()}]`;
+    return `${parametersAst ? `ArrowFunction -> ${parametersAst}` : ''} ArrowFunction -> ${this.block.astNode()}`;
+  }
+
+  public treeObject(): TreeNode {
+    let parameters: TreeNode[] = [];
+    this.parameters.forEach((p) => {
+      parameters.push(p.treeObject());
+    });
+    return {
+      name: "Arrow Function",
+      children: [...parameters, this.block.treeObject()],
+    };
   }
 }

@@ -1,6 +1,7 @@
 import { JsxElement } from "./JsxElement.ts";
-import { Expression } from "../Expressions/Expression.ts";
-import { Jsx } from "./Jsx.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { Jsx } from "../abstracts/Jsx.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class JsxElementContent extends Jsx {
   public content?: JsxElement | Expression;
@@ -15,6 +16,21 @@ export class JsxElementContent extends Jsx {
   }
 
   public astNode(): string {
-    return `JsxElementContent : [\n \t ${this.content?.astNode()} \n]`;
+    return this.content
+      ? `JsxElementContent -> ${this.content?.astNode()}`
+      : "";
+  }
+
+  treeObject(): TreeNode {
+    if (this.content) {
+      return {
+        name: "Jsx Element Content",
+        children: [this.content.treeObject()],
+      };
+    } else {
+      return {
+        name: "Jsx Element Content",
+      };
+    }
   }
 }

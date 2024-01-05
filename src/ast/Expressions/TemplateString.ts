@@ -1,4 +1,5 @@
-import { Expression } from "./Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class TemplateString extends Expression {
   public expression: Expression;
@@ -13,6 +14,13 @@ export class TemplateString extends Expression {
   }
 
   public astNode(): string {
-    return `TemplateString : [\n \t ${this.expression.astNode()} \n]`;
+    return `TemplateString -> ${this.expression.astNode()}`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "Template String",
+      children: [this.expression.treeObject()],
+    };
   }
 }

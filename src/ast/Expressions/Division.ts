@@ -1,4 +1,5 @@
-import {Expression} from "./Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class Division extends Expression {
   public left: Expression;
@@ -16,6 +17,17 @@ export class Division extends Expression {
   }
 
   public astNode(): string {
-      return `Division : [\n \t ${this.left} , \n , \t ,/ ,\n \t ${this.right}]`;
+    return `Division -> ${this.left.astNode()} Division -> DivisionSign Division -> ${this.right.astNode()}`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "Division",
+      children: [
+        this.left.treeObject(),
+        { name: "/" },
+        this.right.treeObject(),
+      ],
+    };
   }
 }

@@ -1,4 +1,5 @@
-import { Expression } from "./Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class Number extends Expression {
   public num: number;
@@ -13,6 +14,13 @@ export class Number extends Expression {
   }
 
   public astNode(): string {
-    return `Number : [\n \t ${this.num} \n]`;
+    return `Number -> ${this.num}`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "Number",
+      children: [{ name: `${this.num}` }],
+    };
   }
 }

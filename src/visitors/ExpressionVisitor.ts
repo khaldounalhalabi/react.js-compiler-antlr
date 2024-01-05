@@ -16,7 +16,7 @@ import {
   TemplateContext,
   TemplateStringContext,
 } from "../antlr/ReactParser.ts";
-import { Expression } from "../ast/Expressions/Expression.ts";
+import { Expression } from "../ast/abstracts/Expression.ts";
 import { String as AntlrString } from "../ast/Expressions/String.ts";
 import ReactVisitor from "../antlr/ReactVisitor.ts";
 import { Addition } from "../ast/Expressions/Addition.ts";

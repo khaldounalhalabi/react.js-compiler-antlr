@@ -1,4 +1,5 @@
-import { Expression } from "./Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class Arguments extends Expression {
   expressions: Expression[];
@@ -15,7 +16,18 @@ export class Arguments extends Expression {
 
   public astNode(): string {
     const exprAst =
-      this.expressions?.map((exp) => exp.astNode()).join(", \n \t") ?? "";
-    return `Arguments : [\n \t ${exprAst} , \n]`;
+      this.expressions?.map((exp) => exp.astNode()).join(" , ") ?? undefined;
+    return exprAst ? `Arguments -> ${exprAst}` : "";
+  }
+
+  treeObject(): TreeNode {
+    let expressions: TreeNode[] = [];
+    this.expressions.forEach((e) => {
+      expressions.push(e.treeObject());
+    });
+    return {
+      name: "Arguments",
+      children: [...expressions],
+    };
   }
 }

@@ -1,4 +1,5 @@
-import { Jsx } from "./Jsx.ts";
+import { Jsx } from "../abstracts/Jsx.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class JsxTagName extends Jsx {
   public name: string;
@@ -13,6 +14,10 @@ export class JsxTagName extends Jsx {
   }
 
   public astNode(): string {
-    return `JsxTagName : [\n \t ${this.name} \n]`;
+    return `JsxTagName -> ${this.name}`;
+  }
+
+  treeObject(): TreeNode {
+    return { name: "Jsx Tag Name", children: [{ name: this.name }] };
   }
 }

@@ -1,6 +1,7 @@
 import { JsxTagName } from "./JsxTagName.ts";
 import { JsxAttribute } from "./JsxAttribute.ts";
-import { Jsx } from "./Jsx.ts";
+import { Jsx } from "../abstracts/Jsx.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class SelfClosingJsxElement extends Jsx {
   public tagName: JsxTagName;
@@ -16,7 +17,7 @@ export class SelfClosingJsxElement extends Jsx {
     }
   }
 
-  public toString() {
+  public toString(): string {
     const attributes =
       this.jsxAttributes?.map((attr) => attr.toString()).join(" ") ?? "";
 
@@ -25,8 +26,27 @@ export class SelfClosingJsxElement extends Jsx {
 
   public astNode(): string {
     const attributesAst =
-      this.jsxAttributes?.map((attr) => attr.astNode()).join(", \n \t") ?? "";
+      this.jsxAttributes?.map((attr) => attr.astNode()).join(" , ") ??
+      undefined;
 
-    return `SelfClosingJsxElement : [\n \t ${this.tagName.astNode()} \n \t , ${attributesAst} \n]`;
+    return `SelfClosingJsxElement -> ${this.tagName.astNode()} ${
+      attributesAst ? `SelfClosingJsxElement -> ${attributesAst}` : ""
+    }`;
+  }
+
+  treeObject(): TreeNode {
+    let attrs: TreeNode[] = [];
+    this.jsxAttributes?.forEach((att) => {
+      attrs.push(att.treeObject());
+    });
+
+    return this.jsxAttributes
+      ? {
+          name: "Self Closing Jsx Element",
+          children: [...attrs],
+        }
+      : {
+          name: "Self Closing Jsx Element",
+        };
   }
 }

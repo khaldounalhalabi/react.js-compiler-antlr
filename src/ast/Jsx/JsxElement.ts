@@ -1,6 +1,7 @@
 import { JsxElementFull } from "./JsxElementFull.ts";
 import { SelfClosingJsxElement } from "./SelfClosingJsxElement.ts";
-import { Jsx } from "./Jsx.ts";
+import { Jsx } from "../abstracts/Jsx.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class JsxElement extends Jsx {
   public element: JsxElementFull | SelfClosingJsxElement;
@@ -15,6 +16,13 @@ export class JsxElement extends Jsx {
   }
 
   public astNode(): string {
-    return `JsxElement : [\n \t ${this.element.astNode()} \n]`;
+    return `JsxElement -> ${this.element.astNode()}`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "Jsx Element",
+      children: [this.element.treeObject()],
+    };
   }
 }

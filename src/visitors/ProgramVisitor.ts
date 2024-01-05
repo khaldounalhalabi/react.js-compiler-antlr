@@ -1,7 +1,11 @@
 import ReactVisitor from "../antlr/ReactVisitor.ts";
 import { Program } from "../ast/Program.ts";
-import { ProgramContext } from "../antlr/ReactParser.ts";
-import { Statement } from "../ast/Statement.ts";
+import {
+  ExpressionContext,
+  FunctionalExpressionContext,
+  ProgramContext,
+} from "../antlr/ReactParser.ts";
+import { Statement } from "../ast/abstracts/Statement.ts";
 import { StatementVisitor } from "./StatementVisitor.ts";
 import { ExpressionVisitor } from "./ExpressionVisitor.ts";
 import { ReturnVisitor } from "./ReturnVisitor.ts";
@@ -58,7 +62,6 @@ export class ProgramVisitor extends ReactVisitor<Program> {
     ctx.statement_list().forEach((st) => {
       statements.push(this.statementVisitor.visit(st));
     });
-
     return new Program(statements);
   };
 }

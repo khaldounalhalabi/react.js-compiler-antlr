@@ -1,6 +1,7 @@
-import {Expression} from "./Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
-export class VariableType extends Expression{
+export class VariableType extends Expression {
   public varType: string;
 
   constructor(varType: string) {
@@ -12,7 +13,14 @@ export class VariableType extends Expression{
     return this.varType;
   }
 
-  public astNode() {
-    return `VariableType : [\n \t ${this.varType} \n]`;
+  public astNode(): string {
+    return `VariableType -> ${this.varType}`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "Variable Type",
+      children: [{ name: this.varType }],
+    };
   }
 }

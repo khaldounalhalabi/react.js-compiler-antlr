@@ -1,4 +1,5 @@
-import {Expression} from "./Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class Equal extends Expression {
   public left: Expression;
@@ -16,6 +17,17 @@ export class Equal extends Expression {
   }
 
   public astNode(): string {
-      return `Equal : [\n \t ${this.left} , \n , \t ,== ,\n \t ${this.right}]`;
+    return `Equal -> ${this.left.astNode()} Equal -> IsEqualSign Equal -> ${this.right.astNode()}`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "Equal",
+      children: [
+        this.left.treeObject(),
+        { name: "==" },
+        this.right.treeObject(),
+      ],
+    };
   }
 }

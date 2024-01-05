@@ -1,6 +1,7 @@
 import { Identifier } from "../Expressions/Identifier.ts";
-import { Expression } from "../Expressions/Expression.ts";
-import { Statement } from "../Statement.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { Statement } from "../abstracts/Statement.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class Assignment extends Statement {
   identifier: Identifier;
@@ -17,6 +18,13 @@ export class Assignment extends Statement {
   }
 
   public astNode(): string {
-    return `Assignment : [\n \t ${this.identifier.astNode()} , \n \t = , \n \t ${this.expression.astNode()} \n]`;
+    return `Assignment -> ${this.identifier.astNode()} Assignment -> AssignSymbol Assignment -> ${this.expression.astNode()}`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "Assignment",
+      children: [this.identifier.treeObject(), this.expression.treeObject()],
+    };
   }
 }

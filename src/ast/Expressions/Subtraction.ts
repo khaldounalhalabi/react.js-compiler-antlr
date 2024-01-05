@@ -1,4 +1,5 @@
-import {Expression} from "./Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class Subtraction extends Expression {
   public left: Expression;
@@ -16,6 +17,17 @@ export class Subtraction extends Expression {
   }
 
   public astNode(): string {
-      return `Subtraction : [\n \t ${this.left} , \n , \t ,- ,\n \t ${this.right}]`;
+    return `Subtraction -> ${this.left.astNode()} Subtraction -> SubSign Subtraction -> ${this.right.astNode()}]`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "Subtraction",
+      children: [
+        this.left.treeObject(),
+        { name: "-" },
+        this.right.treeObject(),
+      ],
+    };
   }
 }

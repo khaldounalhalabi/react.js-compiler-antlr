@@ -47,8 +47,8 @@ IntegerLiteral=46
 StringLiteral=47
 Identifier=48
 WS=49
-';'=1
-'='=2
+'='=1
+';'=2
 'let'=3
 'var'=4
 'const'=5

@@ -1,7 +1,8 @@
-import { Statement } from "../Statement.ts";
-import { FunctionalExpression } from "../Expressions/FunctionalExpression/FunctionalExpression.ts";
+import { Statement } from "../abstracts/Statement.ts";
+import { FunctionalExpression } from "../FunctionalExpression.ts";
 import { ArrowFunction } from "../Expressions/FunctionalExpression/ArrowFunction.ts";
 import { Parameter } from "../Expressions/Parameters.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class UseEffect extends Statement {
   public functional: FunctionalExpression | ArrowFunction;
@@ -28,7 +29,26 @@ export class UseEffect extends Statement {
 
   public astNode(): string {
     const parametersAst =
-      this.parameters?.map((param) => param.astNode()).join(", \n \t") ?? "";
-    return `UseEffect : [\n \t ${this.functional.astNode()} , \n \t Dependencies : [\n \t ${parametersAst} \n] \n]`;
+      this.parameters?.map((param) => param.astNode()).join(" , ") ?? undefined;
+    return `UseEffect -> ${this.functional.astNode()} ${
+      parametersAst ? `UseEffect -> ${parametersAst}` : ""
+    }`;
+  }
+
+  treeObject(): TreeNode {
+    let params: TreeNode[] = [];
+    this.parameters?.forEach((p) => {
+      params.push(p.treeObject());
+    });
+
+    return this.parameters
+      ? {
+          name: "Use Effect",
+          children: [this.functional.treeObject(), ...params],
+        }
+      : {
+          name: "Use Effect",
+          children: [this.functional.treeObject()],
+        };
   }
 }

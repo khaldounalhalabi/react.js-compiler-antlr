@@ -1,7 +1,8 @@
 import { Identifier } from "./Identifier.ts";
-import {Expression} from "./Expression.ts";
+import { Expression } from "../abstracts/Expression.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
-export class Parameter extends Expression{
+export class Parameter extends Expression {
   identifier: Identifier;
 
   constructor(identifier: Identifier) {
@@ -14,6 +15,13 @@ export class Parameter extends Expression{
   }
 
   public astNode(): string {
-    return `Parameter : [\n \t ${this.identifier.astNode()} \n]`;
+    return `Parameter -> ${this.identifier.astNode()}`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "Parameter",
+      children: [this.identifier.treeObject()],
+    };
   }
 }

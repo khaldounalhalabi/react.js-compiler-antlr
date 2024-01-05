@@ -1,4 +1,5 @@
-import { Jsx } from "./Jsx.ts";
+import { Jsx } from "../abstracts/Jsx.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class JsxAttributeName extends Jsx {
   public name: string;
@@ -13,6 +14,13 @@ export class JsxAttributeName extends Jsx {
   }
 
   public astNode(): string {
-    return `JsxAttributeName : [\n \t ${this.name} \n]`;
+    return `JsxAttributeName -> ${this.name}`;
+  }
+
+  treeObject(): TreeNode {
+    return {
+      name: "Jsx Attribute Name",
+      children: [{ name: this.name }],
+    };
   }
 }
