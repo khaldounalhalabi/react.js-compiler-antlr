@@ -11,6 +11,7 @@ statement: variableDeclaration
          | useEffect
          | useRef
          | functionCall
+         | conditionalStatement
          ;
 
 variableDeclaration: variableType Identifier '=' expression ';'?;
@@ -25,7 +26,7 @@ functionExpression: 'function' '(' parameters? ')' block;
 
 parameters: Identifier (',' Identifier)*;
 
-return:'return' (expression|'(' jsxElement ')')? ';';
+return:'return' (expression|'(' jsxElement ')')? ';'?;
 
 block: '{' statement* return?'}';
 
@@ -42,6 +43,8 @@ expression: expression '*' expression                           #Multiplication
           | '(' expression ')'                                  #BracedExpression
           | funcExpr                                            #FunctionalExpression
           | template                                            #TemplateString
+          | expression '?' expression ':' expression            #TernaryCondition
+          | expression '??' expression                          #NullishCoalescing
           | Identifier                                          #ID
           | IntegerLiteral                                      #Number
           | StringLiteral                                       #String
@@ -62,6 +65,14 @@ consoleLogExpression: 'console.log' '(' arguments? ')' ';'?;
 
 template:'`' '$' '{' expression '}' '`';
 
+ifStatement : 'if' '(' expression ')' block;
+
+elseStatement : 'else' block;
+
+elseIfStatement : 'else' 'if' '(' expression ')' block;
+
+conditionalStatement : ifStatement elseIfStatement* elseStatement?;
+
 IntegerLiteral: [0-9]+;
 
 StringLiteral: '"' (EscapeSequence | ~["\\])* '"' | '\'' ('\\"' | ~'\'')* '\'';
@@ -70,3 +81,5 @@ fragment EscapeSequence: '\\' [nrt"'\\];
 
 Identifier: [a-zA-Z_] [a-zA-Z_0-9]*;
 WS: [ \t\r\n]+ -> skip;
+
+

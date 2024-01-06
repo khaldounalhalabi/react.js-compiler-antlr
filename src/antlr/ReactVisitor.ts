@@ -20,11 +20,13 @@ import { NotEqualContext } from "./ReactParser";
 import { LessThanOrEqualContext } from "./ReactParser";
 import { MoreThanOrEqualContext } from "./ReactParser";
 import { StringContext } from "./ReactParser";
+import { NullishCoalescingContext } from "./ReactParser";
 import { LessThanContext } from "./ReactParser";
 import { SubtractionContext } from "./ReactParser";
 import { NumberContext } from "./ReactParser";
 import { EqualContext } from "./ReactParser";
 import { BracedExpressionContext } from "./ReactParser";
+import { TernaryConditionContext } from "./ReactParser";
 import { DivisionContext } from "./ReactParser";
 import { IDContext } from "./ReactParser";
 import { MoreThanContext } from "./ReactParser";
@@ -35,6 +37,10 @@ import { ArrowFunctionContext } from "./ReactParser";
 import { ArgumentsContext } from "./ReactParser";
 import { ConsoleLogExpressionContext } from "./ReactParser";
 import { TemplateContext } from "./ReactParser";
+import { IfStatementContext } from "./ReactParser";
+import { ElseStatementContext } from "./ReactParser";
+import { ElseIfStatementContext } from "./ReactParser";
+import { ConditionalStatementContext } from "./ReactParser";
 import { UseStateContext } from "./ReactParser";
 import { UseEffectContext } from "./ReactParser";
 import { UseRefContext } from "./ReactParser";
@@ -46,6 +52,9 @@ import { JsxAttributeContext } from "./ReactParser";
 import { JsxAttributeNameContext } from "./ReactParser";
 import { JsxAttributeValueContext } from "./ReactParser";
 import { JsxElementContentContext } from "./ReactParser";
+import { JsxComponentFullContext } from "./ReactParser";
+import { SelfClosingComponentContext } from "./ReactParser";
+import { ComponentPropsContext } from "./ReactParser";
 
 
 /**
@@ -166,6 +175,13 @@ export default class ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 */
 	visitString?: (ctx: StringContext) => Result;
 	/**
+	 * Visit a parse tree produced by the `NullishCoalescing`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitNullishCoalescing?: (ctx: NullishCoalescingContext) => Result;
+	/**
 	 * Visit a parse tree produced by the `LessThan`
 	 * labeled alternative in `ReactParser.expression`.
 	 * @param ctx the parse tree
@@ -200,6 +216,13 @@ export default class ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitBracedExpression?: (ctx: BracedExpressionContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `TernaryCondition`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitTernaryCondition?: (ctx: TernaryConditionContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `Division`
 	 * labeled alternative in `ReactParser.expression`.
@@ -264,6 +287,30 @@ export default class ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitTemplate?: (ctx: TemplateContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.ifStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitIfStatement?: (ctx: IfStatementContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.elseStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitElseStatement?: (ctx: ElseStatementContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.elseIfStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitElseIfStatement?: (ctx: ElseIfStatementContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.conditionalStatement`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitConditionalStatement?: (ctx: ConditionalStatementContext) => Result;
 	/**
 	 * Visit a parse tree produced by `ReactParser.useState`.
 	 * @param ctx the parse tree
@@ -330,5 +377,23 @@ export default class ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 * @return the visitor result
 	 */
 	visitJsxElementContent?: (ctx: JsxElementContentContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.jsxComponentFull`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitJsxComponentFull?: (ctx: JsxComponentFullContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.selfClosingComponent`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitSelfClosingComponent?: (ctx: SelfClosingComponentContext) => Result;
+	/**
+	 * Visit a parse tree produced by `ReactParser.componentProps`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitComponentProps?: (ctx: ComponentPropsContext) => Result;
 }
 

@@ -20,11 +20,13 @@ import { NotEqualContext } from "./ReactParser";
 import { LessThanOrEqualContext } from "./ReactParser";
 import { MoreThanOrEqualContext } from "./ReactParser";
 import { StringContext } from "./ReactParser";
+import { NullishCoalescingContext } from "./ReactParser";
 import { LessThanContext } from "./ReactParser";
 import { SubtractionContext } from "./ReactParser";
 import { NumberContext } from "./ReactParser";
 import { EqualContext } from "./ReactParser";
 import { BracedExpressionContext } from "./ReactParser";
+import { TernaryConditionContext } from "./ReactParser";
 import { DivisionContext } from "./ReactParser";
 import { IDContext } from "./ReactParser";
 import { MoreThanContext } from "./ReactParser";
@@ -35,6 +37,10 @@ import { ArrowFunctionContext } from "./ReactParser";
 import { ArgumentsContext } from "./ReactParser";
 import { ConsoleLogExpressionContext } from "./ReactParser";
 import { TemplateContext } from "./ReactParser";
+import { IfStatementContext } from "./ReactParser";
+import { ElseStatementContext } from "./ReactParser";
+import { ElseIfStatementContext } from "./ReactParser";
+import { ConditionalStatementContext } from "./ReactParser";
 import { UseStateContext } from "./ReactParser";
 import { UseEffectContext } from "./ReactParser";
 import { UseRefContext } from "./ReactParser";
@@ -46,6 +52,9 @@ import { JsxAttributeContext } from "./ReactParser";
 import { JsxAttributeNameContext } from "./ReactParser";
 import { JsxAttributeValueContext } from "./ReactParser";
 import { JsxElementContentContext } from "./ReactParser";
+import { JsxComponentFullContext } from "./ReactParser";
+import { SelfClosingComponentContext } from "./ReactParser";
+import { ComponentPropsContext } from "./ReactParser";
 
 
 /**
@@ -238,6 +247,18 @@ export default class ReactListener extends ParseTreeListener {
 	 */
 	exitString?: (ctx: StringContext) => void;
 	/**
+	 * Enter a parse tree produced by the `NullishCoalescing`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	enterNullishCoalescing?: (ctx: NullishCoalescingContext) => void;
+	/**
+	 * Exit a parse tree produced by the `NullishCoalescing`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	exitNullishCoalescing?: (ctx: NullishCoalescingContext) => void;
+	/**
 	 * Enter a parse tree produced by the `LessThan`
 	 * labeled alternative in `ReactParser.expression`.
 	 * @param ctx the parse tree
@@ -297,6 +318,18 @@ export default class ReactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitBracedExpression?: (ctx: BracedExpressionContext) => void;
+	/**
+	 * Enter a parse tree produced by the `TernaryCondition`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	enterTernaryCondition?: (ctx: TernaryConditionContext) => void;
+	/**
+	 * Exit a parse tree produced by the `TernaryCondition`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	exitTernaryCondition?: (ctx: TernaryConditionContext) => void;
 	/**
 	 * Enter a parse tree produced by the `Division`
 	 * labeled alternative in `ReactParser.expression`.
@@ -405,6 +438,46 @@ export default class ReactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitTemplate?: (ctx: TemplateContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.ifStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterIfStatement?: (ctx: IfStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.ifStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitIfStatement?: (ctx: IfStatementContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.elseStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterElseStatement?: (ctx: ElseStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.elseStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitElseStatement?: (ctx: ElseStatementContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.elseIfStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterElseIfStatement?: (ctx: ElseIfStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.elseIfStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitElseIfStatement?: (ctx: ElseIfStatementContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.conditionalStatement`.
+	 * @param ctx the parse tree
+	 */
+	enterConditionalStatement?: (ctx: ConditionalStatementContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.conditionalStatement`.
+	 * @param ctx the parse tree
+	 */
+	exitConditionalStatement?: (ctx: ConditionalStatementContext) => void;
 	/**
 	 * Enter a parse tree produced by `ReactParser.useState`.
 	 * @param ctx the parse tree
@@ -515,5 +588,35 @@ export default class ReactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitJsxElementContent?: (ctx: JsxElementContentContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.jsxComponentFull`.
+	 * @param ctx the parse tree
+	 */
+	enterJsxComponentFull?: (ctx: JsxComponentFullContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.jsxComponentFull`.
+	 * @param ctx the parse tree
+	 */
+	exitJsxComponentFull?: (ctx: JsxComponentFullContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.selfClosingComponent`.
+	 * @param ctx the parse tree
+	 */
+	enterSelfClosingComponent?: (ctx: SelfClosingComponentContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.selfClosingComponent`.
+	 * @param ctx the parse tree
+	 */
+	exitSelfClosingComponent?: (ctx: SelfClosingComponentContext) => void;
+	/**
+	 * Enter a parse tree produced by `ReactParser.componentProps`.
+	 * @param ctx the parse tree
+	 */
+	enterComponentProps?: (ctx: ComponentPropsContext) => void;
+	/**
+	 * Exit a parse tree produced by `ReactParser.componentProps`.
+	 * @param ctx the parse tree
+	 */
+	exitComponentProps?: (ctx: ComponentPropsContext) => void;
 }
 

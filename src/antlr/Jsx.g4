@@ -14,7 +14,7 @@ useEffect: 'useEffect' '(' (arrowFunction|functionExpression) (',')? ('['paramet
 
 useRef: 'const' Identifier '=' 'useRef' '(' expression? ')' ';'?;
 
-jsxElement:jsxElementFull|selfClosingJsxElement;
+jsxElement:jsxElementFull|selfClosingJsxElement | jsxComponentFull | selfClosingComponent;
 
 jsxElementFull: '<' jsxTagName jsxAttribute* '>' jsxElementContent* '</' jsxTagName '>';
 
@@ -30,3 +30,10 @@ jsxAttributeValue: StringLiteral | '{'expression?'}';
 
 jsxElementContent:jsxElement | '{' expression '}';
 
+jsxComponentFull : '<' Identifier jsxAttribute* componentProps* '>' jsxElementContent* '</' Identifier '>';
+
+selfClosingComponent : '<' Identifier jsxAttribute* componentProps* '/>';
+
+componentProps : Identifier '=' StringLiteral
+               | Identifier '=' '{'expression?'}'
+               ;

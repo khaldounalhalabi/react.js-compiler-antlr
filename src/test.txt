@@ -43,3 +43,9 @@ function str(){
 console.log();
 str();
 arr();
+
+if(x) {x = 9 ;}
+else if (y) {y = 0 ;}
+else if (z) {b = 8}
+else {x = 90;}
+
