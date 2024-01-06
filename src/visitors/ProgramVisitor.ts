@@ -42,7 +42,7 @@ export class ProgramVisitor extends ReactVisitor<Program> {
       this.blockVisitor,
       this.parameterVisitor,
     );
-    this.jsxElementVisitor = new JsxElementVisitor(this.exprVisitor , this.funcExprVisitor );
+    this.jsxElementVisitor = new JsxElementVisitor(this.funcExprVisitor);
     this.returnVisitor = new ReturnVisitor(this.funcExprVisitor , this.jsxElementVisitor);
     this.identifiers = new Map<string, any>();
     this.statementVisitor = new StatementVisitor(

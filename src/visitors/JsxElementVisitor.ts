@@ -13,7 +13,6 @@ import {
 import { JsxAttribute } from "../ast/Jsx/JsxAttribute.ts";
 import { JsxAttributeName } from "../ast/Jsx/JsxAttributeName.ts";
 import { JsxAttributeValue } from "../ast/Jsx/JsxAttributeValue.ts";
-import { ExpressionVisitor } from "./ExpressionVisitor.ts";
 import { Jsx } from "../ast/abstracts/Jsx.ts";
 import { JsxElement } from "../ast/Jsx/JsxElement.ts";
 import { JsxElementFull } from "../ast/Jsx/JsxElementFull.ts";
