@@ -1,12 +1,12 @@
 import { Expression } from "../abstracts/Expression.ts";
-import { String } from "../Expressions/String.ts";
+import { String as AntlrString } from "../Expressions/String.ts";
 import { Jsx } from "../abstracts/Jsx.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class JsxAttributeValue extends Jsx {
-  public value: String | Expression;
+  public value: AntlrString | Expression;
 
-  constructor(value: Expression | String) {
+  constructor(value: Expression | AntlrString) {
     super();
     this.value = value;
   }
@@ -24,16 +24,9 @@ export class JsxAttributeValue extends Jsx {
   }
 
   treeObject(): TreeNode {
-    if (this.value instanceof Expression) {
       return {
         name: "Jsx Attribute Value",
-        // children: [this.value.treeObject()],
+        children: [this.value.treeObject()],
       };
-    } else {
-      return {
-        name: "Jsx Attribute Value",
-        // children: [{ name: this.value }],
-      };
-    }
   }
 }

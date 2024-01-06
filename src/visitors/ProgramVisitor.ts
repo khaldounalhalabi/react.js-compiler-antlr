@@ -1,8 +1,6 @@
 import ReactVisitor from "../antlr/ReactVisitor.ts";
 import { Program } from "../ast/Program.ts";
 import {
-  ExpressionContext,
-  FunctionalExpressionContext,
   ProgramContext,
 } from "../antlr/ReactParser.ts";
 import { Statement } from "../ast/abstracts/Statement.ts";
@@ -37,15 +35,15 @@ export class ProgramVisitor extends ReactVisitor<Program> {
 
   constructor() {
     super();
-    this.returnVisitor = new ReturnVisitor();
     this.blockVisitor = new BlockVisitor();
     this.exprVisitor = new ExpressionVisitor();
-    this.jsxElementVisitor = new JsxElementVisitor(this.exprVisitor);
     this.parameterVisitor = new ParameterVisitor(this.exprVisitor);
     this.funcExprVisitor = new FunctionalExpressionVisitor(
       this.blockVisitor,
       this.parameterVisitor,
     );
+    this.jsxElementVisitor = new JsxElementVisitor(this.exprVisitor , this.funcExprVisitor );
+    this.returnVisitor = new ReturnVisitor(this.funcExprVisitor , this.jsxElementVisitor);
     this.identifiers = new Map<string, any>();
     this.statementVisitor = new StatementVisitor(
       this.exprVisitor,

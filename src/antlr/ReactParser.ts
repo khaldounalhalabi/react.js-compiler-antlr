@@ -1899,12 +1899,12 @@ export class ProgramContext extends ParserRuleContext {
 	}
 	// @Override
 	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitProgram) {
-			return visitor.visitProgram(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
+    if (visitor.visitProgram) {
+      return visitor.visitProgram(this);
+    } else {
+      return visitor.visitChildren(this);
+    }
+  }
 }
 
 
@@ -1962,6 +1962,7 @@ export class StatementContext extends ParserRuleContext {
 
 
 export class VariableDeclarationContext extends ParserRuleContext {
+    [x: string]: any;
 	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
@@ -2067,37 +2068,42 @@ export class FunctionDeclarationContext extends ParserRuleContext {
 
 
 export class AssignmentContext extends ParserRuleContext {
-	constructor(parser?: ReactParser, parent?: ParserRuleContext, invokingState?: number) {
-		super(parent, invokingState);
-    	this.parser = parser;
-	}
-	public Identifier(): TerminalNode {
-		return this.getToken(ReactParser.Identifier, 0);
-	}
-	public expression(): ExpressionContext {
-		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
-	}
-    public get ruleIndex(): number {
-    	return ReactParser.RULE_assignment;
-	}
-	public enterRule(listener: ReactListener): void {
-	    if(listener.enterAssignment) {
-	 		listener.enterAssignment(this);
-		}
-	}
-	public exitRule(listener: ReactListener): void {
-	    if(listener.exitAssignment) {
-	 		listener.exitAssignment(this);
-		}
-	}
-	// @Override
-	public accept<Result>(visitor: ReactVisitor<Result>): Result {
-		if (visitor.visitAssignment) {
-			return visitor.visitAssignment(this);
-		} else {
-			return visitor.visitChildren(this);
-		}
-	}
+  [x: string]: any;
+  constructor(
+    parser?: ReactParser,
+    parent?: ParserRuleContext,
+    invokingState?: number,
+  ) {
+    super(parent, invokingState);
+    this.parser = parser;
+  }
+  public Identifier(): TerminalNode {
+    return this.getToken(ReactParser.Identifier, 0);
+  }
+  public expression(): ExpressionContext {
+    return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+  }
+  public get ruleIndex(): number {
+    return ReactParser.RULE_assignment;
+  }
+  public enterRule(listener: ReactListener): void {
+    if (listener.enterAssignment) {
+      listener.enterAssignment(this);
+    }
+  }
+  public exitRule(listener: ReactListener): void {
+    if (listener.exitAssignment) {
+      listener.exitAssignment(this);
+    }
+  }
+  // @Override
+  public accept<Result>(visitor: ReactVisitor<Result>): Result {
+    if (visitor.visitAssignment) {
+      return visitor.visitAssignment(this);
+    } else {
+      return visitor.visitChildren(this);
+    }
+  }
 }
 
 

@@ -5,6 +5,7 @@ import { CharStream, CommonTokenStream } from "antlr4";
 import { ProgramVisitor } from "./visitors/ProgramVisitor.ts";
 import ReactDOM from "react-dom";
 import PrintAst from "./libs/Tree.tsx";
+import {createRoot} from "react-dom/client";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = ``;
 let inputStream: string = "";
@@ -34,4 +35,5 @@ if (programVisitor.semanticErrors.length >= 0) {
 }
 
 const content = document.getElementById("app");
-ReactDOM.render(PrintAst({ data: treeObject }), content);
+const root = createRoot(content);
+root.render(PrintAst({data :treeObject}))

@@ -89,6 +89,7 @@ export class StatementVisitor extends ReactVisitor<Statement> {
   visitVariableType: (ctx: VariableTypeContext) => VariableType = (
     ctx: VariableTypeContext,
   ) => {
+    // @ts-ignore
     let varType: string = ctx.getText();
     return new VariableType(varType);
   };

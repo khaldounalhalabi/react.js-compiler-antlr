@@ -19,13 +19,14 @@ import { JsxElement } from "../ast/Jsx/JsxElement.ts";
 import { JsxElementFull } from "../ast/Jsx/JsxElementFull.ts";
 import { JsxElementContent } from "../ast/Jsx/JsxElementContent.ts";
 import { SelfClosingJsxElement } from "../ast/Jsx/SelfClosingJsxElement.ts";
+import {FunctionalExpressionVisitor} from "./FunctionalExpressionVisitor.ts";
 
 export class JsxElementVisitor extends ReactVisitor<Jsx> {
   [x: string]: any;
 
-  protected expressionVisitor: ExpressionVisitor;
+  protected expressionVisitor: FunctionalExpressionVisitor;
 
-  constructor(expressionVisitor: ExpressionVisitor) {
+  constructor(expressionVisitor: FunctionalExpressionVisitor) {
     super();
     this.expressionVisitor = expressionVisitor;
   }
@@ -59,8 +60,9 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
         const valueCtx = ctx.expression();
         value = this.expressionVisitor.visit(valueCtx);
       } else {
-        value = ctx.getText();
+        value = this.expressionVisitor.visitString(ctx.StringLiteral());
       }
+      // console.log(value)
       return new JsxAttributeValue(value);
     };
 

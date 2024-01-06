@@ -64,6 +64,7 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   };
 
   visitID: (ctx: IDContext) => Identifier = (ctx: IDContext) => {
+    // @ts-ignore
     let id: string = ctx.getText();
     return new Identifier(id);
   };
@@ -136,7 +137,7 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
   };
 
   visitString: (ctx: StringContext) => AntlrString = (ctx: StringContext) => {
-    let str = ctx.StringLiteral().getText();
+    let str = ctx.getText();
     return new AntlrString(str);
   };
 
