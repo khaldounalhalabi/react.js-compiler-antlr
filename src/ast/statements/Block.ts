@@ -23,7 +23,7 @@ export class Block extends Statement {
 
   public astNode(): string {
     const statAst =
-    // @ts-ignore
+      // @ts-ignore
       this.statements.map((st) => st[0].astNode()).join(" , ") ?? "none";
     return `Block -> ${statAst} ${
       this.returnStatement ? `Block -> ${this.returnStatement?.astNode()}` : ""
@@ -39,11 +39,14 @@ export class Block extends Statement {
     return this.returnStatement
       ? {
           name: "Block",
-          children: [...sts, this.returnStatement?.treeObject()],
+          children: [
+            { name: "statments", children: [...sts] },
+            this.returnStatement?.treeObject(),
+          ],
         }
       : {
           name: "Block",
-          children: [...sts],
+          children: [{ name: "statments", children: [...sts] }],
         };
   }
 }

@@ -11,6 +11,7 @@ const PrintAst = ({ data }: { data: TreeNode }) => {
         rootNodeClassName="node__root"
         branchNodeClassName="node__branch"
         leafNodeClassName="node__leaf"
+        nodeSize={{ x: 250, y: 250 }}
         orientation="vertical"
       />
     </div>

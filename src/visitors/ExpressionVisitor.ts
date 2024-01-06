@@ -1,5 +1,5 @@
 import {
-  AdditionContext,
+  AdditionContext, BracedExpressionContext,
   DivisionContext,
   EqualContext,
   ExpressionContext,
@@ -32,6 +32,7 @@ import { NotEqual } from "../ast/Expressions/NotEqual.ts";
 import { Number as AntlrNumber } from "../ast/Expressions/Number.ts";
 import { Subtraction } from "../ast/Expressions/Subtraction.ts";
 import { TemplateString } from "../ast/Expressions/TemplateString.ts";
+import {BracedExpression} from "../ast/Expressions/BracedExpression.ts";
 
 export class ExpressionVisitor extends ReactVisitor<Expression> {
   [x: string]: any;
@@ -165,4 +166,8 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
 
     return new TemplateString(expression);
   };
+
+  visitBracedExpression:(ctx:BracedExpressionContext) => BracedExpression = (ctx : BracedExpressionContext) => {
+    return new BracedExpression(this.visit(ctx.expression()));
+  }
 }

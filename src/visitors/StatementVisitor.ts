@@ -29,6 +29,7 @@ import { UseState } from "../ast/statements/UseState.ts";
 import { TerminalNode } from "antlr4";
 import { FunctionExpression } from "../ast/Expressions/FunctionalExpression/FunctionExpression.ts";
 import { FunctionCall } from "../ast/Expressions/FunctionalExpression/FunctionCall.ts";
+import {Arguments} from "../ast/Expressions/Arguments.ts";
 
 export class StatementVisitor extends ReactVisitor<Statement> {
   [x: string]: any;
@@ -191,7 +192,10 @@ export class StatementVisitor extends ReactVisitor<Statement> {
     ctx: FunctionCallContext,
   ) => {
     let id = this.exprVisitor.visitID(ctx.Identifier());
-    const args = this.funcExprVisitor.visitArguments(ctx.arguments());
+    let args:Arguments|undefined = undefined;
+    if (ctx.arguments()){
+      args = this.funcExprVisitor.visitArguments(ctx.arguments());
+    }
     return new FunctionCall(id, args);
   };
 }

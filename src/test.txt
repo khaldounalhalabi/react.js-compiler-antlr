@@ -19,3 +19,27 @@ function Home() {
     </main>
   );
 }
+
+let x = 10;
+var y = 9;
+const z = 100;
+
+let sum = x + y + (5*z);
+let fun = function (x , y){
+    return (5+9);
+}
+
+z = 600;
+x = y;
+
+const arr = (c) => {
+    console.log(55)
+    return (5+9);
+}
+
+function str(){
+    return `${'asdasd'}`;
+}
+console.log();
+str();
+arr();

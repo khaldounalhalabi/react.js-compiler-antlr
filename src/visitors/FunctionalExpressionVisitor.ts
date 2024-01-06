@@ -31,7 +31,7 @@ export class FunctionalExpressionVisitor extends ExpressionVisitor {
   visitArrowFunction: (ctx: ArrowFunctionContext) => ArrowFunction = (
     ctx: ArrowFunctionContext,
   ) => {
-    const parameters = ctx.parameters() ? this.visit(ctx.parameters()) : [];
+    const parameters = ctx.parameters() ? this.parameterVisitor.visitParameters(ctx.parameters()) : [];
 
     const block = this.blockVisitor.visitBlock(ctx.block());
 

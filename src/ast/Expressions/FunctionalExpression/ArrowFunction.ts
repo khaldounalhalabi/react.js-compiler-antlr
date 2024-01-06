@@ -30,13 +30,13 @@ export class ArrowFunction extends Expression {
   }
 
   public treeObject(): TreeNode {
-    let parameters: TreeNode[] = [];
+    let params: TreeNode[] = [];
     this.parameters.forEach((p) => {
-      parameters.push(p.treeObject());
+      params.push(p.treeObject());
     });
     return {
       name: "Arrow Function",
-      children: [...parameters, this.block.treeObject()],
+      children: [...params, this.block.treeObject()],
     };
   }
 }
