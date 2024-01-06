@@ -24,7 +24,7 @@ jsxTagName: 'main' | 'div' | 'img' | 'h1' | 'p' | 'a';
 
 jsxAttribute: jsxAttributeName '=' jsxAttributeValue;
 
-jsxAttributeName: 'src' | 'onClick' | 'ref' | 'width' | 'height' | 'className';
+jsxAttributeName: 'src' | 'onClick' | 'ref' | 'width' | 'height' | 'className' | 'href';
 
 jsxAttributeValue: StringLiteral | '{'expression?'}';
 
