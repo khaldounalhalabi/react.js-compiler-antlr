@@ -20,7 +20,9 @@ import { NotEqualContext } from "./ReactParser";
 import { LessThanOrEqualContext } from "./ReactParser";
 import { MoreThanOrEqualContext } from "./ReactParser";
 import { StringContext } from "./ReactParser";
+import { ArrayLiteralContext } from "./ReactParser";
 import { NullishCoalescingContext } from "./ReactParser";
+import { ArrayAccessContext } from "./ReactParser";
 import { LessThanContext } from "./ReactParser";
 import { SubtractionContext } from "./ReactParser";
 import { NumberContext } from "./ReactParser";
@@ -175,12 +177,26 @@ export default class ReactVisitor<Result> extends ParseTreeVisitor<Result> {
 	 */
 	visitString?: (ctx: StringContext) => Result;
 	/**
+	 * Visit a parse tree produced by the `ArrayLiteral`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitArrayLiteral?: (ctx: ArrayLiteralContext) => Result;
+	/**
 	 * Visit a parse tree produced by the `NullishCoalescing`
 	 * labeled alternative in `ReactParser.expression`.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	visitNullishCoalescing?: (ctx: NullishCoalescingContext) => Result;
+	/**
+	 * Visit a parse tree produced by the `ArrayAccess`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	visitArrayAccess?: (ctx: ArrayAccessContext) => Result;
 	/**
 	 * Visit a parse tree produced by the `LessThan`
 	 * labeled alternative in `ReactParser.expression`.

@@ -34,6 +34,4 @@ jsxComponentFull : '<' Identifier jsxAttribute* componentProps* '>' jsxElementCo
 
 selfClosingComponent : '<' Identifier jsxAttribute* componentProps* '/>';
 
-componentProps : Identifier '=' StringLiteral
-               | Identifier '=' '{'expression?'}'
-               ;
+componentProps : Identifier '=' jsxAttributeValue;

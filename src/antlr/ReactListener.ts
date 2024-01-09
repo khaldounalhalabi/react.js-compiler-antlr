@@ -20,7 +20,9 @@ import { NotEqualContext } from "./ReactParser";
 import { LessThanOrEqualContext } from "./ReactParser";
 import { MoreThanOrEqualContext } from "./ReactParser";
 import { StringContext } from "./ReactParser";
+import { ArrayLiteralContext } from "./ReactParser";
 import { NullishCoalescingContext } from "./ReactParser";
+import { ArrayAccessContext } from "./ReactParser";
 import { LessThanContext } from "./ReactParser";
 import { SubtractionContext } from "./ReactParser";
 import { NumberContext } from "./ReactParser";
@@ -247,6 +249,18 @@ export default class ReactListener extends ParseTreeListener {
 	 */
 	exitString?: (ctx: StringContext) => void;
 	/**
+	 * Enter a parse tree produced by the `ArrayLiteral`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	enterArrayLiteral?: (ctx: ArrayLiteralContext) => void;
+	/**
+	 * Exit a parse tree produced by the `ArrayLiteral`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	exitArrayLiteral?: (ctx: ArrayLiteralContext) => void;
+	/**
 	 * Enter a parse tree produced by the `NullishCoalescing`
 	 * labeled alternative in `ReactParser.expression`.
 	 * @param ctx the parse tree
@@ -258,6 +272,18 @@ export default class ReactListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	exitNullishCoalescing?: (ctx: NullishCoalescingContext) => void;
+	/**
+	 * Enter a parse tree produced by the `ArrayAccess`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	enterArrayAccess?: (ctx: ArrayAccessContext) => void;
+	/**
+	 * Exit a parse tree produced by the `ArrayAccess`
+	 * labeled alternative in `ReactParser.expression`.
+	 * @param ctx the parse tree
+	 */
+	exitArrayAccess?: (ctx: ArrayAccessContext) => void;
 	/**
 	 * Enter a parse tree produced by the `LessThan`
 	 * labeled alternative in `ReactParser.expression`.

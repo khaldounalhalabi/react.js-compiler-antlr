@@ -45,6 +45,8 @@ expression: expression '*' expression                           #Multiplication
           | template                                            #TemplateString
           | expression '?' expression ':' expression            #TernaryCondition
           | expression '??' expression                          #NullishCoalescing
+          | '[' (expression (',' expression)*)? ']'             #ArrayLiteral
+          | Identifier '[' IntegerLiteral ']'                   #ArrayAccess
           | Identifier                                          #ID
           | IntegerLiteral                                      #Number
           | StringLiteral                                       #String
