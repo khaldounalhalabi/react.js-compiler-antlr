@@ -1,8 +1,8 @@
 import { Statement } from "../abstracts/Statement.ts";
-import { FunctionalExpression } from "../FunctionalExpression.ts";
 import { ArrowFunction } from "../Expressions/FunctionalExpression/ArrowFunction.ts";
 import { Parameter } from "../Expressions/Parameters.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
+import {FunctionalExpression} from "../Expressions/FunctionalExpression/FunctionalExpression.ts";
 
 export class UseEffect extends Statement {
   public functional: FunctionalExpression | ArrowFunction;

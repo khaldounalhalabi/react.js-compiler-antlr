@@ -1,8 +1,6 @@
 import ReactVisitor from "../antlr/ReactVisitor.ts";
 import { Program } from "../ast/Program.ts";
-import {
-  ProgramContext,
-} from "../antlr/ReactParser.ts";
+import { ProgramContext } from "../antlr/ReactParser.ts";
 import { Statement } from "../ast/abstracts/Statement.ts";
 import { StatementVisitor } from "./StatementVisitor.ts";
 import { ExpressionVisitor } from "./ExpressionVisitor.ts";
@@ -11,13 +9,14 @@ import { ParameterVisitor } from "./ParameterVisitor.ts";
 import { JsxElementVisitor } from "./JsxElementVisitor.ts";
 import { FunctionalExpressionVisitor } from "./FunctionalExpressionVisitor.ts";
 import { BlockVisitor } from "./BlockVisitor.ts";
+import { SymbolTable } from "../libs/SymbolTable.ts";
 
 export class ProgramVisitor extends ReactVisitor<Program> {
   [x: string]: any;
 
   public semanticErrors: string[] = [];
 
-  public identifiers: Map<string, any>;
+  public symbolTable: SymbolTable;
 
   public exprVisitor;
 
@@ -43,15 +42,18 @@ export class ProgramVisitor extends ReactVisitor<Program> {
       this.parameterVisitor,
     );
     this.jsxElementVisitor = new JsxElementVisitor(this.funcExprVisitor);
-    this.returnVisitor = new ReturnVisitor(this.funcExprVisitor , this.jsxElementVisitor);
-    this.identifiers = new Map<string, any>();
+    this.returnVisitor = new ReturnVisitor(
+      this.funcExprVisitor,
+      this.jsxElementVisitor,
+    );
+    this.symbolTable = new SymbolTable();
     this.statementVisitor = new StatementVisitor(
       this.exprVisitor,
       this.blockVisitor,
       this.funcExprVisitor,
       this.parameterVisitor,
       this.semanticErrors,
-      this.identifiers,
+      this.symbolTable,
     );
   }
 

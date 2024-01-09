@@ -27,7 +27,7 @@ export class Arguments extends Expression {
     });
     return {
       name: "Arguments",
-      children: [...expressions],
+      children: expressions,
     };
   }
 }

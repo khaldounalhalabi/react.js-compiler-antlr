@@ -13,9 +13,10 @@ import { FunctionExpression } from "../ast/Expressions/FunctionalExpression/Func
 import { FunctionCall } from "../ast/Expressions/FunctionalExpression/FunctionCall.ts";
 import { Arguments } from "../ast/Expressions/Arguments.ts";
 import { Expression } from "../ast/abstracts/Expression.ts";
-import {FunctionalExpression} from "../ast/Expressions/FunctionalExpression/FunctionalExpression.ts";
-import {FuncExpr} from "../ast/Expressions/FunctionalExpression/FuncExpr.ts";
-import {ExpressionVisitor} from "./ExpressionVisitor.ts";
+import { FunctionalExpression } from "../ast/Expressions/FunctionalExpression/FunctionalExpression.ts";
+import { FuncExpr } from "../ast/Expressions/FunctionalExpression/FuncExpr.ts";
+import { ExpressionVisitor } from "./ExpressionVisitor.ts";
+import { Block } from "../ast/statements/Block.ts";
 
 export class FunctionalExpressionVisitor extends ExpressionVisitor {
   public blockVisitor: BlockVisitor;
@@ -31,11 +32,16 @@ export class FunctionalExpressionVisitor extends ExpressionVisitor {
   visitArrowFunction: (ctx: ArrowFunctionContext) => ArrowFunction = (
     ctx: ArrowFunctionContext,
   ) => {
-    const parameters = ctx.parameters() ? this.parameterVisitor.visitParameters(ctx.parameters()) : [];
+    const parameters = ctx.parameters()
+      ? this.parameterVisitor.visitParameters(ctx.parameters())
+      : [];
+    let body: Expression | Block;
 
-    const block = this.blockVisitor.visitBlock(ctx.block());
+    if (ctx.block()) {
+      body = this.blockVisitor.visitBlock(ctx.block());
+    } else body = this.visit(ctx.expression());
 
-    return new ArrowFunction(parameters, block);
+    return new ArrowFunction(parameters, body);
   };
 
   visitFunctionExpression: (
@@ -69,10 +75,11 @@ export class FunctionalExpressionVisitor extends ExpressionVisitor {
     return new Arguments(expressions);
   };
 
-  visitFunctionalExpression: (ctx: FunctionalExpressionContext) => FunctionalExpression =
-    (ctx: FunctionalExpressionContext) => {
-      return new FunctionalExpression(this.visit(ctx.funcExpr()));
-    };
+  visitFunctionalExpression: (
+    ctx: FunctionalExpressionContext,
+  ) => FunctionalExpression = (ctx: FunctionalExpressionContext) => {
+    return new FunctionalExpression(this.visit(ctx.funcExpr()));
+  };
 
   visitFuncExpr: (ctx: FuncExprContext) => FuncExpr = (
     ctx: FuncExprContext,

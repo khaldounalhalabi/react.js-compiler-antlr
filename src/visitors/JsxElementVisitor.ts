@@ -1,13 +1,16 @@
 import ReactVisitor from "../antlr/ReactVisitor.ts";
 import { JsxTagName } from "../ast/Jsx/JsxTagName.ts";
 import {
+  ComponentPropsContext,
   JsxAttributeContext,
   JsxAttributeNameContext,
   JsxAttributeValueContext,
+  JsxComponentFullContext,
   JsxElementContentContext,
   JsxElementContext,
   JsxElementFullContext,
   JsxTagNameContext,
+  SelfClosingComponentContext,
   SelfClosingJsxElementContext,
 } from "../antlr/ReactParser.ts";
 import { JsxAttribute } from "../ast/Jsx/JsxAttribute.ts";
@@ -18,7 +21,10 @@ import { JsxElement } from "../ast/Jsx/JsxElement.ts";
 import { JsxElementFull } from "../ast/Jsx/JsxElementFull.ts";
 import { JsxElementContent } from "../ast/Jsx/JsxElementContent.ts";
 import { SelfClosingJsxElement } from "../ast/Jsx/SelfClosingJsxElement.ts";
-import {FunctionalExpressionVisitor} from "./FunctionalExpressionVisitor.ts";
+import { FunctionalExpressionVisitor } from "./FunctionalExpressionVisitor.ts";
+import { ComponentProps } from "../ast/Jsx/ComponentProps.ts";
+import { JsxComponentFull } from "../ast/Jsx/JsxComponentFull.ts";
+import { SelfClosingComponent } from "../ast/Jsx/SelfClosingComponent.ts";
 
 export class JsxElementVisitor extends ReactVisitor<Jsx> {
   [x: string]: any;
@@ -119,16 +125,70 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
   visitJsxElement: (ctx: JsxElementContext) => JsxElement = (
     ctx: JsxElementContext,
   ) => {
-    let jsxElementContext;
-    let jsxElement;
+    return new JsxElement(
+      this.visit(
+        ctx.jsxElementFull() ??
+          ctx.selfClosingJsxElement() ??
+          ctx.jsxComponentFull() ??
+          ctx.selfClosingComponent(),
+      ),
+    );
+  };
 
-    if (ctx.jsxElementFull()) {
-      jsxElementContext = ctx.jsxElementFull();
-      jsxElement = this.visitJsxElementFull(jsxElementContext);
-    } else {
-      jsxElementContext = ctx.selfClosingJsxElement();
-      jsxElement = this.visitSelfClosingJsxElement(jsxElementContext);
+  visitComponentProps: (ctx: ComponentPropsContext) => ComponentProps = (
+    ctx: ComponentPropsContext,
+  ) => {
+    let id = this.expressionVisitor.visitID(ctx.Identifier());
+    let val = this.visit(ctx.jsxAttributeValue());
+    return new ComponentProps(id, val);
+  };
+
+  visitJsxComponentFull: (ctx: JsxComponentFullContext) => JsxComponentFull = (
+    ctx: JsxComponentFullContext,
+  ) => {
+    //TODO::add semantic error
+    let id = this.expressionVisitor.visitID(ctx.Identifier_list()[0]);
+
+    let attributes: JsxAttribute[] = [];
+
+    if (ctx.jsxAttribute_list().length > 0) {
+      ctx.jsxAttribute_list().forEach((att) => {
+        attributes.push(this.visit(att));
+      });
     }
-    return new JsxElement(jsxElement);
+
+    let props: ComponentProps[] = [];
+
+    if (ctx.componentProps_list().length > 0) {
+      ctx.componentProps_list().forEach((prop) => {
+        props.push(this.visit(prop));
+      });
+    }
+
+    return new JsxComponentFull(id, attributes, props);
+  };
+
+  visitSelfClosingComponent: (
+    ctx: SelfClosingComponentContext,
+  ) => SelfClosingComponent = (ctx: SelfClosingComponentContext) => {
+    let id = this.expressionVisitor.visitID(ctx.Identifier());
+
+    let attributes: JsxAttribute[] = [];
+
+    if (ctx.jsxAttribute_list().length > 0) {
+      ctx.jsxAttribute_list().forEach((att) => {
+        attributes.push(this.visit(att));
+      });
+    }
+
+    let props: ComponentProps[] = [];
+
+    if (ctx.componentProps_list().length > 0) {
+      ctx.componentProps_list().forEach((prop) => {
+        props.push(this.visit(prop));
+      });
+    }
+
+    return new JsxComponentFull(id, attributes, props);
   };
 }

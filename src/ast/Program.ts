@@ -14,7 +14,7 @@ export class Program {
 
   public astNode() {
     const statAst =
-    // @ts-ignore
+      // @ts-ignore
       this.statements?.map((st: Statement) => st[0]?.astNode()).join(" , ") ??
       "void";
 

@@ -1,5 +1,8 @@
 import {
-  AdditionContext, BracedExpressionContext,
+  AdditionContext,
+  ArrayAccessContext,
+  ArrayLiteralContext,
+  BracedExpressionContext,
   DivisionContext,
   EqualContext,
   ExpressionContext,
@@ -10,11 +13,13 @@ import {
   MoreThanOrEqualContext,
   MultiplicationContext,
   NotEqualContext,
+  NullishCoalescingContext,
   NumberContext,
   StringContext,
   SubtractionContext,
   TemplateContext,
   TemplateStringContext,
+  TernaryConditionContext,
 } from "../antlr/ReactParser.ts";
 import { Expression } from "../ast/abstracts/Expression.ts";
 import { String as AntlrString } from "../ast/Expressions/String.ts";
@@ -32,10 +37,15 @@ import { NotEqual } from "../ast/Expressions/NotEqual.ts";
 import { Number as AntlrNumber } from "../ast/Expressions/Number.ts";
 import { Subtraction } from "../ast/Expressions/Subtraction.ts";
 import { TemplateString } from "../ast/Expressions/TemplateString.ts";
-import {BracedExpression} from "../ast/Expressions/BracedExpression.ts";
+import { BracedExpression } from "../ast/Expressions/BracedExpression.ts";
+import { TernaryCondition } from "../ast/Expressions/TernaryCondition.ts";
+import { NullishCoalescing } from "../ast/Expressions/NullishCoalescing.ts";
+import { ArrayLiteral } from "../ast/Expressions/ArrayLiteral.ts";
+import { ArrayAccess } from "../ast/Expressions/ArrayAccess.ts";
 
 export class ExpressionVisitor extends ReactVisitor<Expression> {
   [x: string]: any;
+
   visitAddition: (ctx: AdditionContext) => Addition = (
     ctx: AdditionContext,
   ) => {
@@ -167,7 +177,48 @@ export class ExpressionVisitor extends ReactVisitor<Expression> {
     return new TemplateString(expression);
   };
 
-  visitBracedExpression:(ctx:BracedExpressionContext) => BracedExpression = (ctx : BracedExpressionContext) => {
+  visitBracedExpression: (ctx: BracedExpressionContext) => BracedExpression = (
+    ctx: BracedExpressionContext,
+  ) => {
     return new BracedExpression(this.visit(ctx.expression()));
-  }
+  };
+
+  visitTernaryCondition: (ctx: TernaryConditionContext) => TernaryCondition = (
+    ctx: TernaryConditionContext,
+  ): TernaryCondition => {
+    let cond = this.visit(ctx.expression(0));
+    let then = this.visit(ctx.expression(1));
+    let els = this.visit(ctx.expression(2));
+
+    return new TernaryCondition(cond, then, els);
+  };
+
+  visitNullishCoalescing: (ctx: NullishCoalescingContext) => NullishCoalescing =
+    (ctx: NullishCoalescingContext): NullishCoalescing => {
+      let left = this.visit(ctx.expression(0));
+      let right = this.visit(ctx.expression(1));
+      return new NullishCoalescing(left, right);
+    };
+
+  visitArrayLiteral: (ctx: ArrayLiteralContext) => ArrayLiteral = (
+    ctx: ArrayLiteralContext,
+  ): ArrayLiteral => {
+    let exprs: Expression[] = [];
+
+    if (ctx.expression_list().length > 0) {
+      ctx.expression_list().forEach((exp) => {
+        exprs.push(this.visit(exp));
+      });
+    }
+
+    return new ArrayLiteral(exprs);
+  };
+
+  visitArrayAccess: (ctx: ArrayAccessContext) => ArrayAccess = (
+    ctx: ArrayAccessContext,
+  ): ArrayAccess => {
+    let id = this.visitID(ctx.Identifier());
+    let index = this.visitNumber(ctx.IntegerLiteral());
+    return new ArrayAccess(id, index);
+  };
 }

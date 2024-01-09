@@ -2,11 +2,23 @@ import { JsxElementFull } from "./JsxElementFull.ts";
 import { SelfClosingJsxElement } from "./SelfClosingJsxElement.ts";
 import { Jsx } from "../abstracts/Jsx.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
+import { SelfClosingComponent } from "./SelfClosingComponent.ts";
+import { JsxComponentFull } from "./JsxComponentFull.ts";
 
 export class JsxElement extends Jsx {
-  public element: JsxElementFull | SelfClosingJsxElement;
+  public element:
+    | JsxElementFull
+    | SelfClosingJsxElement
+    | SelfClosingComponent
+    | JsxComponentFull;
 
-  constructor(element: JsxElementFull | SelfClosingJsxElement) {
+  constructor(
+    element:
+      | JsxElementFull
+      | SelfClosingJsxElement
+      | SelfClosingComponent
+      | JsxComponentFull,
+  ) {
     super();
     this.element = element;
   }
