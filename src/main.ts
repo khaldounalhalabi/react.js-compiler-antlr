@@ -26,6 +26,11 @@ let tree = parser.program();
 const programVisitor = new ProgramVisitor();
 let treeObject = programVisitor.visitProgram(tree).treeObject();
 
+
+/**
+ * Drawing
+ * @param table
+ */
 function populateTable(table: SymbolTable) {
   const tableBody = document.querySelector("#symbolTable tbody");
 
