@@ -11,11 +11,6 @@ import { JsxElementVisitor } from "./JsxElementVisitor.ts";
 import { SymbolTable } from "../libs/SymbolTable.ts";
 
 export class BlockVisitor extends ReactVisitor<Block> {
-  [x: string]: any;
-
-  public semanticErrors: string[] | undefined;
-  public symbolTable: SymbolTable;
-
   visitBlock: (ctx: BlockContext) => Block = (ctx: BlockContext) => {
     this.semanticErrors = [];
     this.symbolTable = new SymbolTable();
@@ -35,8 +30,6 @@ export class BlockVisitor extends ReactVisitor<Block> {
       this,
       funcExprVisitor,
       parameterVisitor,
-      this.semanticErrors,
-      this.symbolTable,
     );
 
     for (let i = 0; i < statementsCtx.length; i++) {

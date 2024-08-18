@@ -1,10 +1,10 @@
+// @ts-ignore
+import { TerminalNode } from "antlr4";
 import ReactVisitor from "../antlr/ReactVisitor.ts";
 import { Parameter } from "../ast/Expressions/Parameters.ts";
 import { ParametersContext } from "../antlr/ReactParser.ts";
 import { Identifier } from "../ast/Expressions/Identifier.ts";
 import { ExpressionVisitor } from "./ExpressionVisitor.ts";
-// @ts-ignore
-import { TerminalNode } from "antlr4";
 
 export class ParameterVisitor extends ReactVisitor<Parameter[]> {
   public exprVisitor;

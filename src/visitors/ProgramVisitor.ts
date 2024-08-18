@@ -9,15 +9,8 @@ import { ParameterVisitor } from "./ParameterVisitor.ts";
 import { JsxElementVisitor } from "./JsxElementVisitor.ts";
 import { FunctionalExpressionVisitor } from "./FunctionalExpressionVisitor.ts";
 import { BlockVisitor } from "./BlockVisitor.ts";
-import { SymbolTable } from "../libs/SymbolTable.ts";
 
 export class ProgramVisitor extends ReactVisitor<Program> {
-  [x: string]: any;
-
-  public semanticErrors: string[] = [];
-
-  public symbolTable: SymbolTable;
-
   public exprVisitor;
 
   public blockVisitor;
@@ -46,14 +39,11 @@ export class ProgramVisitor extends ReactVisitor<Program> {
       this.funcExprVisitor,
       this.jsxElementVisitor,
     );
-    this.symbolTable = new SymbolTable();
     this.statementVisitor = new StatementVisitor(
       this.exprVisitor,
       this.blockVisitor,
       this.funcExprVisitor,
       this.parameterVisitor,
-      this.semanticErrors,
-      this.symbolTable,
     );
   }
 
