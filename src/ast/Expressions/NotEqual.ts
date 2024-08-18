@@ -16,10 +16,6 @@ export class NotEqual extends Expression {
     return this.left.toString() + "!=" + this.right.toString();
   }
 
-  public astNode(): string {
-    return `NotEqual -> ${this.left.astNode()} NotEqual -> NotEqualSign NotEqual -> ${this.right.astNode()}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Not Equal",
@@ -29,5 +25,9 @@ export class NotEqual extends Expression {
         this.right.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return this.left.resolve() + "!=" + this.right.resolve();
   }
 }

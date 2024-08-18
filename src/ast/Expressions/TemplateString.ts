@@ -10,11 +10,7 @@ export class TemplateString extends Expression {
   }
 
   public toString(): string {
-    return "${" + this.expression.toString() + "}";
-  }
-
-  public astNode(): string {
-    return `TemplateString -> ${this.expression.astNode()}`;
+    return "`${" + this.expression.toString() + "}`";
   }
 
   treeObject(): TreeNode {
@@ -22,5 +18,9 @@ export class TemplateString extends Expression {
       name: "Template String",
       children: [this.expression.treeObject()],
     };
+  }
+
+  resolve(): string {
+    return "`${" + this.expression.resolve() + "}`";
   }
 }

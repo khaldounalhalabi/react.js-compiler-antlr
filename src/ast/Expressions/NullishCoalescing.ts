@@ -16,10 +16,6 @@ export class NullishCoalescing extends Expression {
     return this.left.toString() + "??" + this.right.toString();
   }
 
-  public astNode(): string {
-    return ``;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Nullish Coalescing",
@@ -29,5 +25,9 @@ export class NullishCoalescing extends Expression {
         this.right.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return this.left.resolve() + "??" + this.right.resolve();
   }
 }

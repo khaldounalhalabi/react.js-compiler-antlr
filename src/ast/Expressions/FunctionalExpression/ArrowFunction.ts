@@ -22,15 +22,6 @@ export class ArrowFunction extends Expression {
     return `(${paramsString}) => ${blockString}`;
   }
 
-  public astNode(): string {
-    const parametersAst =
-      this.parameters?.map((param) => param.astNode()).join(" , ") ?? undefined;
-
-    return `${
-      parametersAst ? `ArrowFunction -> ${parametersAst}` : ""
-    } ArrowFunction -> ${this.block.astNode()}`;
-  }
-
   public treeObject(): TreeNode {
     let params: TreeNode[] = [];
     this.parameters.forEach((p) => {
@@ -40,5 +31,11 @@ export class ArrowFunction extends Expression {
       name: "Arrow Function",
       children: [...params, this.block.treeObject()],
     };
+  }
+
+  resolve(): string {
+    return `(${this.parameters
+      .map((param) => param.resolve())
+      .join(",")}) => ${this.block.resolve()}`;
   }
 }

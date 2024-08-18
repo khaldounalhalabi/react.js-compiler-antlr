@@ -14,12 +14,6 @@ export class Arguments extends Expression {
     return `(${args})`;
   }
 
-  public astNode(): string {
-    const exprAst =
-      this.expressions?.map((exp) => exp.astNode()).join(" , ") ?? undefined;
-    return exprAst ? `Arguments -> ${exprAst}` : "";
-  }
-
   treeObject(): TreeNode {
     let expressions: TreeNode[] = [];
     this.expressions.forEach((e) => {
@@ -29,5 +23,10 @@ export class Arguments extends Expression {
       name: "Arguments",
       children: expressions,
     };
+  }
+
+  resolve(): string {
+    const args = this.expressions.map((expr) => expr.resolve()).join(", ");
+    return `(${args})`;
   }
 }

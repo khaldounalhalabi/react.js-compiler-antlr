@@ -1,1 +1,5 @@
 const x = "hey";
+const y = x + `${x}`
+
+const gaurd = (x,y) => x+y;
+console.log(gaurd(10,15))

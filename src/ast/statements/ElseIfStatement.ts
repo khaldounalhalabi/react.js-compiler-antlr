@@ -14,11 +14,7 @@ export class ElseIfStatement extends Statement {
   }
 
   toString(): string {
-    return "";
-  }
-
-  astNode(): string {
-    return "";
+    return `else if(${this.condition.toString()}) ${this.block.toString()}`;
   }
 
   treeObject(): TreeNode {
@@ -29,5 +25,9 @@ export class ElseIfStatement extends Statement {
         this.block.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return `else if(${this.condition.toString()}) ${this.block.toString()}`;
   }
 }

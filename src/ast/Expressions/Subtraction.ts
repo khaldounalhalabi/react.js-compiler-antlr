@@ -16,10 +16,6 @@ export class Subtraction extends Expression {
     return this.left.toString() + "-" + this.right.toString();
   }
 
-  public astNode(): string {
-    return `Subtraction -> ${this.left.astNode()} Subtraction -> SubSign Subtraction -> ${this.right.astNode()}]`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Subtraction",
@@ -29,5 +25,9 @@ export class Subtraction extends Expression {
         this.right.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return this.left.resolve() + "-" + this.right.resolve();
   }
 }

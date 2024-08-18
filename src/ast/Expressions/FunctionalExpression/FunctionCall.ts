@@ -1,7 +1,7 @@
 import { Identifier } from "../Identifier.ts";
 import { Arguments } from "../Arguments.ts";
 import { TreeNode } from "../../../Types/TreeNode.ts";
-import {Expression} from "../../abstracts/Expression.ts";
+import { Expression } from "../../abstracts/Expression.ts";
 
 export class FunctionCall extends Expression {
   public identifier: Identifier;
@@ -14,11 +14,7 @@ export class FunctionCall extends Expression {
   }
 
   public toString(): string {
-    return `${this.identifier.toString()}(${this.args?.toString() ?? ""})`;
-  }
-
-  public astNode(): string {
-    return `FunctionCall -> ${this.identifier.astNode()} FunctionCall -> ${this.args?.astNode()}`;
+    return `${this.identifier.toString()} ${this.args?.toString()}`;
   }
 
   treeObject(): TreeNode {
@@ -31,5 +27,9 @@ export class FunctionCall extends Expression {
           name: "Function Call",
           children: [this.identifier.treeObject()],
         };
+  }
+
+  resolve(): string {
+    return `${this.identifier.resolve()} ${this.args?.resolve()}`;
   }
 }

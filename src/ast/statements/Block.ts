@@ -21,15 +21,6 @@ export class Block extends Statement {
     } \n}`;
   }
 
-  public astNode(): string {
-    const statAst =
-      // @ts-ignore
-      this.statements.map((st) => st[0].astNode()).join(" , ") ?? "none";
-    return `Block -> ${statAst} ${
-      this.returnStatement ? `Block -> ${this.returnStatement?.astNode()}` : ""
-    }`;
-  }
-
   treeObject(): TreeNode {
     let sts: TreeNode[] = [];
     this.statements.forEach((st) => {
@@ -48,5 +39,13 @@ export class Block extends Statement {
           name: "Block",
           children: [{ name: "statments", children: [...sts] }],
         };
+  }
+
+  resolve(): string {
+    return `{\n
+              ${this.statements
+                .map((statement) => statement.resolve())
+                .join("\n")}\n
+            }`;
   }
 }

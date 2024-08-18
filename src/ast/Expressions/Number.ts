@@ -13,14 +13,14 @@ export class Number extends Expression {
     return `${this.num}`;
   }
 
-  public astNode(): string {
-    return `Number -> ${this.num}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Number",
       children: [{ name: `${this.num}` }],
     };
+  }
+
+  resolve(): string {
+    return `${this.num}`;
   }
 }

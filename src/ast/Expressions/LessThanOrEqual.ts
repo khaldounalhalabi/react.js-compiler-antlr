@@ -16,10 +16,6 @@ export class LessThanOrEqual extends Expression {
     return this.left.toString() + "<=" + this.right.toString();
   }
 
-  public astNode(): string {
-    return `LessThanOrEqual -> ${this.left.astNode()} LessThanOrEqual -> LessThanOrEqualSign LessThanOrEqual -> ${this.right.astNode()}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Less Than Or Equal",
@@ -29,5 +25,9 @@ export class LessThanOrEqual extends Expression {
         this.right.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return this.left.resolve() + "<=" + this.right.resolve();
   }
 }

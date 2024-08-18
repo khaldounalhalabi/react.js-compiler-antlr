@@ -13,14 +13,14 @@ export class Identifier extends Expression {
     return this.name;
   }
 
-  public astNode(): string {
-    return `Identifier -> ${this.name}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Identifier",
       children: [{ name: this.name }],
     };
+  }
+
+  resolve(): string {
+    return this.name;
   }
 }

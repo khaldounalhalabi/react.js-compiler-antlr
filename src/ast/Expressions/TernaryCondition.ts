@@ -14,11 +14,7 @@ export class TernaryCondition extends Expression {
   }
 
   toString(): string {
-    return "";
-  }
-
-  astNode(): string {
-    return "";
+    return `${this.condition.toString()} ? ${this.then.toString()} : ${this.els.toString()}`;
   }
 
   treeObject(): TreeNode {
@@ -30,5 +26,9 @@ export class TernaryCondition extends Expression {
         this.els.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return `${this.condition.resolve()} ? ${this.then.resolve()} : ${this.els.resolve()}`;
   }
 }

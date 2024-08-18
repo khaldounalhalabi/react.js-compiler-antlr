@@ -10,11 +10,7 @@ export class BracedExpression extends Expression {
   }
 
   public toString(): string {
-    return this.expression.toString();
-  }
-
-  public astNode(): string {
-    return `BracedExpression -> ${this.expression.astNode()}`;
+    return `(${this.expression.toString()})`;
   }
 
   treeObject(): TreeNode {
@@ -22,5 +18,9 @@ export class BracedExpression extends Expression {
       name: "Braced Expression",
       children: [this.expression.treeObject()],
     };
+  }
+
+  resolve(): string {
+    return `(${this.expression.resolve()})`;
   }
 }

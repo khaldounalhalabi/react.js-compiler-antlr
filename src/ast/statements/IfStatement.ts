@@ -14,7 +14,7 @@ export class IfStatement extends Statement {
   }
 
   toString(): string {
-    return "";
+    return `if (${this.condition.toString()})${this.block.toString()}`;
   }
 
   astNode(): string {
@@ -29,5 +29,9 @@ export class IfStatement extends Statement {
         this.block.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return `if (${this.condition.resolve()})${this.block.resolve()}`;
   }
 }

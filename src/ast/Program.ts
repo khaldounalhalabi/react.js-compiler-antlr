@@ -33,4 +33,10 @@ export class Program {
       children: [...sts],
     };
   }
+
+  resolve(): string {
+    return this.statements
+      .map((statement) => statement?.[0]?.resolve())
+      .join("\n");
+  }
 }

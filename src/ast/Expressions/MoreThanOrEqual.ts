@@ -16,10 +16,6 @@ export class MoreThanOrEqual extends Expression {
     return this.left.toString() + ">=" + this.right.toString();
   }
 
-  public astNode(): string {
-    return `MoreThanOrEqual -> ${this.left.astNode()} MoreThanOrEqual -> MoreThanOrEqualSign MoreThanOrEqual -> ${this.right.astNode()}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "More Than Or Equal",
@@ -29,5 +25,9 @@ export class MoreThanOrEqual extends Expression {
         this.right.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return this.left.resolve() + ">=" + this.right.resolve();
   }
 }

@@ -13,14 +13,14 @@ export class VariableType extends Expression {
     return this.varType;
   }
 
-  public astNode(): string {
-    return `VariableType -> ${this.varType}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Variable Type",
       children: [{ name: this.varType }],
     };
+  }
+
+  resolve(): string {
+    return this.varType;
   }
 }

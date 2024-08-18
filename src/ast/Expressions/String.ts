@@ -13,14 +13,14 @@ export class String extends Expression {
     return this.str;
   }
 
-  public astNode(): string {
-    return `String -> ${this.toString()}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "String",
       children: [{ name: this.toString() }],
     };
+  }
+
+  resolve(): string {
+    return this.str;
   }
 }

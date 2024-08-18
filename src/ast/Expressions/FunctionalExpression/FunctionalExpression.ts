@@ -11,14 +11,17 @@ export class FunctionalExpression extends Expression {
   }
 
   toString(): string {
-    return "";
-  }
-
-  astNode(): string {
-    return "";
+    return this.funcExpr.toString();
   }
 
   treeObject(): TreeNode {
-    return { name: "Functional Expression" , children:[this.funcExpr.treeObject()]};
+    return {
+      name: "Functional Expression",
+      children: [this.funcExpr.treeObject()],
+    };
+  }
+
+  resolve(): string {
+    return this.funcExpr.resolve();
   }
 }

@@ -14,11 +14,7 @@ export class ArrayAccess extends Expression {
   }
 
   toString(): string {
-    return "";
-  }
-
-  astNode(): string {
-    return "";
+    return `${this.id.toString()}[${this.index.toString()}]`;
   }
 
   treeObject(): TreeNode {
@@ -29,5 +25,9 @@ export class ArrayAccess extends Expression {
         { name: "Index", children: [this.index.treeObject()] },
       ],
     };
+  }
+
+  resolve(): string {
+    return `${this.id.resolve()}[${this.index.resolve()}]`;
   }
 }

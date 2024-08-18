@@ -27,14 +27,6 @@ export class VariableDeclaration extends Statement {
     return `${this.variableType.toString()} ${this.identifier.toString()}${expressionStr}`;
   }
 
-  public astNode(): string {
-    return `VariableDeclaration -> ${this.variableType.astNode()} VariableDeclaration -> ${this.identifier.astNode()} ${
-      this.expression
-        ? `VariableDeclaration -> ${this.expression?.astNode()}`
-        : ""
-    }`;
-  }
-
   treeObject(): TreeNode {
     return this.expression
       ? {
@@ -52,5 +44,12 @@ export class VariableDeclaration extends Statement {
             this.identifier.treeObject(),
           ],
         };
+  }
+
+  resolve(): string {
+    const expressionStr = this.expression
+      ? ` = ${this.expression.resolve()}`
+      : "";
+    return `${this.variableType.resolve()} ${this.identifier.resolve()}${expressionStr}`;
   }
 }

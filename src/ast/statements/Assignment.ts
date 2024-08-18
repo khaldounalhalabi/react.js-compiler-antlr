@@ -17,14 +17,14 @@ export class Assignment extends Statement {
     return `${this.identifier.toString()} = ${this.expression.toString()}`;
   }
 
-  public astNode(): string {
-    return `Assignment -> ${this.identifier.astNode()} Assignment -> AssignSymbol Assignment -> ${this.expression.astNode()}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Assignment",
       children: [this.identifier.treeObject(), this.expression.treeObject()],
     };
+  }
+
+  resolve(): string {
+    return `${this.identifier.resolve()} =  ${this.expression.resolve()}`;
   }
 }

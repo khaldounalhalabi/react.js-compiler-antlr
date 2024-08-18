@@ -16,10 +16,6 @@ export class LessThan extends Expression {
     return this.left.toString() + "<" + this.right.toString();
   }
 
-  public astNode(): string {
-    return `LessThan -> ${this.left.astNode()} LessThan -> LessThanSign LessThan -> ${this.right.astNode()}]`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Less Than",
@@ -29,5 +25,9 @@ export class LessThan extends Expression {
         this.right.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return this.left.resolve() + "<" + this.right.resolve();
   }
 }

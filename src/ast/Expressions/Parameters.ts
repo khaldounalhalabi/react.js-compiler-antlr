@@ -14,14 +14,14 @@ export class Parameter extends Expression {
     return this.identifier.toString();
   }
 
-  public astNode(): string {
-    return `Parameter -> ${this.identifier.astNode()}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Parameter",
       children: [this.identifier.treeObject()],
     };
+  }
+
+  resolve(): string {
+    return this.identifier.resolve();
   }
 }

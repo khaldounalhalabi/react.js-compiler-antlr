@@ -2,7 +2,7 @@ import { Statement } from "../abstracts/Statement.ts";
 import { ArrowFunction } from "../Expressions/FunctionalExpression/ArrowFunction.ts";
 import { Parameter } from "../Expressions/Parameters.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
-import {FunctionalExpression} from "../Expressions/FunctionalExpression/FunctionalExpression.ts";
+import { FunctionalExpression } from "../Expressions/FunctionalExpression/FunctionalExpression.ts";
 
 export class UseEffect extends Statement {
   public functional: FunctionalExpression | ArrowFunction;
@@ -27,14 +27,6 @@ export class UseEffect extends Statement {
     } else return `useEffect(${this.functional.toString});`;
   }
 
-  public astNode(): string {
-    const parametersAst =
-      this.parameters?.map((param) => param.astNode()).join(" , ") ?? undefined;
-    return `UseEffect -> ${this.functional.astNode()} ${
-      parametersAst ? `UseEffect -> ${parametersAst}` : ""
-    }`;
-  }
-
   treeObject(): TreeNode {
     let params: TreeNode[] = [];
     this.parameters?.forEach((p) => {
@@ -50,5 +42,9 @@ export class UseEffect extends Statement {
           name: "Use Effect",
           children: [this.functional.treeObject()],
         };
+  }
+
+  resolve(): string {
+    return "";
   }
 }

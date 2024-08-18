@@ -1,8 +1,8 @@
-import {Expression} from "../../abstracts/Expression.ts";
-import {ArrowFunction} from "./ArrowFunction.ts";
-import {FunctionCall} from "./FunctionCall.ts";
-import {FunctionExpression} from "./FunctionExpression.ts";
-import {TreeNode} from "../../../Types/TreeNode.ts";
+import { Expression } from "../../abstracts/Expression.ts";
+import { ArrowFunction } from "./ArrowFunction.ts";
+import { FunctionCall } from "./FunctionCall.ts";
+import { FunctionExpression } from "./FunctionExpression.ts";
+import { TreeNode } from "../../../Types/TreeNode.ts";
 
 export class FuncExpr extends Expression {
   public functionExpression: ArrowFunction | FunctionCall | FunctionExpression;
@@ -15,14 +15,17 @@ export class FuncExpr extends Expression {
   }
 
   toString(): string {
-    return "";
-  }
-
-  astNode(): string {
-    return "";
+    return this.functionExpression.toString();
   }
 
   treeObject(): TreeNode {
-    return {name : "FuncExpr" , children:[this.functionExpression.treeObject()]};
+    return {
+      name: "FuncExpr",
+      children: [this.functionExpression.treeObject()],
+    };
+  }
+
+  resolve(): string {
+    return this.functionExpression.resolve();
   }
 }

@@ -28,12 +28,6 @@ export class UseState extends Statement {
     })`;
   }
 
-  public astNode(): string {
-    return `UseState -> ${this.identifier.astNode()} UseState -> ${this.setIdentifier.astNode()} ${
-      this.expression ? `UseState -> ${this.expression?.astNode()}` : ""
-    }`;
-  }
-
   treeObject(): TreeNode {
     return this.expression
       ? {
@@ -51,5 +45,9 @@ export class UseState extends Statement {
             this.setIdentifier.treeObject(),
           ],
         };
+  }
+
+  resolve(): string {
+    return "";
   }
 }

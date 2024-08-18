@@ -11,11 +11,7 @@ export class ElseStatement extends Statement {
   }
 
   toString(): string {
-    return "";
-  }
-
-  astNode(): string {
-    return "";
+    return `else ${this.block.toString()}`;
   }
 
   treeObject(): TreeNode {
@@ -23,5 +19,9 @@ export class ElseStatement extends Statement {
       name: "Else Statement",
       children: [this.block.treeObject()],
     };
+  }
+
+  resolve(): string {
+    return `else ${this.block.resolve()}`;
   }
 }

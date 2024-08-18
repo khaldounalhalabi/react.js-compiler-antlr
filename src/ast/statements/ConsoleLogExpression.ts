@@ -15,12 +15,6 @@ export class ConsoleLogExpression extends Statement {
     return `console.log(${argsStr})`;
   }
 
-  public astNode(): string {
-    return `ConsoleLog -> console.log ${
-      this.args ? `ConsoleLog -> ${this.args?.astNode()}` : ""
-    }`;
-  }
-
   treeObject(): TreeNode {
     return this.args
       ? {
@@ -30,5 +24,10 @@ export class ConsoleLogExpression extends Statement {
       : {
           name: "Console Log",
         };
+  }
+
+  resolve(): string {
+    const argsStr = this.args ? this.args.resolve() : "";
+    return `console.log${argsStr}`;
   }
 }

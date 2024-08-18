@@ -22,14 +22,6 @@ export class FunctionDeclaration extends Statement {
     return `function ${this.identifier.toString()}(${params}) ${this.block.toString()}`;
   }
 
-  public astNode(): string {
-    const parametersAst =
-      this.parameters?.map((param) => param.astNode()).join(" , ") ?? undefined;
-    return `FunctionDeclaration -> ${this.identifier.astNode()} ${
-      parametersAst ? `FunctionDeclaration -> ${parametersAst}` : ""
-    } FunctionDeclaration -> ${this.block.astNode()}`;
-  }
-
   treeObject(): TreeNode {
     let params: TreeNode[] = [];
     this.parameters?.forEach((p) => {
@@ -49,5 +41,11 @@ export class FunctionDeclaration extends Statement {
           name: "Function Declaration",
           children: [this.identifier.treeObject(), this.block.treeObject()],
         };
+  }
+
+  resolve(): string {
+    const params =
+      this.parameters?.map((param) => param.resolve()).join(", ") ?? "";
+    return `function ${this.identifier.resolve()}(${params}) ${this.block.resolve()}`;
   }
 }

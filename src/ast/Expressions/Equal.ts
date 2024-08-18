@@ -16,10 +16,6 @@ export class Equal extends Expression {
     return this.left.toString() + "==" + this.right.toString();
   }
 
-  public astNode(): string {
-    return `Equal -> ${this.left.astNode()} Equal -> IsEqualSign Equal -> ${this.right.astNode()}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Equal",
@@ -29,5 +25,9 @@ export class Equal extends Expression {
         this.right.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return this.left.resolve() + "==" + this.right.resolve();
   }
 }

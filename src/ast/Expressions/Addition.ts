@@ -16,10 +16,6 @@ export class Addition extends Expression {
     return this.left.toString() + "+" + this.right.toString();
   }
 
-  public astNode(): string {
-    return `Addition -> ${this.left.astNode()} Addition -> AddSign Addition -> ${this.right.astNode()}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Addition",
@@ -29,5 +25,9 @@ export class Addition extends Expression {
         this.right.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return `${this.left.resolve()} + ${this.right.resolve()}`;
   }
 }

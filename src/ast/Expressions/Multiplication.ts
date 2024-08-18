@@ -16,10 +16,6 @@ export class Multiplication extends Expression {
     return this.left.toString() + "*" + this.right.toString();
   }
 
-  public astNode(): string {
-    return `Multiplication -> ${this.left.astNode()} Multiplication -> MulSign Multiplication -> ${this.right.astNode()}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Multiplication",
@@ -29,5 +25,9 @@ export class Multiplication extends Expression {
         this.right.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return this.left.resolve() + "*" + this.right.resolve();
   }
 }

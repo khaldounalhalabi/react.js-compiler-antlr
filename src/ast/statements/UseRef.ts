@@ -21,12 +21,6 @@ export class UseRef extends Statement {
     })`;
   }
 
-  public astNode(): string {
-    return `UseRef -> ${this.identifier.astNode()} ${
-      this.expression ? `UseRef -> ${this.expression?.astNode()}` : ""
-    }`;
-  }
-
   treeObject(): TreeNode {
     return this.expression
       ? {
@@ -40,5 +34,9 @@ export class UseRef extends Statement {
           name: "UseRef",
           children: [this.identifier.treeObject()],
         };
+  }
+
+  resolve(): string {
+    return "";
   }
 }

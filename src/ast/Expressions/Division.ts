@@ -3,7 +3,6 @@ import { TreeNode } from "../../Types/TreeNode.ts";
 
 export class Division extends Expression {
   public left: Expression;
-
   public right: Expression;
 
   constructor(left: Expression, right: Expression) {
@@ -16,10 +15,6 @@ export class Division extends Expression {
     return this.left.toString() + "/" + this.right.toString();
   }
 
-  public astNode(): string {
-    return `Division -> ${this.left.astNode()} Division -> DivisionSign Division -> ${this.right.astNode()}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Division",
@@ -29,5 +24,9 @@ export class Division extends Expression {
         this.right.treeObject(),
       ],
     };
+  }
+
+  resolve(): string {
+    return this.left.resolve() + "/" + this.right.resolve();
   }
 }

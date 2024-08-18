@@ -10,20 +10,20 @@ export class ArrayLiteral extends Expression {
   }
 
   toString(): string {
-    return "";
-  }
-
-  astNode(): string {
-    return "";
+    return `${this.expressions.map((exp) => exp.toString()).join(",")}`;
   }
 
   treeObject(): TreeNode {
     let expAst: TreeNode[] = [];
-    
+
     this.expressions.forEach((exp) => {
       expAst.push(exp.treeObject());
     });
 
     return { name: "Array", children: expAst };
+  }
+
+  resolve(): string {
+    return `${this.expressions.map((exp) => exp.resolve()).join(",")}`;
   }
 }

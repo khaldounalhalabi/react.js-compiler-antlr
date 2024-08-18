@@ -21,14 +21,6 @@ export class Return extends Statement {
     } else return "return";
   }
 
-  public astNode(): string {
-    if (this.expression) {
-      return `ReturnStatement -> ${this.expression.astNode()}`;
-    } else if (this.jsxElement) {
-      return `ReturnStatement -> ${this.jsxElement.astNode()}`;
-    } else return "ReturnStatement -> void";
-  }
-
   treeObject(): TreeNode {
     if (this.expression) {
       return {
@@ -45,5 +37,13 @@ export class Return extends Statement {
         name: "Return Statement",
         children: [{ name: "void" }],
       };
+  }
+
+  resolve(): string {
+    if (this.expression) {
+      return `return ${this.expression.resolve()}`;
+    } else if (this.jsxElement) {
+      return `return ${this.jsxElement.resolve()}`;
+    } else return "return";
   }
 }

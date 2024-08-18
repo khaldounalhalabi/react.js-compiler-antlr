@@ -20,12 +20,10 @@ export class ConditionalStatement extends Statement {
     this.elseStatement = elseStatement;
   }
 
-  astNode(): string {
-    return "";
-  }
-
   toString(): string {
-    return "";
+    return `${this.ifStatement.toString()} ${this.ifElseStatements
+      ?.map((st) => st.toString())
+      .join("\n")} ${this.elseStatement?.toString()}`;
   }
 
   treeObject(): TreeNode {
@@ -65,5 +63,11 @@ export class ConditionalStatement extends Statement {
         children: [this.ifStatement.treeObject()],
       };
     }
+  }
+
+  resolve(): string {
+    return `${this.ifStatement.resolve()} ${this.ifElseStatements
+      ?.map((st) => st.resolve())
+      .join("\n")} ${this.elseStatement?.resolve()}`;
   }
 }
