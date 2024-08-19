@@ -1,9 +1,9 @@
-import { Statement } from "../abstracts/Statement.ts";
 import { Expression } from "../abstracts/Expression.ts";
 import { Block } from "./Block.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
+import { AbstractStatement } from "../abstracts/AbstractStatement.ts";
 
-export class ElseIfStatement extends Statement {
+export class ElseIfStatement extends AbstractStatement {
   public condition: Expression;
   public block: Block;
 

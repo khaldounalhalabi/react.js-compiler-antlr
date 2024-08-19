@@ -1,10 +1,10 @@
-import { Statement } from "../abstracts/Statement.ts";
 import { IfStatement } from "./IfStatement.ts";
 import { ElseIfStatement } from "./ElseIfStatement.ts";
 import { ElseStatement } from "./ElseStatement.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
+import {AbstractStatement} from "../abstracts/AbstractStatement.ts";
 
-export class ConditionalStatement extends Statement {
+export class ConditionalStatement extends AbstractStatement {
   public ifStatement: IfStatement;
   public ifElseStatements?: ElseIfStatement[];
   public elseStatement?: ElseStatement;

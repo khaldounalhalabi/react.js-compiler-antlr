@@ -26,11 +26,15 @@ const program = programVisitor.visitProgram(tree);
 // drawTree(program.treeObject());
 
 function appendCompiled() {
-  const script = document.createElement("script");
-    script.innerHTML =
-      program.resolve() +
-      "\ndocument.getElementById('app').innerHTML = App();\n";
-    document.body.appendChild(script);
+  let script = document.getElementById("compiled");
+  if (script) {
+    script.remove();
+  }
+  script = document.createElement("script");
+  script.id = "compiled";
+  script.innerHTML =
+    program.resolve() + "\ndocument.getElementById('app').innerHTML = App();\n";
+  document.body.appendChild(script);
 }
 
 appendCompiled();
@@ -41,5 +45,4 @@ console.log(
 
 document.addEventListener("state_changed", function () {
   appendCompiled();
-  console.log("status changed")
 });

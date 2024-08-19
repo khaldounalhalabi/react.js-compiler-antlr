@@ -1,7 +1,7 @@
 import ReactVisitor from "../antlr/ReactVisitor.ts";
 import { Program } from "../ast/Program.ts";
 import { ProgramContext } from "../antlr/ReactParser.ts";
-import { Statement } from "../ast/abstracts/Statement.ts";
+import { Statement } from "../ast/statements/Statement.ts";
 import { StatementVisitor } from "./StatementVisitor.ts";
 import { ExpressionVisitor } from "./ExpressionVisitor.ts";
 import { ReturnVisitor } from "./ReturnVisitor.ts";

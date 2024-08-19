@@ -1,10 +1,10 @@
 import { Expression } from "../abstracts/Expression.ts";
 import { Identifier } from "../Expressions/Identifier.ts";
 import { VariableType } from "../Expressions/VariableType.ts";
-import { Statement } from "../abstracts/Statement.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
+import { AbstractStatement } from "../abstracts/AbstractStatement.ts";
 
-export class VariableDeclaration extends Statement {
+export class VariableDeclaration extends AbstractStatement {
   variableType: VariableType;
   identifier: Identifier;
   expression: Expression | null;

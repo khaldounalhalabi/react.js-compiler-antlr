@@ -1,5 +1,10 @@
-import { Statement } from "./Statement.ts";
+import { TreeNode } from "../../Types/TreeNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
 
-export abstract class Expression extends Statement {
+export abstract class Expression extends AbstractStatement {
+  public abstract toString(): string;
+
+  public abstract treeObject(): TreeNode;
+
   public abstract resolve(): string;
 }

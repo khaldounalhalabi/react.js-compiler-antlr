@@ -1,4 +1,4 @@
-import { Statement } from "./abstracts/Statement.ts";
+import { Statement } from "./statements/Statement.ts";
 import { TreeNode } from "../Types/TreeNode.ts";
 
 export class Program {

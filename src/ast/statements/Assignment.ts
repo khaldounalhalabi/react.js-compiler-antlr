@@ -1,9 +1,9 @@
 import { Identifier } from "../Expressions/Identifier.ts";
 import { Expression } from "../abstracts/Expression.ts";
-import { Statement } from "../abstracts/Statement.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
+import {AbstractStatement} from "../abstracts/AbstractStatement.ts";
 
-export class Assignment extends Statement {
+export class Assignment extends AbstractStatement {
   identifier: Identifier;
   expression: Expression;
 

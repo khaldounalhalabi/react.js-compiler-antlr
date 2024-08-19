@@ -1,8 +1,8 @@
-import { Statement } from "../abstracts/Statement.ts";
 import { Block } from "./Block.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
+import { AbstractStatement } from "../abstracts/AbstractStatement.ts";
 
-export class ElseStatement extends Statement {
+export class ElseStatement extends AbstractStatement {
   public block: Block;
 
   constructor(block: Block) {

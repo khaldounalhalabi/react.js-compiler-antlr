@@ -1,9 +1,9 @@
 import { JsxElement } from "../Jsx/JsxElement.ts";
 import { Expression } from "../abstracts/Expression.ts";
-import { Statement } from "../abstracts/Statement.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
+import { AbstractStatement } from "../abstracts/AbstractStatement.ts";
 
-export class Return extends Statement {
+export class Return extends AbstractStatement {
   public jsxElement?: JsxElement;
   public expression?: Expression;
 

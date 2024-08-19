@@ -1,10 +1,10 @@
-import { Statement } from "../abstracts/Statement.ts";
 import { Identifier } from "../Expressions/Identifier.ts";
 import { Block } from "./Block.ts";
 import { Parameter } from "../Expressions/Parameters.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
+import { AbstractStatement } from "../abstracts/AbstractStatement.ts";
 
-export class FunctionDeclaration extends Statement {
+export class FunctionDeclaration extends AbstractStatement {
   identifier: Identifier;
   parameters?: Parameter[];
   block: Block;

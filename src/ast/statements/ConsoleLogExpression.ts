@@ -1,8 +1,8 @@
-import { Statement } from "../abstracts/Statement.ts";
 import { Arguments } from "../Expressions/Arguments.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
+import {AbstractStatement} from "../abstracts/AbstractStatement.ts";
 
-export class ConsoleLogExpression extends Statement {
+export class ConsoleLogExpression extends AbstractStatement {
   args: Arguments | undefined;
 
   constructor(args: Arguments | undefined) {
