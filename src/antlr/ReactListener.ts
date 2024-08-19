@@ -1,5 +1,6 @@
 // Generated from React.g4 by ANTLR 4.13.1
 
+// @ts-ignore
 import {ParseTreeListener} from "antlr4";
 
 
