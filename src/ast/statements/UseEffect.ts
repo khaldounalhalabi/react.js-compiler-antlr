@@ -1,10 +1,10 @@
-import { Statement } from "../abstracts/Statement.ts";
 import { ArrowFunction } from "../Expressions/FunctionalExpression/ArrowFunction.ts";
 import { Parameter } from "../Expressions/Parameters.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
 import { FunctionalExpression } from "../Expressions/FunctionalExpression/FunctionalExpression.ts";
+import { AbstractStatement } from "../abstracts/AbstractStatement.ts";
 
-export class UseEffect extends Statement {
+export class UseEffect extends AbstractStatement {
   public functional: FunctionalExpression | ArrowFunction;
 
   public parameters?: Parameter[];
@@ -15,7 +15,7 @@ export class UseEffect extends Statement {
   ) {
     super();
     this.functional = functional;
-    if (this.parameters) this.parameters = parameters;
+    this.parameters = parameters;
   }
 
   public toString() {
@@ -45,6 +45,20 @@ export class UseEffect extends Statement {
   }
 
   resolve(): string {
-    return "";
+    if (!this.parameters || this.parameters.length <= 0) {
+      return `document.addEventListener('state_changed' , function(event){
+                (${this.functional.resolve()})();
+            })`;
+    } else {
+      return this.parameters
+        ?.map(
+          (
+            param,
+          ) => `document.addEventListener('state_changed_${param.resolve()}' , function(event){
+                (${this.functional.resolve()})();
+            })`,
+        )
+        .join("\n");
+    }
   }
 }

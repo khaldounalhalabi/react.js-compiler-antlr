@@ -37,9 +37,14 @@ export class JsxAttribute extends Jsx {
       case "src":
         return `src=${this.value.resolve()}`;
       case "ref":
-        let id = Date.now() * Math.random();
-        RefHandler.add(id as number);
-        return `id=${id}`;
+        let id = undefined;
+        if (!RefHandler.pop(this.value.resolve())) {
+          id = Date.now() * Math.random();
+          RefHandler.add({ key: this.value.resolve(), value: id });
+        } else {
+          id = RefHandler.pop(this.value.resolve())?.value;
+        }
+        return `id="ref_id${id}_ref"`;
       case "width":
         return `width=${this.value.resolve()}`;
       case "height":

@@ -13,41 +13,6 @@
 <div id="app" style="width: 100% ; height: 100%" class="bg-red-900 cursor-pointer">
 </div>
 <script type="module" src="./src/main.ts"></script>
-<script>
-
-    const myEvent = new CustomEvent("state_changed", {
-        detail: {message: "Hello, this is a custom event!", time: new Date()},
-    });
-
-    window.addEventListener('popstate', function (event) {
-        console.log('User hit the back button or navigated history');
-        localStorage.clear();
-    });
-    window.addEventListener('beforeunload', function (event) {
-        console.log('Page is being refreshed or closed');
-        localStorage.clear();
-    });
-
-    function setState(key, value) {
-        let storedValue;
-        if (typeof value == "function") {
-            storedValue = value(getState(key));
-        } else {
-            storedValue = value;
-        }
-        const stringValue = JSON.stringify(storedValue);
-        localStorage.setItem(key, stringValue);
-        document.dispatchEvent(myEvent);
-    }
-
-    function getState(key) {
-        const stringValue = localStorage.getItem(key);
-        if (stringValue === null) {
-            return null;
-        }
-        return JSON.parse(stringValue);
-    }
-</script>
-
+<script src="./src/StateHandlers.ts"></script>
 </body>
 </html>

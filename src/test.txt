@@ -1,8 +1,27 @@
 function App() {
-  const [counter , setCounter] = useState(0);
+
+  function add(x, y) {
+      return x + y;
+  }
+
+  function mul(x, y) {
+      return add(x + y, x - y) * add(x, y);
+  }
+
+  console.log("Hey I am here");
+
+  if (mul(5, -10) > 0) {
+      console.log("it is greater");
+  } else if (add(5, 10) < 0) {
+      console.log("it is not grater")
+  } else {
+      console.log("fuck off");
+  }
+
+  console.log("the end")
+
   return (
-    <div className="w-full flex items-center justify-center bg-red-900">
-        <h1 className="btn btn-success" onClick={() => {setCounter((prev) => {return prev+1})}}>{counter}</h1>
+    <div>
     </div>
   )
 }

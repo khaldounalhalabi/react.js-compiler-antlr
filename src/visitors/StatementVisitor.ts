@@ -1,7 +1,6 @@
 // @ts-ignore
 import { TerminalNode } from "antlr4";
 import ReactVisitor from "../antlr/ReactVisitor.ts";
-import { Statement } from "../ast/abstracts/Statement.ts";
 import {
   AssignmentContext,
   ConditionalStatementContext,
@@ -39,8 +38,9 @@ import { ElseIfStatement } from "../ast/statements/ElseIfStatement.ts";
 import { IfStatement } from "../ast/statements/IfStatement.ts";
 import { ElseStatement } from "../ast/statements/ElseStatement.ts";
 import { Parameter } from "../ast/Expressions/Parameters.ts";
+import { AbstractStatement } from "../ast/abstracts/AbstractStatement.ts";
 
-export class StatementVisitor extends ReactVisitor<Statement> {
+export class StatementVisitor extends ReactVisitor<AbstractStatement> {
   public exprVisitor: ExpressionVisitor;
 
   public blockVisitor: BlockVisitor;
@@ -116,7 +116,10 @@ export class StatementVisitor extends ReactVisitor<Statement> {
   visitUseEffect: (ctx: UseEffectContext) => UseEffect = (
     ctx: UseEffectContext,
   ) => {
-    let funcCtx = ctx.functionExpression();
+    let funcCtx = ctx.arrowFunction() ?? ctx.functionExpression();
+    if (!funcCtx) {
+      console.error("useEffect cannot must have a callback function");
+    }
     let func = this.funcExprVisitor.visit(funcCtx);
 
     let paramCtx:

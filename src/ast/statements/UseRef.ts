@@ -1,9 +1,10 @@
-import { Statement } from "../abstracts/Statement.ts";
 import { Identifier } from "../Expressions/Identifier.ts";
 import { Expression } from "../abstracts/Expression.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
+import { RefHandler } from "../../libs/RefHandler.ts";
+import { AbstractStatement } from "../abstracts/AbstractStatement.ts";
 
-export class UseRef extends Statement {
+export class UseRef extends AbstractStatement {
   public identifier: Identifier;
 
   public expression?: Expression;
@@ -37,6 +38,11 @@ export class UseRef extends Statement {
   }
 
   resolve(): string {
-    return "";
+    return `setRef('${this.identifier.resolve()}',document.getElementById('ref_id${RefHandler.pop(
+      this.identifier.resolve(),
+    )?.value}_ref')?.outerHTML ?? null) \n
+    const ${this.identifier.resolve()} = getState('${this.identifier.resolve()}')${
+      this.expression ? `?? ${this.expression.resolve()}` : "undefined"
+    };`;
   }
 }

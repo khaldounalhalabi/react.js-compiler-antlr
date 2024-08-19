@@ -1,7 +1,7 @@
 import { StatementVisitor } from "./StatementVisitor.ts";
 import { BlockContext } from "../antlr/ReactParser.ts";
 import { Block } from "../ast/statements/Block.ts";
-import { Statement } from "../ast/abstracts/Statement.ts";
+import { Statement } from "../ast/statements/Statement.ts";
 import { ReturnVisitor } from "./ReturnVisitor.ts";
 import ReactVisitor from "../antlr/ReactVisitor.ts";
 import { ExpressionVisitor } from "./ExpressionVisitor.ts";
@@ -16,7 +16,7 @@ export class BlockVisitor extends ReactVisitor<Block> {
     this.symbolTable = new SymbolTable();
 
     const statementsCtx = ctx.statement_list();
-    const statements: Statement[] = [];
+    let statements: Statement[] = [];
 
     const expressionVisitor = new ExpressionVisitor();
     const parameterVisitor = new ParameterVisitor(expressionVisitor);
@@ -31,10 +31,7 @@ export class BlockVisitor extends ReactVisitor<Block> {
       funcExprVisitor,
       parameterVisitor,
     );
-
-    for (let i = 0; i < statementsCtx.length; i++) {
-      statements.push(statementVisitor.visit(statementsCtx[i]));
-    }
+    statements = statementsCtx.map((stCtx) => statementVisitor.visit(stCtx));
 
     const returnVisitor = new ReturnVisitor(
       funcExprVisitor,
