@@ -8,14 +8,16 @@ function App() {
       return add(x + y, x - y) * add(x, y);
   }
 
-  console.log("Hey I am here");
+ console.log("Hey I am here");
+ const result = mul(5, 10) ;
+ const addResult = add(5, 10);
 
-  if (mul(5, -10) > 0) {
+  if (result > 0) {
       console.log("it is greater");
-  } else if (add(5, 10) < 0) {
+  } else if (addResult < 0) {
       console.log("it is not grater")
   } else {
-      console.log("fuck off");
+      console.log("Didn't make it to here");
   }
 
   console.log("the end")

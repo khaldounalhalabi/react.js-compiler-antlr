@@ -46,7 +46,7 @@ export class Block extends AbstractStatement {
     return `{\n
               ${this.statements
                 // @ts-ignore
-                .map((statement) => statement?.[0].resolve())
+                .map((statement) => statement?.resolve())
                 .join("\n")}\n
                 ${this.returnStatement?.resolve()}
             }`;

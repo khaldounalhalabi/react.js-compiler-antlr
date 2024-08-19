@@ -28,7 +28,6 @@ export class IfStatement extends AbstractStatement {
   }
 
   resolve(): string {
-    console.log(this.condition);
     return `if (${this.condition.resolve()})${this.block.resolve()}`;
   }
 }

@@ -25,7 +25,7 @@ export class Program {
     let sts: TreeNode[] = [];
     this.statements.forEach((s) => {
       // @ts-ignore
-      sts.push(s[0].treeObject());
+      sts.push(s.treeObject());
     });
 
     return {
@@ -38,7 +38,7 @@ export class Program {
     return (
       this.statements
         // @ts-ignore
-        .map((statement) => statement?.[0]?.resolve())
+        .map((statement) => statement?.resolve())
         .join("\n")
     );
   }

@@ -11,6 +11,7 @@ import {
   FunctionDeclarationContext,
   IfStatementContext,
   ParametersContext,
+  StatementContext,
   UseEffectContext,
   UseRefContext,
   UseStateContext,
@@ -39,6 +40,7 @@ import { IfStatement } from "../ast/statements/IfStatement.ts";
 import { ElseStatement } from "../ast/statements/ElseStatement.ts";
 import { Parameter } from "../ast/Expressions/Parameters.ts";
 import { AbstractStatement } from "../ast/abstracts/AbstractStatement.ts";
+import { Statement } from "../ast/statements/Statement.ts";
 
 export class StatementVisitor extends ReactVisitor<AbstractStatement> {
   public exprVisitor: ExpressionVisitor;
@@ -218,5 +220,23 @@ export class StatementVisitor extends ReactVisitor<AbstractStatement> {
   ): ElseStatement => {
     let block = this.blockVisitor.visitBlock(ctx.block());
     return new ElseStatement(block);
+  };
+
+  visitStatement: (ctx: StatementContext) => Statement = (
+    ctx: StatementContext,
+  ) => {
+    return new Statement(
+      this.visit(
+        ctx.assignment() ??
+          ctx.conditionalStatement() ??
+          ctx.consoleLogExpression() ??
+          ctx.functionCall() ??
+          ctx.functionDeclaration() ??
+          ctx.useEffect() ??
+          ctx.useRef() ??
+          ctx.useState() ??
+          ctx.variableDeclaration(),
+      ),
+    );
   };
 }
