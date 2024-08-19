@@ -48,6 +48,13 @@ export class UseState extends Statement {
   }
 
   resolve(): string {
-    return "";
+    return `const ${this.identifier.resolve()} = getState('${this.identifier.resolve()}') ${
+      this.expression
+        ? `?? ${this.expression.resolve()}`
+        : "undefined"
+    };
+            \n const ${this.setIdentifier.resolve()} = (value) => {setState('${this.identifier.resolve()}' , value)}
+            \n window.${this.identifier.resolve()} = ${this.identifier.resolve()}\n
+            \n window.${this.setIdentifier.resolve()} = ${this.setIdentifier.resolve()}`;
   }
 }

@@ -33,7 +33,7 @@ export class JsxAttribute extends Jsx {
     const attributeName = this.name.resolve();
     switch (attributeName) {
       case "onClick":
-        return `onclick="(function(event){${this.value.resolve()}})(event)"`;
+        return `onclick="(${this.value.resolve()})(event)"`;
       case "src":
         return `src=${this.value.resolve()}`;
       case "ref":

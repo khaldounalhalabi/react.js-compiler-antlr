@@ -29,6 +29,13 @@ export class JsxElementContent extends Jsx {
   }
 
   resolve(): string {
-    return this.content?.resolve() ?? "";
+    if (this.content) {
+      if (this.content instanceof Jsx) {
+        return this.content.resolve();
+      } else {
+        return "${" + this.content.resolve() + "}";
+      }
+    }
+    return "";
   }
 }

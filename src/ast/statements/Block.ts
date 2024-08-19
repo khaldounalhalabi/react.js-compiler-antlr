@@ -42,9 +42,9 @@ export class Block extends Statement {
   }
 
   resolve(): string {
-    console.log(this.statements);
     return `{\n
               ${this.statements
+                // @ts-ignore
                 .map((statement) => statement?.[0].resolve())
                 .join("\n")}\n
                 ${this.returnStatement?.resolve()}

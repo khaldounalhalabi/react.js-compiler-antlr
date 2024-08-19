@@ -22,10 +22,24 @@ let tree = parser.program();
 
 const programVisitor = new ProgramVisitor();
 const program = programVisitor.visitProgram(tree);
+
 // drawTree(program.treeObject());
 
-console.log(program.resolve());
+function appendCompiled() {
+  const script = document.createElement("script");
+    script.innerHTML =
+      program.resolve() +
+      "\ndocument.getElementById('app').innerHTML = App();\n";
+    document.body.appendChild(script);
+}
 
-const script = document.createElement("script");
-script.innerHTML = program.resolve() + "document.getElementById('app').innerHTML = App();";
-document.getElementById("app")?.appendChild(script);
+appendCompiled();
+
+console.log(
+  program.resolve() + "\ndocument.getElementById('app').innerHTML = App();\n",
+);
+
+document.addEventListener("state_changed", function () {
+  appendCompiled();
+  console.log("status changed")
+});
