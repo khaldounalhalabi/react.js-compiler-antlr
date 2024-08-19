@@ -21,6 +21,6 @@ export class TemplateString extends Expression {
   }
 
   resolve(): string {
-    return "`${" + this.expression.resolve() + "}`";
+    return "${" + this.expression.resolve() + "}";
   }
 }

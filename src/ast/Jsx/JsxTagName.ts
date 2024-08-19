@@ -13,11 +13,11 @@ export class JsxTagName extends Jsx {
     return this.name;
   }
 
-  public astNode(): string {
-    return `JsxTagName -> ${this.name}`;
-  }
-
   treeObject(): TreeNode {
     return { name: "Jsx Tag Name", children: [{ name: this.name }] };
+  }
+
+  resolve(): string {
+    return this.name;
   }
 }

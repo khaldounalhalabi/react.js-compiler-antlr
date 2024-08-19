@@ -24,16 +24,6 @@ export class SelfClosingJsxElement extends Jsx {
     return `<${this.tagName.toString()} ${attributes}/>`;
   }
 
-  public astNode(): string {
-    const attributesAst =
-      this.jsxAttributes?.map((attr) => attr.astNode()).join(" , ") ??
-      undefined;
-
-    return `SelfClosingJsxElement -> ${this.tagName.astNode()} ${
-      attributesAst ? `SelfClosingJsxElement -> ${attributesAst}` : ""
-    }`;
-  }
-
   treeObject(): TreeNode {
     let attrs: TreeNode[] = [];
     this.jsxAttributes?.forEach((att) => {
@@ -48,5 +38,16 @@ export class SelfClosingJsxElement extends Jsx {
       : {
           name: "Self Closing Jsx Element",
         };
+  }
+  resolve(): string {
+    if (this.tagName.resolve() != "img") {
+      return `<${this.tagName.resolve()} ${this.jsxAttributes
+          ?.map((attr) => attr.resolve())
+          .join(" ")}></${this.tagName.resolve()}>`;
+    } else {
+      return `<${this.tagName.resolve()} ${this.jsxAttributes
+          ?.map((attr) => attr.resolve())
+          .join(" ")}/>`;
+    }
   }
 }

@@ -13,12 +13,8 @@ export class ComponentProps extends Jsx {
     this.value = value;
   }
 
-  astNode(): string {
-    return "";
-  }
-
   toString(): string {
-    return "";
+    return this.identifier.toString() + "=" + `{${this.value.toString()}}`;
   }
 
   treeObject(): TreeNode {
@@ -26,5 +22,9 @@ export class ComponentProps extends Jsx {
       name: "Component Prop",
       children: [this.identifier.treeObject(), this.value.treeObject()],
     };
+  }
+
+  resolve(): string {
+    return this.value.resolve();
   }
 }

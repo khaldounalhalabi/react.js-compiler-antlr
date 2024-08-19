@@ -2,6 +2,7 @@ import ReactVisitor from "../antlr/ReactVisitor.ts";
 import { JsxTagName } from "../ast/Jsx/JsxTagName.ts";
 import {
   ComponentPropsContext,
+  ExpressionContext,
   JsxAttributeContext,
   JsxAttributeNameContext,
   JsxAttributeValueContext,
@@ -12,6 +13,7 @@ import {
   JsxTagNameContext,
   SelfClosingComponentContext,
   SelfClosingJsxElementContext,
+  StringContext,
 } from "../antlr/ReactParser.ts";
 import { JsxAttribute } from "../ast/Jsx/JsxAttribute.ts";
 import { JsxAttributeName } from "../ast/Jsx/JsxAttributeName.ts";
@@ -65,7 +67,9 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
         const valueCtx = ctx.expression();
         value = this.expressionVisitor.visit(valueCtx);
       } else {
-        value = this.expressionVisitor.visitString(ctx.StringLiteral());
+        value = this.expressionVisitor.visitString(
+          ctx as unknown as StringContext,
+        );
       }
       // console.log(value)
       return new JsxAttributeValue(value);
@@ -165,7 +169,15 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
       });
     }
 
-    return new JsxComponentFull(id, attributes, props);
+    const content = ctx
+      .jsxElementContent_list()
+      .map((c) =>
+        c instanceof ExpressionContext
+          ? this.expressionVisitor.visit(c)
+          : this.visit(c),
+      );
+
+    return new JsxComponentFull(id, attributes, props, content);
   };
 
   visitSelfClosingComponent: (
@@ -189,6 +201,6 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
       });
     }
 
-    return new JsxComponentFull(id, attributes, props);
+    return new SelfClosingComponent(id, attributes, props);
   };
 }

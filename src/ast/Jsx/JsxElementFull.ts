@@ -37,24 +37,6 @@ export class JsxElementFull extends Jsx {
                 </${this.tagName.toString()}>`;
   }
 
-  public astNode(): string {
-    const attributesAst =
-      this.jsxAttributes?.map((attr) => attr.astNode()).join(" , ") ??
-      undefined;
-
-    const contentAst =
-      this.content?.map((co) => co.astNode()).join(" , ") ?? undefined;
-
-    return `JsxElementFull -> ${this.tagName.astNode()}  ${
-      attributesAst ? `JsxElementFull -> ${attributesAst}` : ""
-    } ${
-      contentAst
-        ? `
-    JsxElementFull -> ${contentAst}`
-        : ""
-    }`;
-  }
-
   treeObject(): TreeNode {
     let contentObjects: TreeNode[] = [];
     this.content?.forEach((co) => {
@@ -71,7 +53,7 @@ export class JsxElementFull extends Jsx {
         name: "Jsx Element Full",
         children: [this.tagName.treeObject(), ...attrs, ...contentObjects],
       };
-    } else if (this.content && !this.jsxAttributes){
+    } else if (this.content && !this.jsxAttributes) {
       return {
         name: "Jsx Element Full",
         children: [this.tagName.treeObject(), ...contentObjects],
@@ -86,6 +68,20 @@ export class JsxElementFull extends Jsx {
         name: "Jsx Element Full",
         children: [this.tagName.treeObject()],
       };
+    }
+  }
+
+  resolve(): string {
+    if (this.tagName.resolve() != "img") {
+      return `<${this.tagName.resolve()} ${this.jsxAttributes
+        ?.map((attr) => attr.resolve())
+        .join(" ")}>${this.content
+        ?.map((cont) => cont.resolve())
+        .join("\n")}</${this.tagName.resolve()}>`;
+    } else {
+      return `<${this.tagName.resolve()} ${this.jsxAttributes
+          ?.map((attr) => attr.resolve())
+          .join(" ")}/>`;
     }
   }
 }

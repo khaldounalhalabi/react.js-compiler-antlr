@@ -15,18 +15,14 @@ export class JsxAttributeValue extends Jsx {
     return this.value.toString();
   }
 
-  public astNode(): string {
-    if (this.value instanceof String)
-      return `JsxAttributeValue -> ${this.value}`;
-    else {
-      return `JsxAttributeValue -> ${this.value.astNode()}`;
-    }
+  treeObject(): TreeNode {
+    return {
+      name: "Jsx Attribute Value",
+      children: [this.value.treeObject()],
+    };
   }
 
-  treeObject(): TreeNode {
-      return {
-        name: "Jsx Attribute Value",
-        children: [this.value.treeObject()],
-      };
+  resolve(): string {
+    return this.value.resolve();
   }
 }

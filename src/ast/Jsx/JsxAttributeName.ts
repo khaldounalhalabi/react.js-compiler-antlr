@@ -13,14 +13,14 @@ export class JsxAttributeName extends Jsx {
     return this.name;
   }
 
-  public astNode(): string {
-    return `JsxAttributeName -> ${this.name}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Jsx Attribute Name",
       children: [{ name: this.name }],
     };
+  }
+
+  resolve(): string {
+    return this.name;
   }
 }

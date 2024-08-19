@@ -27,14 +27,14 @@ export class JsxElement extends Jsx {
     return this.element.toString();
   }
 
-  public astNode(): string {
-    return `JsxElement -> ${this.element.astNode()}`;
-  }
-
   treeObject(): TreeNode {
     return {
       name: "Jsx Element",
       children: [this.element.treeObject()],
     };
+  }
+
+  resolve(): string {
+    return this.element.resolve();
   }
 }

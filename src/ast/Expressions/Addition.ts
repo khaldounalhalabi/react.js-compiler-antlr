@@ -28,6 +28,6 @@ export class Addition extends Expression {
   }
 
   resolve(): string {
-    return `${this.left.resolve()} + ${this.right.resolve()}`;
+    return `(${this.left.resolve()}) + (${this.right.resolve()})`;
   }
 }

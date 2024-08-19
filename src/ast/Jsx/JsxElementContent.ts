@@ -15,12 +15,6 @@ export class JsxElementContent extends Jsx {
     return this.content?.toString() ?? "";
   }
 
-  public astNode(): string {
-    return this.content
-      ? `JsxElementContent -> ${this.content?.astNode()}`
-      : "";
-  }
-
   treeObject(): TreeNode {
     if (this.content) {
       return {
@@ -32,5 +26,9 @@ export class JsxElementContent extends Jsx {
         name: "Jsx Element Content",
       };
     }
+  }
+
+  resolve(): string {
+    return this.content?.resolve() ?? "";
   }
 }

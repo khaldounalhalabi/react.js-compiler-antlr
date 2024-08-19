@@ -35,8 +35,11 @@ export class Program {
   }
 
   resolve(): string {
-    return this.statements
-      .map((statement) => statement?.[0]?.resolve())
-      .join("\n");
+    return (
+      this.statements
+        // @ts-ignore
+        .map((statement) => statement?.[0]?.resolve())
+        .join("\n")
+    );
   }
 }

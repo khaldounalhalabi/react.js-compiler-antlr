@@ -1,8 +1,8 @@
 import { Jsx } from "../abstracts/Jsx.ts";
 import { Identifier } from "../Expressions/Identifier.ts";
 import { TreeNode } from "../../Types/TreeNode.ts";
-import {JsxAttribute} from "./JsxAttribute.ts";
-import {ComponentProps} from "./ComponentProps.ts";
+import { JsxAttribute } from "./JsxAttribute.ts";
+import { ComponentProps } from "./ComponentProps.ts";
 
 export class SelfClosingComponent extends Jsx {
   public identifier: Identifier;
@@ -10,9 +10,9 @@ export class SelfClosingComponent extends Jsx {
   public props: ComponentProps[];
 
   constructor(
-      identifier: Identifier,
-      jsxAttributes: JsxAttribute[],
-      props: ComponentProps[],
+    identifier: Identifier,
+    jsxAttributes: JsxAttribute[],
+    props: ComponentProps[],
   ) {
     super();
     this.identifier = identifier;
@@ -44,5 +44,11 @@ export class SelfClosingComponent extends Jsx {
       name: "Self Closing Jsx Component",
       children: [...attributesTree, ...propsTree],
     };
+  }
+
+  resolve(): string {
+    return `\${${this.identifier.resolve()}(${this.props.map((prop) =>
+      prop.value.resolve(),
+    )})}`;
   }
 }

@@ -23,10 +23,9 @@ let tree = parser.program();
 const programVisitor = new ProgramVisitor();
 const program = programVisitor.visitProgram(tree);
 // drawTree(program.treeObject());
-const compiled = program.resolve();
-const appContainer = document.getElementById("app");
-if (appContainer) {
-  const script = document.createElement("script");
-  script.innerHTML = compiled;
-  appContainer.appendChild(script);
-}
+
+console.log(program.resolve());
+
+const script = document.createElement("script");
+script.innerHTML = program.resolve() + "document.getElementById('app').innerHTML = App();";
+document.getElementById("app")?.appendChild(script);

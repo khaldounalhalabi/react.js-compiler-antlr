@@ -43,7 +43,7 @@ export class Return extends Statement {
     if (this.expression) {
       return `return ${this.expression.resolve()}`;
     } else if (this.jsxElement) {
-      return `return ${this.jsxElement.resolve()}`;
+      return `return (\`${this.jsxElement.resolve()}\`)`;
     } else return "return";
   }
 }
