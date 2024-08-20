@@ -3,11 +3,12 @@ import ReactLexer from "./antlr/ReactLexer.ts";
 // @ts-ignore
 import { CharStream, CommonTokenStream } from "antlr4";
 import { ProgramVisitor } from "./visitors/ProgramVisitor.ts";
+import {drawTree} from "./libs/DrawTree.ts";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = ``;
 let inputStream: string = "";
 
-await fetch("./src/test.txt")
+await fetch("./src/test4.txt")
   .then((res) => res.text())
   .then((data) => {
     inputStream = data;
@@ -37,16 +38,15 @@ try {
     document.body.appendChild(script);
   }
 
-  appendCompiled();
+  drawTree(program.treeObject());
 
-  console.log(
-    program.resolve() + "\ndocument.getElementById('app').innerHTML = App();\n",
-  );
+  appendCompiled();
 
   document.addEventListener("state_changed", function () {
     appendCompiled();
   });
-  // drawTree(program.treeObject());
+
+  console.log(program.resolve());
 } catch (error) {
   console.error(error);
 }

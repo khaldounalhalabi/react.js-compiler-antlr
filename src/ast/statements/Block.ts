@@ -25,8 +25,7 @@ export class Block extends AbstractStatement {
   treeObject(): TreeNode {
     let sts: TreeNode[] = [];
     this.statements.forEach((st) => {
-      // @ts-ignore
-      sts.push(st[0].treeObject());
+      sts.push(st.treeObject());
     });
     return this.returnStatement
       ? {

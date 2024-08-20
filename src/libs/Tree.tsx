@@ -1,7 +1,7 @@
 import React from "react";
 import Tree from "react-d3-tree";
 import { TreeNode } from "../Types/TreeNode.ts";
-import './styles.css'
+import "./styles.css";
 
 const PrintAst = ({ data }: { data: TreeNode }) => {
   return (
@@ -19,3 +19,23 @@ const PrintAst = ({ data }: { data: TreeNode }) => {
 };
 
 export default PrintAst;
+
+function App() {
+  const [counter, setCounter] = useState(0);
+
+  return (
+    <div className={"flex items-center justify-center"}>
+      <h1 className={"text-3xl"}>"Counter" ${counter}</h1>
+      <div
+        className={"btn btn-warning"}
+        onClick={() => {
+          return setCounter((prev) => {
+            return prev + 1;
+          });
+        }}
+      >
+        "Click to increment"
+      </div>
+    </div>
+  );
+}

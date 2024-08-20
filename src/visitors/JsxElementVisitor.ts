@@ -97,6 +97,7 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
     ctx: JsxElementFullContext,
   ) => {
     const jsxTagNameCtx: JsxTagNameContext[] = ctx.jsxTagName_list();
+    console.log(jsxTagNameCtx)
     const tagName = this.visitJsxTagName(jsxTagNameCtx[0]);
     const tagName2 = this.visitJsxTagName(jsxTagNameCtx[1]);
     if (tagName.name != tagName2.name) {
