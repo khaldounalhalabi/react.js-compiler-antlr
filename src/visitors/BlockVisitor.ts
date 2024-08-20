@@ -11,10 +11,17 @@ import { JsxElementVisitor } from "./JsxElementVisitor.ts";
 import { SymbolTable } from "../libs/SymbolTable.ts";
 
 export class BlockVisitor extends ReactVisitor<Block> {
-  visitBlock: (ctx: BlockContext) => Block = (ctx: BlockContext) => {
-    this.semanticErrors = [];
-    this.symbolTable = new SymbolTable();
+  public symbolTable?: SymbolTable = undefined;
 
+  constructor(symbolTable?: SymbolTable) {
+    super();
+    this.symbolTable = symbolTable;
+  }
+
+  visitBlock: (ctx: BlockContext) => Block = (ctx: BlockContext) => {
+    if (!this.symbolTable) {
+      this.symbolTable = SymbolTable.make();
+    }
     const statementsCtx = ctx.statement_list();
     let statements: Statement[] = [];
 
@@ -30,6 +37,7 @@ export class BlockVisitor extends ReactVisitor<Block> {
       this,
       funcExprVisitor,
       parameterVisitor,
+      this.symbolTable,
     );
     statements = statementsCtx.map((stCtx) => statementVisitor.visit(stCtx));
 

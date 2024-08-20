@@ -21,28 +21,32 @@ let parser = new ReactParser(tokens);
 let tree = parser.program();
 
 const programVisitor = new ProgramVisitor();
-const program = programVisitor.visitProgram(tree);
+try {
+  const program = programVisitor.visitProgram(tree);
 
-// drawTree(program.treeObject());
-
-function appendCompiled() {
-  let script = document.getElementById("compiled");
-  if (script) {
-    script.remove();
+  function appendCompiled() {
+    let script = document.getElementById("compiled");
+    if (script) {
+      script.remove();
+    }
+    script = document.createElement("script");
+    script.id = "compiled";
+    script.innerHTML =
+      program.resolve() +
+      "\ndocument.getElementById('app').innerHTML = App();\n";
+    document.body.appendChild(script);
   }
-  script = document.createElement("script");
-  script.id = "compiled";
-  script.innerHTML =
-    program.resolve() + "\ndocument.getElementById('app').innerHTML = App();\n";
-  document.body.appendChild(script);
-}
 
-appendCompiled();
-
-console.log(
-  program.resolve() + "\ndocument.getElementById('app').innerHTML = App();\n",
-);
-
-document.addEventListener("state_changed", function () {
   appendCompiled();
-});
+
+  console.log(
+    program.resolve() + "\ndocument.getElementById('app').innerHTML = App();\n",
+  );
+
+  document.addEventListener("state_changed", function () {
+    appendCompiled();
+  });
+  // drawTree(program.treeObject());
+} catch (error) {
+  console.error(error);
+}

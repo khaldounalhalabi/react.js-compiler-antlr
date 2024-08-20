@@ -41,6 +41,7 @@ import { ElseStatement } from "../ast/statements/ElseStatement.ts";
 import { Parameter } from "../ast/Expressions/Parameters.ts";
 import { AbstractStatement } from "../ast/abstracts/AbstractStatement.ts";
 import { Statement } from "../ast/statements/Statement.ts";
+import { SymbolTable } from "../libs/SymbolTable.ts";
 
 export class StatementVisitor extends ReactVisitor<AbstractStatement> {
   public exprVisitor: ExpressionVisitor;
@@ -51,17 +52,21 @@ export class StatementVisitor extends ReactVisitor<AbstractStatement> {
 
   public parameterVisitor: ParameterVisitor;
 
+  public symbolTable: SymbolTable;
+
   constructor(
     exprVisitor: ExpressionVisitor,
     blockVisitor: BlockVisitor,
     funcExprVisitor: FunctionalExpressionVisitor,
     parameterVisitor: ParameterVisitor,
+    symbolTable: SymbolTable,
   ) {
     super();
     this.exprVisitor = exprVisitor;
     this.blockVisitor = blockVisitor;
     this.funcExprVisitor = funcExprVisitor;
     this.parameterVisitor = parameterVisitor;
+    this.symbolTable = symbolTable;
   }
 
   visitVariableDeclaration: (
@@ -71,6 +76,13 @@ export class StatementVisitor extends ReactVisitor<AbstractStatement> {
     let id: Identifier = this.funcExprVisitor.visitID(ctx.Identifier());
     let expression: Expression = this.funcExprVisitor.visit(ctx.expression());
     new VariableDeclaration(varType, id, expression);
+    this.symbolTable.add(
+      id.name,
+      ctx.start.line,
+      ctx.start.column,
+      false,
+      varType.toString(),
+    );
     return new VariableDeclaration(varType, id, expression);
   };
 
@@ -88,6 +100,20 @@ export class StatementVisitor extends ReactVisitor<AbstractStatement> {
     const idCtx = ctx.Identifier();
     const id = this.funcExprVisitor.visitID(idCtx);
     const expression = this.funcExprVisitor.visit(ctx.expression());
+
+    if (!this.symbolTable.has(id.name)) {
+      console.error(
+        `${id.name} is undefined line : ${ctx.start.line} column : ${ctx.start.column}`,
+      );
+    } else {
+      const record = this.symbolTable.get(id.name);
+      if (record?.idType == "const") {
+        console.error(
+          `${id.name} is constant you cannot change its value line : ${ctx.start.line} column : ${ctx.start.column}`,
+        );
+      }
+    }
+
     return new Assignment(id, expression);
   };
 
@@ -112,6 +138,13 @@ export class StatementVisitor extends ReactVisitor<AbstractStatement> {
     }
     const block = this.blockVisitor.visit(ctx.block());
 
+    this.symbolTable.add(
+      id.name,
+      ctx?.Identifier().start?.line ?? 0,
+      ctx?.Identifier()?.column ?? 0,
+      true,
+    );
+
     return new FunctionDeclaration(id, block, parameters);
   };
 
@@ -133,6 +166,15 @@ export class StatementVisitor extends ReactVisitor<AbstractStatement> {
     if (ctx.parameters()) {
       paramCtx = ctx.parameters();
       params = this.parameterVisitor.visitParameters(paramCtx);
+      paramCtx.Identifier_list().forEach((param) => {
+        if (!this.symbolTable.has(param.getText())) {
+          console.error(
+            `${param.getText()} is undefined line : ${
+              param?.symbol.start?.line ?? 0
+            } column : ${param?.symbol.start?.column ?? 0}`,
+          );
+        }
+      });
     }
     return new UseEffect(func, params);
   };
@@ -178,6 +220,11 @@ export class StatementVisitor extends ReactVisitor<AbstractStatement> {
     if (ctx.arguments()) {
       args = this.funcExprVisitor.visitArguments(ctx.arguments());
     }
+
+    if (!this.symbolTable.has(id.name)) {
+      console.error(`Undefined function ${id.name}`);
+    }
+
     return new FunctionCall(id, args);
   };
   visitConditionalStatement: (

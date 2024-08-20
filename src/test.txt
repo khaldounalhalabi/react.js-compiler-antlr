@@ -1,30 +1,33 @@
 function App() {
-
-  function add(x, y) {
-      return x + y;
-  }
-
-  function mul(x, y) {
-      return add(x + y, x - y) * add(x, y);
-  }
-
- console.log("Hey I am here");
- const result = mul(5, 10) ;
- const addResult = add(5, 10);
-
-  if (result > 0) {
-      console.log("it is greater");
-  } else if (addResult < 0) {
-      console.log("it is not grater")
-  } else {
-      console.log("Didn't make it to here");
-  }
-
-  console.log("the end")
+  const [count, setCount] = useState(0)
 
   return (
     <div>
+      <div>
+        <a href="https://vitejs.dev">
+          <img src={viteLogo} className="logo"/>
+        </a>
+        <a href="https://react.dev">
+          <img src={reactLogo} className="logo react" />
+        </a>
+      </div>
+      <h1>{"Vite + React"}</h1>
+      <div className="card">
+        <div onClick={() => {
+                         return setCount(
+                            (count) => {return count + 1;}
+                         )
+                      }}>
+          {"count is " +`${count}`}
+        </div>
+        <p>
+          {"Edit src/App.jsx and save to test HMR"}
+        </p>
+      </div>
+      <p className="read-the-docs">
+        {"Click on the Vite and React logos to learn more"}
+      </p>
+      <Card/>
     </div>
   )
 }
-

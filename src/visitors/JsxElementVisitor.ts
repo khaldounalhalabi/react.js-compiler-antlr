@@ -27,6 +27,7 @@ import { FunctionalExpressionVisitor } from "./FunctionalExpressionVisitor.ts";
 import { ComponentProps } from "../ast/Jsx/ComponentProps.ts";
 import { JsxComponentFull } from "../ast/Jsx/JsxComponentFull.ts";
 import { SelfClosingComponent } from "../ast/Jsx/SelfClosingComponent.ts";
+import { SymbolTable } from "../libs/SymbolTable.ts";
 
 export class JsxElementVisitor extends ReactVisitor<Jsx> {
   [x: string]: any;
@@ -71,7 +72,6 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
           ctx as unknown as StringContext,
         );
       }
-      // console.log(value)
       return new JsxAttributeValue(value);
     };
 
@@ -81,6 +81,9 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
       let content;
       if (ctx.expression()) {
         contentCtx = ctx.expression();
+        if (!(contentCtx instanceof ExpressionContext)) {
+          throw new Error("Only expressions allowed inside jsx");
+        }
         content = this.expressionVisitor.visit(contentCtx);
       } else if (ctx.jsxElement()) {
         contentCtx = ctx.jsxElement();
@@ -95,6 +98,12 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
   ) => {
     const jsxTagNameCtx: JsxTagNameContext[] = ctx.jsxTagName_list();
     const tagName = this.visitJsxTagName(jsxTagNameCtx[0]);
+    const tagName2 = this.visitJsxTagName(jsxTagNameCtx[1]);
+    if (tagName.name != tagName2.name) {
+      throw new Error(
+        `open tag didn't match closing tag (${tagName.name} and ${tagName2.name})`,
+      );
+    }
     const jsxAttributeCtx: JsxAttributeContext[] = ctx.jsxAttribute_list();
     const jsxElementContentCtx: JsxElementContentContext[] =
       ctx.jsxElementContent_list();
@@ -153,6 +162,10 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
     //TODO::add semantic error
     let id = this.expressionVisitor.visitID(ctx.Identifier_list()[0]);
 
+    if (!SymbolTable.make().has(id.name)) {
+      throw new Error(`Uncaught ReferenceError :  ${id.name} is not defined`);
+    }
+
     let attributes: JsxAttribute[] = [];
 
     if (ctx.jsxAttribute_list().length > 0) {
@@ -184,7 +197,9 @@ export class JsxElementVisitor extends ReactVisitor<Jsx> {
     ctx: SelfClosingComponentContext,
   ) => SelfClosingComponent = (ctx: SelfClosingComponentContext) => {
     let id = this.expressionVisitor.visitID(ctx.Identifier());
-
+    if (!SymbolTable.make().has(id.name)) {
+      throw new Error(`Uncaught ReferenceError :  ${id.name} is not defined`);
+    }
     let attributes: JsxAttribute[] = [];
 
     if (ctx.jsxAttribute_list().length > 0) {
